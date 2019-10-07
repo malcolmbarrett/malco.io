@@ -35,15 +35,19 @@ section#profile-page.pt-5 div.container div.row div.col-12.col-lg-8{
   max-height: 44px;
 }
 
-
-.shrink-header {
-  min-height: 44px !important;
+.navbar {
+  min-height: 80px !important;
 }
 
+.shrink-header {
+  min-height: 80px !important;
+}
+
+/*
 #navbar-main {
   box-shadow: none;
 }
-
+*/
 
 a.nav-link {
   text-transform: uppercase;
