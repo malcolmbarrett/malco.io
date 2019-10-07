@@ -177,7 +177,7 @@ table {
 }
 
 .article-style-slider {  
-  font-style: italic; 
+  font-style: italic;
   font-size: 1em !important;
   color: #fff;
   padding-right: 5em;
@@ -201,6 +201,14 @@ table {
 
 .media.stream-item {
   margin-bottom: 0;
+}
+
+.media.stream-item {
+  margin-bottom: 0;
+}
+
+.btn-links {
+  margin-bottom: 15px;
 }
 
 /*single pages*/
