@@ -34,7 +34,7 @@ featured: false
 # To use, add an image named `featured.jpg/png` to your page's folder. 
 # Focal points: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.
 image:
-  caption: "[Photo by ______ on Unsplash](https://unsplash.com/photos/______)"
+  caption: "[Figure by Corinne Riddell](https://corinne-riddell.github.io/)"
   focal_point: ""
   preview_only: false
 
