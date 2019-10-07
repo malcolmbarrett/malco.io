@@ -1,0 +1,33 @@
+---
+title: Introduction to Data Visualization for Meta-Analysis
+author: Malcolm Barrett
+date: '2018-03-01T10:00:00'
+time_start: '2018-04-23T10:00:00'
+time_end: '2018-04-23T12:00:00'
+slug: metaanalysis-viz
+event: 'Guest Lecture for PM 605: Systematic Review and Meta-Analysis'
+location: Los Angeles, CA
+event_url: 
+categories:
+  - r
+tags: []
+subtitle: ''
+abstract: 'An introduction to data visualization for meta-anlyses using ggplot2 and the tidymeta package.'
+authors: []
+lastmod: '2019-09-26T18:30:00'
+featured: no
+image:
+  caption: '[Photo by Dominik Bednarz on Unsplash](https://unsplash.com/photos/UUdH-wNbCC8)'
+  focal_point: ''
+  preview_only: no
+links:
+- icon: images
+  icon_pack: fas
+  name: slides
+  url: https://nostalgic-sinoussi-169fd5.netlify.com/ma_workshop.html
+- icon: github
+  icon_pack: fab
+  name: github
+  url: https://github.com/malcolmbarrett/ma_viz_workshop
+projects: [tidymeta]
+---

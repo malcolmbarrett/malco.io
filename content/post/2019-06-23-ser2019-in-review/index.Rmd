@@ -1,0 +1,303 @@
+---
+title: '#SER2019 In Review'
+author: Malcolm Barrett
+date: '2019-06-23'
+slug: ser2019-in-review
+categories:
+  - r
+tags:
+  - ser
+  - textanalysis
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2019-06-23'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, dpi = 320)
+```
+
+
+The annual meeting of the [Society for Epidemiologic Research](https://epiresearch.org) (SER) took place June 18-21. The past two years, I've collected Twitter data ([2018](https://github.com/malcolmbarrett/ser_tweets), [2019](https://github.com/malcolmbarrett/ser_conf_2019)). The data were collected with the excellent [rtweet](https://rtweet.info/) package, and the data collection code was based on related code by [Mike Kearney](https://mikewk.com/), the author of rtweet.
+
+## Setup
+
+```{r}
+# for everything else :)
+library(tidyverse)
+# for tidy eval
+library(rlang)
+# for labeling tweets in plots
+library(ggrepel)
+# for network graphs
+library(ggraph)
+library(tidygraph)
+# for text analysis
+library(tidytext)
+```
+
+Since the data were collected over several days, I'm going to read the saved data straight from GitHub. You'll note that there is also some code to turn the tweets into network data (who is tweeting whom); I'll also read that in.
+
+```{r}
+ser_tweets <- read_rds(url("https://github.com/malcolmbarrett/ser_conf_2019/blob/master/data/search.rds?raw=true"))
+ser_tweets_2018 <- read_rds(url("https://github.com/malcolmbarrett/ser_tweets/blob/master/data/search.rds?raw=true"))
+twitter_graph <- readr::read_rds(url("https://github.com/malcolmbarrett/ser_conf_2019/raw/master/data/twitter_graph.rds"))
+
+# simplify tweet tibble
+ser_tweets <- ser_tweets %>% 
+  select(screen_name, text, created_at, favorite_count, retweet_count, is_retweet, hashtags, media_type)
+```
+
+First, a few functions to help us out: `plot_barchat()` to plot horizontal bar charts, `plot_tweets()` to make a scatterplot labeled with the tweet text, and `plot_screen_names()` to quickly count number of times a screen name appeared and plot the top ten with `plot_barchat()`.
+
+```{r}
+# plot horizontal bar charts
+plot_barchat <- function(.df, y) {
+  y <- enquo(y)
+  .df %>% 
+    #  put the bars in order of their appearance
+    mutate(!!y := fct_rev(fct_inorder(!!y))) %>% 
+    #  y first because we're flipping
+    ggplot(aes(y = n, x = !!y)) + 
+    geom_col(color = NA, fill = "#0172B1") +
+    theme_minimal(14) +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.minor.x = element_blank()
+    ) + 
+    coord_flip()
+}
+
+# plot points labelled with tweet text
+plot_tweets <- function(.df, y) {
+  y <- enquo(y)
+  .df %>% 
+    mutate(text = str_wrap(text, 50)) %>% 
+    ggplot(aes(x = fct_inorder(screen_name), y = !!y)) + 
+    geom_point(color = "#0172B1", size = 2) +
+    geom_label_repel(
+      aes(label = text), 
+      size = 2.5, 
+      force = 4, 
+      nudge_y = 3, 
+      point.padding = .5
+    ) +
+    theme_minimal(14)
+}
+
+# group by screen name, count, and plot 1st 10
+plot_screen_name <- function(.df) {
+  .df %>% 
+    group_by(screen_name) %>% 
+    summarize(n = n()) %>% 
+    mutate(screen_name = paste0("@", screen_name)) %>% 
+    arrange(desc(n)) %>% 
+    top_n(10) %>% 
+    plot_barchat(screen_name) +
+    xlab(element_blank())
+}
+```
+
+# Tweets vs. 2018
+
+I noticed this almost immediately: there were *many* more tweets this year. Between the 2018 and 2019, there was tremendous growth in the epidemiology Twitter community under the hashtag [#epitwitter](https://twitter.com/search?q=%23epitwitter&src=tyah), and it showed. There were about twice as many original tweets and retweets during the official days of the conference.
+
+```{r, fig.height=2}
+n_2019 <- ser_tweets %>% 
+  filter(between(created_at, as.POSIXct("2019-06-18"), as.POSIXct("2019-06-21"))) %>% 
+  group_by(is_retweet) %>% 
+  summarize(n = n()) %>% 
+  mutate(year = "2019")
+
+n_2018 <- ser_tweets_2018 %>% 
+  filter(between(created_at, as.POSIXct("2018-06-19"), as.POSIXct("2018-06-22"))) %>% 
+  group_by(is_retweet) %>% 
+  summarize(n = n()) %>% 
+  mutate(year = "2018")
+
+label_retweet <- function(x) ifelse(x, "retweet", "original tweet")
+
+bind_rows(n_2019, n_2018) %>% 
+  plot_barchat(year) +
+  facet_wrap(~is_retweet, labeller = as_labeller(label_retweet))
+```
+
+## Twitter connections and network centrality
+
+1,026 users tweeted or retweeted a tweet with the #SER2019 hashtag. Many were single tweets, but there were hundreds of people interacting. From the 2019 repo:
+
+```{r}
+knitr::include_graphics("https://raw.githubusercontent.com/malcolmbarrett/ser_conf_2019/master/tweet_network.png")
+```
+
+A big reason for the growth in #EpiTwitter is the community building that [Ellie Murray](https://twitter.com/EpiEllie), aka @EpiEllie, has done. Unsurprisingly, she is the most central person in the Twitter graph, followed by the [SER twitter account](https://twitter.com/societyforepi). 
+
+```{r}
+twitter_graph %>% 
+  activate(nodes) %>% 
+  arrange(desc(value)) %>% 
+  as_tibble() %>% 
+  top_n(10) %>% 
+  mutate(name = paste0("@", name), n = value) %>% 
+  plot_barchat(name) +
+  labs(y = "centrality", x = element_blank())
+```
+
+## Subjects by day
+
+A few months back, I read [Tidy Text Mining with R](https://www.tidytextmining.com), and since then, I've just been waiting to analyze word use by day of the conference. I won't go over this code in detail, but it uses [tf-dif](https://www.wikiwand.com/en/Tf%E2%80%93idf) to analyze words that were unique to each day. You can find [a discussion and more examples](https://www.tidytextmining.com/tfidf.html) of this approach in the book.
+
+```{r}
+tfidf_tweets <- ser_tweets %>% 
+  filter(
+    !is_retweet,
+    between(created_at, as.POSIXct("2019-06-18"), as.POSIXct("2019-06-21"))
+  ) %>% 
+  #  tidytext doesn't like these list columns
+  select_if(~ !is_list(.x)) %>% 
+  #  create day of tweet
+  mutate(day = lubridate::wday(created_at, label = TRUE)) %>% 
+  #  unnest by word and count each word by day
+  unnest_tokens(word, text) %>%
+  group_by(day) %>% 
+  count(word, sort = TRUE) %>%
+  ungroup() %>% 
+  #  add tf-idf and sort
+  bind_tf_idf(word, day, n) %>% 
+  arrange(desc(tf_idf)) %>% 
+  mutate(word = fct_rev(fct_inorder(word))) %>% 
+  #  pick top 10 by day
+  group_by(day) %>% 
+  top_n(10) %>%
+  ungroup()
+```
+
+So, what was unique to each day? Tuesday was full of workshops, including workshops on R, g-computation, and E-values. Wednesday started with a fantastic keynote by [Alix Spiegel of Invisibilia](https://www.npr.org/people/90889243/alix-spiegel), which was like a live version of the podcast. People also talked about [Dr. Shawnita Sealy-Jefferson](https://twitter.com/Dr_S_Jefferson)'s powerful talk, "Listen to and trust black women." Thursday began with a debate by [Sandro Galea](https://twitter.com/sandrogalea) and [Miguel Hernán](https://twitter.com/_MiguelHernan) about the role of causal inference in social epidemiology. The same day, people were talking about race and racism in relation to health epidemiology. On the final day of the conference, people were talking about the reunion parties the night before, #blackgirlmagic, and [Dr. Sharrelle Barber](https://twitter.com/HealthEquityDoc).
+
+
+```{r}
+tfidf_tweets %>% 
+  ggplot(aes(word, tf_idf)) + 
+  geom_col(color = NA, fill = "#0172B1") +
+  theme_minimal(14) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.minor.x = element_blank()
+  ) + 
+  coord_flip() + 
+  facet_wrap(~ day, scales = "free")
+```
+
+## Other active hashtags
+
+What other hashtags were used with #SER2019? Unsurprisingly, #EpiTwitter leads the list, followed by #SPER2019, related to the [SPER](https://sper.org/annual-meeting-2/) meeting that happens immediately before SER. People were also talking about the better poster design, open science, causal inference, [Lisa Bodnar's](https://twitter.com/lisabodnar) annual SER party, and more.
+
+```{r}
+unnested_hashtags <- ser_tweets %>% 
+  filter(!is_retweet) %>% 
+  unnest(hashtags) %>% 
+  mutate_at(vars(hashtags), tolower) %>% 
+  filter(
+    stringr::str_detect(
+      hashtags, 
+      stringr::fixed("SER2019", ignore_case = TRUE),
+      negate = TRUE
+    )
+  )
+
+unnested_hashtags %>% 
+  group_by(hashtags) %>% 
+  summarize(n = n()) %>% 
+  arrange(desc(n)) %>% 
+  top_n(10) %>% 
+  plot_barchat(hashtags)
+```
+
+## BlackEpiMatters
+
+One particularly powerful event was the inception of the [#BlackEpiMatters](https://twitter.com/search?q=%23BlackEpiMatters&src=typd) hashtag, which lead to the creation of the @[black_epi](https://twitter.com/black_epi) account. There were many incredible talks by black epidemiologists at this meeting, and the fact that the rooms were absolutely packed for these talks magnified the fact that most were in smaller rooms. Many people called out SER for this, and they have promised to address it for SER 2020. Additionally, many black epidemiologists who are active on Twitter will be doing [Twitter takeovers of the SER account over the next year](https://twitter.com/societyforepi/status/1142068033407651841).
+
+So who were the people using #blackepimatters during the meeting? [Sharrelle Barber](https://twitter.com/HealthEquityDoc) lead the way.
+
+```{r}
+unnested_hashtags %>% 
+  filter(
+    hashtags %in% c("blackepimatters", "blackepidemiologymatters")
+  ) %>% 
+  plot_screen_name()
+```
+
+
+Finally, how about a few rankings?
+
+## Most retweets
+
+My poster got the most retweets 😱😱😱. Also popular were Jess Rohmann's [list of DAG papers](https://docs.google.com/document/d/1a-_VYQrZDLIAWCUs_JKvnwNT2onn-rIiLh69W53fh1o/) and the "Beyond 'Is Race a Cause?'" session, which was standing-room with a line out the door (I know this because I couldn't get in the door!).
+
+```{r}
+ser_tweets %>% 
+  filter(!is_retweet) %>% 
+  arrange(desc(retweet_count)) %>%
+  top_n(5, retweet_count) %>% 
+  plot_tweets(retweet_count) +
+  labs(x = "twitter user", y = "n retweets")
+```
+
+## Most favorites
+
+My poster also got the most favorites 😱😱😱. One high-impact tweet was [Bill Miller](https://twitter.com/BillMiller_Epi)'s offer to mentor attendees. I barely had a chance to say hi to him he was so busy! People also liked Ellie's temporary tattoos, #SER2019 bingo, and the #betterposter design.
+
+```{r}
+ser_tweets %>% 
+  filter(!is_retweet) %>% 
+  arrange(desc(favorite_count)) %>%
+  top_n(5, favorite_count) %>% 
+  plot_tweets(favorite_count) +
+  labs(x = "twitter user", y = "n favorites")
+```
+
+## Most tweets
+
+@AbbyCScience (taking a well-deserved Twitter break) was responsible for the most original tweets by a long shot.
+
+```{r}
+# number original tweets
+ser_tweets %>% 
+  filter(!is_retweet) %>% 
+  plot_screen_name()
+```
+
+## Most retweets
+
+Unsurprisingly, the most retweets came from my [EpiBot](https://twitter.com/epi_twit), which retweets #EpiTwitter. But Ellie is a surprisingly close second!
+
+```{r}
+# number retweets
+ser_tweets %>% 
+  filter(is_retweet) %>% 
+  plot_screen_name()
+```
+
+## Most photos posted
+
+[Peter Tennant](https://twitter.com/PWGTennant) posted the most photos (plus, there's a [video of his poster presentation](https://twitter.com/kellyn_arnold/status/1141820251467857928)).
+
+```{r}
+ser_tweets %>% 
+  filter(!is_retweet) %>% 
+  unnest(media_type) %>% 
+  filter(media_type == "photo") %>% 
+  plot_screen_name()
+```
+
+And that's it for #SER2019!

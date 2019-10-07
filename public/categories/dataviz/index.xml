@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dataviz | Malcolm Barrett</title>
+    <link>/categories/dataviz/</link>
+      <atom:link href="/categories/dataviz/index.xml" rel="self" type="application/rss+xml" />
+    <description>dataviz</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019 Malcolm Barrett</copyright><lastBuildDate>Tue, 17 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>dataviz</title>
+      <link>/categories/dataviz/</link>
+    </image>
+    
+    <item>
+      <title>Tidy causal DAGs with ggdag 0.2.0</title>
+      <link>/2019/09/17/tidy-causal-dags-with-ggdag-0-2-0/</link>
+      <pubDate>Tue, 17 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>/2019/09/17/tidy-causal-dags-with-ggdag-0-2-0/</guid>
+      <description>
+
+
+&lt;p&gt;I’m please to announce that &lt;a href=&#34;https://ggdag.malco.io/&#34;&gt;ggdag 0.2.0&lt;/a&gt; is now on CRAN! ggdag links the dagitty package, which contains powerful algorithms for analyzing causal DAGs, with the unlimited flexibility of ggplot2. ggdag coverts dagitty objects to a tidy DAG data structure, which allows you to both analyze your DAG and plot it easily in ggplot2. Let’s look at an example for a causal diagram of the effect of smoking on cardiac arrest.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggdag)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;smoking_ca_dag &amp;lt;- dagify(cardiacarrest ~ cholesterol,
+       cholesterol ~ smoking + weight,
+       smoking ~ unhealthy,
+       weight ~ unhealthy,
+       labels = c(&amp;quot;cardiacarrest&amp;quot; = &amp;quot;Cardiac\n Arrest&amp;quot;, 
+                  &amp;quot;smoking&amp;quot; = &amp;quot;Smoking&amp;quot;,
+                  &amp;quot;cholesterol&amp;quot; = &amp;quot;Cholesterol&amp;quot;,
+                  &amp;quot;unhealthy&amp;quot; = &amp;quot;Unhealthy\n Lifestyle&amp;quot;,
+                  &amp;quot;weight&amp;quot; = &amp;quot;Weight&amp;quot;),
+       latent = &amp;quot;unhealthy&amp;quot;,
+       exposure = &amp;quot;smoking&amp;quot;,
+       outcome = &amp;quot;cardiacarrest&amp;quot;) %&amp;gt;% 
+  tidy_dagitty()
+
+smoking_ca_dag&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A DAG with 5 nodes and 5 edges
+## #
+## # Exposure: smoking
+## # Outcome: cardiacarrest
+## # Latent Variable: unhealthy
+## #
+## # A tibble: 6 x 9
+##   name          x     y direction to        xend  yend circular label      
+##   &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;lgl&amp;gt;    &amp;lt;chr&amp;gt;      
+## 1 choleste…  13.2  11.8 -&amp;gt;        cardiac…  12.0  11.2 FALSE    Cholesterol
+## 2 smoking    14.5  11.7 -&amp;gt;        cholest…  13.2  11.8 FALSE    Smoking    
+## 3 unhealthy  15.0  12.8 -&amp;gt;        smoking   14.5  11.7 FALSE    &amp;quot;Unhealthy…
+## 4 unhealthy  15.0  12.8 -&amp;gt;        weight    13.8  13.0 FALSE    &amp;quot;Unhealthy…
+## 5 weight     13.8  13.0 -&amp;gt;        cholest…  13.2  11.8 FALSE    Weight     
+## 6 cardiaca…  12.0  11.2 &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;      NA    NA   FALSE    &amp;quot;Cardiac\n…&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The tidy DAG structure looks like a &lt;code&gt;tibble&lt;/code&gt;. ggdag 0.2.0 also prints some information about the DAG at the top.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggdag(smoking_ca_dag, text = FALSE, use_labels = &amp;quot;label&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Here, smoking does increase the risk of cardiac arrest, but it’s also confounded by an unmeasured variable, a tendency towards an unhealthy lifestyle. That means that there are two open paths from smoking to cardiac arrest: the causal path through cholesterol and the backdoor path through weight. (This DAG is probably not quite right, because smoking also affects weight, but we’ll leave it as is for demonstration purposes.)&lt;/p&gt;
+&lt;p&gt;If you used ggdag 0.1.0, you may notice a big difference here: ggdag plots now look a lot more like base ggplot2 plots. While this has been the case in the development version for some time, one of the bigger mistakes in the initial release of ggdag was too much out-of-box customization. ggdag now does a much better job getting out of the way of ggplot2’s incredible system for aesthetics and themes. Let’s analyze the paths in the smoking DAG but take advantage of tools from ggplot2 to customize the plot.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggdag_paths(smoking_ca_dag, text = FALSE, use_labels = &amp;quot;label&amp;quot;, shadow = TRUE) +
+  theme_dag(base_size = 14) +
+  theme(legend.position = &amp;quot;none&amp;quot;, strip.text = element_blank()) + 
+  # set node aesthetics
+  scale_color_manual(values = &amp;quot;#0072B2&amp;quot;, na.value = &amp;quot;grey80&amp;quot;) + 
+  # set label aesthetics
+  scale_fill_manual(values = &amp;quot;#0072B2&amp;quot;, na.value = &amp;quot;grey80&amp;quot;) + 
+  # set arrow aesthetics
+  ggraph::scale_edge_color_manual(values = &amp;quot;#0072B2&amp;quot;, na.value = &amp;quot;grey80&amp;quot;) +
+  ggtitle(&amp;quot;Open paths from smoking to cardiac arrest&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;There are also many new themes available, each of which is prefixed with &lt;code&gt;theme_dag*()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Learn more about ggdag on the &lt;a href=&#34;https://ggdag.malco.io/&#34;&gt;package website&lt;/a&gt;. There you’ll find articles on &lt;a href=&#34;https://ggdag.malco.io/articles/intro-to-ggdag.html&#34;&gt;introducing ggdag&lt;/a&gt;, &lt;a href=&#34;https://ggdag.malco.io/articles/intro-to-dags.html&#34;&gt;introducing DAGs&lt;/a&gt;, and discussing &lt;a href=&#34;https://ggdag.malco.io/articles/bias-structures.html&#34;&gt;common structures of bias&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;what-else-is-new&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;What else is new?&lt;/h2&gt;
+&lt;p&gt;This release ensures compatibility with ggraph 2.0.0 and also fixes a number of bugs (see the &lt;a href=&#34;https://ggdag.malco.io/news/index.html&#34;&gt;news&lt;/a&gt; section of the pkgdown site). In addition to better support for ggplot2 aesthetic functions, ggdag also now has better support for working directly in tidygraph/ggraph. ggraph is essential to ggdag’s geoms, but you might prefer to work with the full toolkit from that package.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidygraph)
+library(ggraph)
+tblgraph_dag &amp;lt;- as_tbl_graph(smoking_ca_dag)
+
+tblgraph_dag&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tbl_graph: 5 nodes and 5 edges
+## #
+## # A directed acyclic simple graph with 1 component
+## #
+## # Node Data: 5 x 1 (active)
+##   name         
+##   &amp;lt;chr&amp;gt;        
+## 1 cholesterol  
+## 2 smoking      
+## 3 unhealthy    
+## 4 weight       
+## 5 cardiacarrest
+## #
+## # Edge Data: 5 x 9
+##    from    to     x     y direction  xend  yend circular label             
+##   &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;lgl&amp;gt;    &amp;lt;chr&amp;gt;             
+## 1     1     5  13.2  11.8 -&amp;gt;         12.0  11.2 FALSE    Cholesterol       
+## 2     2     1  14.5  11.7 -&amp;gt;         13.2  11.8 FALSE    Smoking           
+## 3     3     2  15.0  12.8 -&amp;gt;         14.5  11.7 FALSE    &amp;quot;Unhealthy\n Life…
+## # … with 2 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tblgraph_dag %&amp;gt;% 
+  ggraph() +
+  geom_node_text(aes(label = name)) + 
+  geom_edge_link(aes(
+    start_cap = label_rect(node1.name),
+    end_cap = label_rect(node2.name)
+  ), arrow = arrow()) +
+  theme_graph()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;tidygraph is designed to work with network data rather than causal diagrams, so many of the features are not as useful for causal DAGs as the algorithms from dagitty. However, tidygraph and ggraph have many tools for manipulating network-like data that are very powerful.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;miss-the-old-look&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Miss the old look?&lt;/h2&gt;
+&lt;p&gt;A lot has changed in the look of ggdag, but the old style hasn’t gone away. You can set the old theme with &lt;code&gt;theme_dag_gray()&lt;/code&gt; and set the stylized nodes with &lt;code&gt;geom_dag_node()&lt;/code&gt; (instead of &lt;code&gt;geom_dag_point()&lt;/code&gt;) or with the &lt;code&gt;stylized&lt;/code&gt; argument in the quick plotting functions.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggdag(confounder_triangle(), stylized = TRUE) +
+  theme_dag_gray()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ggdag 0.1.0</title>
+      <link>/2018/03/28/ggdag-0.1.0/</link>
+      <pubDate>Wed, 28 Mar 2018 00:00:00 +0000</pubDate>
+      <guid>/2018/03/28/ggdag-0.1.0/</guid>
+      <description>
+
+
+&lt;p&gt;I’m pleased to announce the release of &lt;code&gt;ggdag&lt;/code&gt; 0.1.0 on CRAN! &lt;code&gt;ggdag&lt;/code&gt; uses the powerful &lt;code&gt;dagitty&lt;/code&gt; package to create and analyze structural causal models and plot them using &lt;code&gt;ggplot2&lt;/code&gt; and &lt;code&gt;ggraph&lt;/code&gt; in a tidy, consistent, and easy manner. You can use &lt;code&gt;dagitty&lt;/code&gt; objects directly in &lt;code&gt;ggdag&lt;/code&gt;, but &lt;code&gt;ggdag&lt;/code&gt; also includes wrappers to make DAGs using a more R-like syntax:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# install.packages(&amp;quot;ggdag&amp;quot;)
+library(ggdag)
+
+dag &amp;lt;- dagify(y ~ x + z,
+       x ~ z) %&amp;gt;% 
+  tidy_dagitty()
+
+dag&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A DAG with 3 nodes and 3 edges
+## #
+## # A tibble: 4 x 8
+##   name      x     y direction to     xend  yend circular
+##   &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;     &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;lgl&amp;gt;   
+## 1 x      8.21  7.43 -&amp;gt;        y      7.57  8.19 FALSE   
+## 2 z      8.55  8.37 -&amp;gt;        x      8.21  7.43 FALSE   
+## 3 z      8.55  8.37 -&amp;gt;        y      7.57  8.19 FALSE   
+## 4 y      7.57  8.19 &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;  NA    NA    FALSE&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggdag(dag)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-03-28-ggdag-0-1-0/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;You can learn more about it on the &lt;a href=&#34;https://ggdag.netlify.com/&#34;&gt;ggdag website&lt;/a&gt;, a &lt;code&gt;pkgdown&lt;/code&gt; site that includes rendered documentation and the following vignettes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://ggdag.netlify.com/articles/intro-to-ggdag.html&#34;&gt;An Introduction to ggdag&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ggdag.netlify.com/articles/intro-to-dags.html&#34;&gt;An Introduction to Directed Acyclic Graphs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ggdag.netlify.com/articles/bias-structures.html&#34;&gt;Common Structures of Bias&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Give it a try, and please file an bugs or suggestions to the &lt;a href=&#34;https://github.com/malcolmbarrett/ggdag&#34;&gt;GitHub repo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I also want to thank a few of my fellow USC PhDs, David Bogumil, Ugonna Ihenacho, and Zhi Yang, for helping me polish the articles and offering helpful suggestions on some of the aesthetic details of &lt;code&gt;ggdag&lt;/code&gt;. Thanks, y’all!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

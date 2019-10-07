@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Malcolm Barrett">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="TL;DR: Why should I use here?  The here package makes it easier to use sub-directories within projects It’s robust to other ways people open and run your code Like its base R cousin, file.path(), it writes paths safely across operating systems  Like a lot of people, when I learned R, I was taught to put setwd() and rm(list = ls()) at the beginning of scripts. Getting rid of any leftovers in the environment and setting the working directory so I can use relative paths made sense to me.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#0072B2">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karla:300,400,500%7CIBM+Plex+Sans:300,400,500%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.df8fd8733249a7fbb9ddd57129b7872f.css">
+
+  
+    
+    
+    
+    
+      
+    
+    
+    
+    <link rel="stylesheet" href="/css/academic.60ce589d21aa386e05f4a4b39b4a3cb2.css">
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@malco_barrett">
+  <meta property="twitter:creator" content="@malco_barrett">
+  
+  <meta property="og:site_name" content="Malcolm Barrett">
+  <meta property="og:url" content="/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/">
+  <meta property="og:title" content="Why should I use the here package when I&#39;m already using projects? | Malcolm Barrett">
+  <meta property="og:description" content="TL;DR: Why should I use here?  The here package makes it easier to use sub-directories within projects It’s robust to other ways people open and run your code Like its base R cousin, file.path(), it writes paths safely across operating systems  Like a lot of people, when I learned R, I was taught to put setwd() and rm(list = ls()) at the beginning of scripts. Getting rid of any leftovers in the environment and setting the working directory so I can use relative paths made sense to me."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2018-11-05T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-10-06T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/"
+  },
+  "headline": "Why should I use the here package when I'm already using projects?",
+  
+  "datePublished": "2018-11-05T00:00:00Z",
+  "dateModified": "2019-10-06T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Malcolm Barrett"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Malcolm Barrett",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/icon-512.png"
+    }
+  },
+  "description": "TL;DR: Why should I use here?  The here package makes it easier to use sub-directories within projects It’s robust to other ways people open and run your code Like its base R cousin, file.path(), it writes paths safely across operating systems  Like a lot of people, when I learned R, I was taught to put setwd() and rm(list = ls()) at the beginning of scripts. Getting rid of any leftovers in the environment and setting the working directory so I can use relative paths made sense to me."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Why should I use the here package when I&#39;m already using projects? | Malcolm Barrett</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Malcolm Barrett</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talk"><span>Talks</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/training"><span>Training</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/consulting"><span>Consulting</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/abooutme"><span>About me</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Why should I use the here package when I&#39;m already using projects?</h1>
+
+  
+
+  
+    
+
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Oct 6, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">r</a>, <a href="/categories/rmarkdown/">rmarkdown</a></span>
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/&amp;text=Why%20should%20I%20use%20the%20here%20package%20when%20I&amp;#39;m%20already%20using%20projects?" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/&amp;t=Why%20should%20I%20use%20the%20here%20package%20when%20I&amp;#39;m%20already%20using%20projects?" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Why%20should%20I%20use%20the%20here%20package%20when%20I&amp;#39;m%20already%20using%20projects?&amp;body=/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/&amp;title=Why%20should%20I%20use%20the%20here%20package%20when%20I&amp;#39;m%20already%20using%20projects?" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Why%20should%20I%20use%20the%20here%20package%20when%20I&amp;#39;m%20already%20using%20projects?%20/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/&amp;title=Why%20should%20I%20use%20the%20here%20package%20when%20I&amp;#39;m%20already%20using%20projects?" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+
+<div id="tldr-why-should-i-use-here" class="section level2">
+<h2>TL;DR: Why should I use <code>here</code>?</h2>
+<ul>
+<li>The <code>here</code> package makes it easier to use sub-directories within projects</li>
+<li>It’s robust to other ways people open and run your code</li>
+<li>Like its base R cousin, <code>file.path()</code>, it writes paths safely across operating systems</li>
+</ul>
+<p>Like a lot of people, when I learned R, I was taught to put <code>setwd()</code> and <code>rm(list = ls())</code> at the beginning of scripts. Getting rid of any leftovers in the environment and setting the working directory so I can use relative paths made sense to me. It seemed like good practice! But <code>setwd()</code> and <code>rm(list = ls())</code> are problematic. <code>rm()</code> doesn’t actually give you a clean R session; it doesn’t, for instance, detach packages. <code>setwd()</code>, meanwhile, is completely dependent on the way you organize your files. If you set a working directory that is an absolute path on your computer, it will only run for someone else if they rewrite the absolute path to where it is on <em>their</em> computer.</p>
+<p>Last year, Jenny Bryan shared some slides from a talk on this subject. I’ll let them speak for themselves:</p>
+<blockquote>
+<p><em>If the first line of your R script is</em></p>
+<p><code>setwd(&quot;C:\Users\jenny\path\that\only\I\have&quot;)</code></p>
+<p><em>I will come into your office and SET YOUR COMPUTER ON FIRE</em> 🔥.</p>
+</blockquote>
+<blockquote>
+<p><em>If the first line of your R script is</em></p>
+<p><code>rm(list = ls())</code></p>
+<p><em>I will come into your office and SET YOUR COMPUTER ON FIRE</em> 🔥.</p>
+</blockquote>
+<p>If you haven’t read <a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">her write-up on what the issues and solutions are</a>, you should. Here’s the basic idea:</p>
+<ul>
+<li>Use Rstudio projects. They set up a local working directory in a fresh R session, which makes it much easier for someone else to open</li>
+<li>Use <code>here()</code> from the <code>here</code> package to write file paths</li>
+</ul>
+<p><a href="https://www.youtube.com/watch?v=etkSsF6r2iU">Setting up a project is easy</a><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Projects can handle both of the problems <code>setwd()</code> and <code>rm(list = ls())</code> are trying to solve for you. You can <a href="https://community.rstudio.com/t/first-line-of-every-r-script/799/11">set it so you have a fresh R session when opening a project</a> (either locally in the project or globally in Rstudio). Additionally, when you’re in a project, you don’t need to set your working directory. The working directory is just wherever the project is.</p>
+<p>So, it may not be obvious: what’s the benefit of using the <code>here</code> package if projects solve both those problems?</p>
+<p><img src="https://media.giphy.com/media/YByMQsx1NrmPKLuYqF/giphy.gif" width="75%" /></p>
+</div>
+<div id="whats-under-here" class="section level1">
+<h1>What’s under here?</h1>
+<p>It may seem like <code>here</code> is just pasting paths together for you, but let’s look at what it’s actually doing. The <code>here</code> package is essentially a wrapper for the <code>rprojroot</code> package. <code>rprojroot</code> is a powerful tool for working with project directories, but <code>here</code> offers a simpler set of functions that take care of its main purpose: detecting the root directory and working with paths within it in a platform-independent way.</p>
+<p>If you use <code>here()</code>, it will tell you your project root directory, which will look something like this.</p>
+<pre class="r"><code>library(here)
+here()</code></pre>
+<pre class="r"><code>## here() starts at /Users/malcolmbarrett/folders/to/directory/
+## [1] &quot;/Users/malcolmbarrett/folders/to/directory/&quot;</code></pre>
+<p>Essentially, <code>here()</code> is looking around for a few things that signify a root directory, like a <code>.Rproj</code> project file. <code>here</code> also has a function, <code>set_here()</code>, that will tag a directory as root using a <code>.here</code> file, even if it’s not a project. In fact, <code>.here</code> files take priority, then <code>.Rproj</code> files, followed by several other file formats (see the documentation at <code>?here</code>). The last resort is the working directory. If you’re not sure why <code>here</code> is picking a root directory, you can ask it to explain itself using <code>dr_here()</code></p>
+<pre class="r"><code>dr_here()</code></pre>
+<pre class="r"><code>## here() starts at /Users/malcolmbarrett/folders/to/directory/, because it contains a file matching `[.]Rproj$` with contents matching `^Version: ` in the first line</code></pre>
+<p><code>here()</code> also works a lot like <code>file.path()</code> in that it will create a platform-independent path for you (e.g. it will work on Windows and Mac alike). On my Mac, it looks something like this:</p>
+<pre class="r"><code>here(&quot;figure&quot;, &quot;figure.png&quot;)</code></pre>
+<pre class="r"><code>## [1] &quot;/Users/malcolmbarrett/folders/to/directory/figure/figure.png&quot;</code></pre>
+<div id="i-have-a-project.-why-not-just-use-relative-paths" class="section level2">
+<h2>I have a project. Why not just use relative paths?</h2>
+<p>I already touched on one reason to avoid writing paths yourself: the rules aren’t necessarily the same between operating systems. You could, of course, use <code>file.path()</code> from base R, which safely creates a relative path for you.</p>
+<pre class="r"><code>file.path(&quot;figure&quot;, &quot;figure.png&quot;)</code></pre>
+<pre class="r"><code>## [1] &quot;figure/figure.png&quot;</code></pre>
+<p>But <code>here</code> has some added benefits: it makes it easier to manage sub-directories, and it makes your code more robust outside of projects. <a href="https://github.com/malcolmbarrett/here_here">As an example, I’ve set up an R project on my GitHub</a> that has a file directory like this:</p>
+<pre class="r"><code>here_here
+|--data
+    |--mtcars.csv
+|--figs
+    |--mpg_hp.png
+|--rmd
+    |--01_read_data.Rmd
+    |--01_read_data.pdf
+|--scripts
+    |--read_data.R
+|--here_here.Rproj</code></pre>
+<p>In <code>rmd/01_read_data.Rmd</code>, I try to call the data using a relative path from the root directory, but Rmarkdown sets a local working directory, so it fails:</p>
+<pre class="r"><code>library(tidyverse)
+read_csv(&quot;data/mtcars.csv&quot;)</code></pre>
+<pre class="r"><code>## Error: &#39;data/mtcars.csv&#39; does not exist in current working directory</code></pre>
+<p>I can solve this with some of the usual wonky backtracking, e.g. <code>../data/mtcars.csv</code>, but <code>here()</code> will take care if it for me by finding the project directory:</p>
+<pre class="r"><code>read_csv(here(&quot;data&quot;, &quot;mtcars.csv&quot;))</code></pre>
+<pre><code>## # A tibble: 32 x 11
+##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+##  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+##  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+##  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+##  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+##  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+##  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+##  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+## # … with 22 more rows</code></pre>
+<p>It works with no trouble. Likewise, saving output to other sub-directories is no issue:</p>
+<pre class="r"><code>ggplot(mtcars, aes(mpg, hp)) + geom_point()</code></pre>
+<p><img src="/post/2018-11-05-why-should-i-use-the-here-package-when-i-m-already-using-projects/index_files/figure-html/makee_ggplot-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(here(&quot;figs&quot;, &quot;mpg_hp.png&quot;))</code></pre>
+<p>Which puts it in the <code>figs</code> folder despite being called from the <code>rmd</code> folder.</p>
+<pre class="r"><code>|--figs
+    |--mpg_hp.png</code></pre>
+<p>This is nice, as well, because if I move a file, I don’t need to change the relative directory: it works from the root up.</p>
+<p>Another benefit is that, if I open any of these files outside of an Rstudio project, they will still run. For Rmarkdown files, using a relative path may be fine because it sets a local working directory when running, but <code>.R</code> files don’t. If you open <code>scripts/read_data.R</code> in a different Rstudio session, for instance, the relative path fails, but <code>here()</code> still works fine. That’s because it knows where the right directory is based on the <code>.Rproj</code> file.</p>
+<p><img src="https://malco.io/img/outside_project.gif" /></p>
+<p>Likewise, if you or someone else sets a working directory within your project, <code>here</code> will still work correctly because project directories take precedence. If you need to manually change it for some reason, it’s better in this case to use <code>set_here()</code>.</p>
+</div>
+<div id="more-than-a-path-paster" class="section level2">
+<h2>More than a path paster</h2>
+<p><code>here</code> is one of the many tools in our toolkit for addressing reproducibility. Because it’s designed to work with Rstudio projects, it’s a natural tool to use within them. <code>here</code> is also robust to other ways people run your code. If that doesn’t convince you, you can at least sleep soundly knowing that your computer will live another day.</p>
+<p><img src="https://media.giphy.com/media/XQt3RY9g48OwU/giphy.gif" width="75%" /></p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>And if you’re on a Mac, you can also combine it with Alfred. <a href="https://www.youtube.com/watch?v=boKFxBniUH0">Check out Hadley’s workflow with projects and Alfred here</a>.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+    </div>
+
+    
+
+
+    
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/here/">here</a>
+  
+</div>
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu7cd8e03fae7dee7e08991da728c996e4_129746_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Malcolm Barrett</a></h5>
+      <h6 class="card-subtitle">PhD Student in Epidemiology</h6>
+      <p class="card-text">Malcolm Barrett is a PhD student in Epidemiology at the University of Southern California. He has worked on both mature and nascent cohort studies, as well as in several clinical settings. He served for two years in AmeriCorps at Federally-Qualified Health Centers and is committed to science as service. matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:malcolmbarrett@gmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/malco_barrett" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/malcolm-barrett-33b307138" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/malcolmbarrett" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+      
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.6cbefe3f0755301b86cd38317ded9f54.js"></script>
+
+    
+
+
+
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2019 Malcolm Barrett &middot; 
+    
+    <a href="https://github.com/malcolmbarrett/malco.io" target="_blank" rel="noopener"><i class="fas fa-code-branch" style="color:#0072B2"></i></a>  &middot; 
+    
+    Made with the <a href="https://cran.r-project.org/" target="_blank" rel="noopener"><i class="fab fa-r-project"></i> </a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener">blogdown</a> package and the 
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

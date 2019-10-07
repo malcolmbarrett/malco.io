@@ -1,0 +1,16 @@
+# Font style metadata
+name = "malco"
+
+# Optional Google font URL
+google_fonts = "Karla:300,400,500|IBM+Plex+Sans:300,400,500|Roboto+Mono"
+# old main font: Fira+Sans 
+
+# Font families
+heading_font = "IBM Plex Sans"
+body_font = "Karla"
+nav_font = "IBM Plex Sans"
+mono_font = "Roboto Mono"
+
+# Font size
+font_size = "20"
+font_size_small = "16"

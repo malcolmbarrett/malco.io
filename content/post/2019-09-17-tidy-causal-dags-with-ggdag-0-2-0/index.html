@@ -1,0 +1,124 @@
+---
+title: Tidy causal DAGs with ggdag 0.2.0
+author: Malcolm Barrett
+date: '2019-09-17'
+slug: tidy-causal-dags-with-ggdag-0-2-0
+categories:
+  - r
+  - dataviz
+  - releases
+  - causalinference
+tags:
+  - ggdag
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2019-09-17'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: 
+  - ggdag
+  - methods
+---
+
+
+
+<p>I’m please to announce that <a href="https://ggdag.malco.io/">ggdag 0.2.0</a> is now on CRAN! ggdag links the dagitty package, which contains powerful algorithms for analyzing causal DAGs, with the unlimited flexibility of ggplot2. ggdag coverts dagitty objects to a tidy DAG data structure, which allows you to both analyze your DAG and plot it easily in ggplot2. Let’s look at an example for a causal diagram of the effect of smoking on cardiac arrest.</p>
+<pre class="r"><code>library(ggdag)</code></pre>
+<pre class="r"><code>smoking_ca_dag &lt;- dagify(cardiacarrest ~ cholesterol,
+       cholesterol ~ smoking + weight,
+       smoking ~ unhealthy,
+       weight ~ unhealthy,
+       labels = c(&quot;cardiacarrest&quot; = &quot;Cardiac\n Arrest&quot;, 
+                  &quot;smoking&quot; = &quot;Smoking&quot;,
+                  &quot;cholesterol&quot; = &quot;Cholesterol&quot;,
+                  &quot;unhealthy&quot; = &quot;Unhealthy\n Lifestyle&quot;,
+                  &quot;weight&quot; = &quot;Weight&quot;),
+       latent = &quot;unhealthy&quot;,
+       exposure = &quot;smoking&quot;,
+       outcome = &quot;cardiacarrest&quot;) %&gt;% 
+  tidy_dagitty()
+
+smoking_ca_dag</code></pre>
+<pre><code>## # A DAG with 5 nodes and 5 edges
+## #
+## # Exposure: smoking
+## # Outcome: cardiacarrest
+## # Latent Variable: unhealthy
+## #
+## # A tibble: 6 x 9
+##   name          x     y direction to        xend  yend circular label      
+##   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;     &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;      
+## 1 choleste…  13.2  11.8 -&gt;        cardiac…  12.0  11.2 FALSE    Cholesterol
+## 2 smoking    14.5  11.7 -&gt;        cholest…  13.2  11.8 FALSE    Smoking    
+## 3 unhealthy  15.0  12.8 -&gt;        smoking   14.5  11.7 FALSE    &quot;Unhealthy…
+## 4 unhealthy  15.0  12.8 -&gt;        weight    13.8  13.0 FALSE    &quot;Unhealthy…
+## 5 weight     13.8  13.0 -&gt;        cholest…  13.2  11.8 FALSE    Weight     
+## 6 cardiaca…  12.0  11.2 &lt;NA&gt;      &lt;NA&gt;      NA    NA   FALSE    &quot;Cardiac\n…</code></pre>
+<p>The tidy DAG structure looks like a <code>tibble</code>. ggdag 0.2.0 also prints some information about the DAG at the top.</p>
+<pre class="r"><code>ggdag(smoking_ca_dag, text = FALSE, use_labels = &quot;label&quot;)</code></pre>
+<p><img src="/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Here, smoking does increase the risk of cardiac arrest, but it’s also confounded by an unmeasured variable, a tendency towards an unhealthy lifestyle. That means that there are two open paths from smoking to cardiac arrest: the causal path through cholesterol and the backdoor path through weight. (This DAG is probably not quite right, because smoking also affects weight, but we’ll leave it as is for demonstration purposes.)</p>
+<p>If you used ggdag 0.1.0, you may notice a big difference here: ggdag plots now look a lot more like base ggplot2 plots. While this has been the case in the development version for some time, one of the bigger mistakes in the initial release of ggdag was too much out-of-box customization. ggdag now does a much better job getting out of the way of ggplot2’s incredible system for aesthetics and themes. Let’s analyze the paths in the smoking DAG but take advantage of tools from ggplot2 to customize the plot.</p>
+<pre class="r"><code>ggdag_paths(smoking_ca_dag, text = FALSE, use_labels = &quot;label&quot;, shadow = TRUE) +
+  theme_dag(base_size = 14) +
+  theme(legend.position = &quot;none&quot;, strip.text = element_blank()) + 
+  # set node aesthetics
+  scale_color_manual(values = &quot;#0072B2&quot;, na.value = &quot;grey80&quot;) + 
+  # set label aesthetics
+  scale_fill_manual(values = &quot;#0072B2&quot;, na.value = &quot;grey80&quot;) + 
+  # set arrow aesthetics
+  ggraph::scale_edge_color_manual(values = &quot;#0072B2&quot;, na.value = &quot;grey80&quot;) +
+  ggtitle(&quot;Open paths from smoking to cardiac arrest&quot;)</code></pre>
+<p><img src="/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>There are also many new themes available, each of which is prefixed with <code>theme_dag*()</code>.</p>
+<p>Learn more about ggdag on the <a href="https://ggdag.malco.io/">package website</a>. There you’ll find articles on <a href="https://ggdag.malco.io/articles/intro-to-ggdag.html">introducing ggdag</a>, <a href="https://ggdag.malco.io/articles/intro-to-dags.html">introducing DAGs</a>, and discussing <a href="https://ggdag.malco.io/articles/bias-structures.html">common structures of bias</a></p>
+<div id="what-else-is-new" class="section level2">
+<h2>What else is new?</h2>
+<p>This release ensures compatibility with ggraph 2.0.0 and also fixes a number of bugs (see the <a href="https://ggdag.malco.io/news/index.html">news</a> section of the pkgdown site). In addition to better support for ggplot2 aesthetic functions, ggdag also now has better support for working directly in tidygraph/ggraph. ggraph is essential to ggdag’s geoms, but you might prefer to work with the full toolkit from that package.</p>
+<pre class="r"><code>library(tidygraph)
+library(ggraph)
+tblgraph_dag &lt;- as_tbl_graph(smoking_ca_dag)
+
+tblgraph_dag</code></pre>
+<pre><code>## # A tbl_graph: 5 nodes and 5 edges
+## #
+## # A directed acyclic simple graph with 1 component
+## #
+## # Node Data: 5 x 1 (active)
+##   name         
+##   &lt;chr&gt;        
+## 1 cholesterol  
+## 2 smoking      
+## 3 unhealthy    
+## 4 weight       
+## 5 cardiacarrest
+## #
+## # Edge Data: 5 x 9
+##    from    to     x     y direction  xend  yend circular label             
+##   &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;             
+## 1     1     5  13.2  11.8 -&gt;         12.0  11.2 FALSE    Cholesterol       
+## 2     2     1  14.5  11.7 -&gt;         13.2  11.8 FALSE    Smoking           
+## 3     3     2  15.0  12.8 -&gt;         14.5  11.7 FALSE    &quot;Unhealthy\n Life…
+## # … with 2 more rows</code></pre>
+<pre class="r"><code>tblgraph_dag %&gt;% 
+  ggraph() +
+  geom_node_text(aes(label = name)) + 
+  geom_edge_link(aes(
+    start_cap = label_rect(node1.name),
+    end_cap = label_rect(node2.name)
+  ), arrow = arrow()) +
+  theme_graph()</code></pre>
+<p><img src="/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>tidygraph is designed to work with network data rather than causal diagrams, so many of the features are not as useful for causal DAGs as the algorithms from dagitty. However, tidygraph and ggraph have many tools for manipulating network-like data that are very powerful.</p>
+</div>
+<div id="miss-the-old-look" class="section level2">
+<h2>Miss the old look?</h2>
+<p>A lot has changed in the look of ggdag, but the old style hasn’t gone away. You can set the old theme with <code>theme_dag_gray()</code> and set the stylized nodes with <code>geom_dag_node()</code> (instead of <code>geom_dag_point()</code>) or with the <code>stylized</code> argument in the quick plotting functions.</p>
+<pre class="r"><code>ggdag(confounder_triangle(), stylized = TRUE) +
+  theme_dag_gray()</code></pre>
+<p><img src="/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>

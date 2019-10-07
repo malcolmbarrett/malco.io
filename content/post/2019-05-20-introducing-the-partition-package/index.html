@@ -1,0 +1,158 @@
+---
+title: Introducing the partition package
+author: Malcolm Barrett
+date: '2019-05-20'
+slug: introducing-the-partition-package
+categories:
+  - r
+  - releases
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2019-05-20'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+
+<p>I’m pleased to announce the CRAN release of partition 0.1.0. partition is a fast and flexible data reduction framework that minimizes information loss and creates interpretable clusters. partition uses agglomorative clustering: it starts from the ground up, matching pairs of variables and assessing the amount of information that would be explained by their reduction. If the information is above this user-specified threshold, the data is reduced. This type of reduction is particularly useful in very redundant data, such as high-resolution genetic data.</p>
+<div id="creating-partitions" class="section level1">
+<h1>Creating partitions</h1>
+<p><code>partition()</code> takes a data frame and reduces it as much as possible without creating clusters below the minimum amount of information specified in the <code>threshold</code> argument.</p>
+<pre class="r"><code># install.packages(&quot;partition&quot;)
+library(partition)
+set.seed(1234)
+#  simulate correlated data
+df &lt;- simulate_block_data(c(3, 4, 5), lower_corr = .4, upper_corr = .6, n = 100)
+
+#  don&#39;t accept reductions where information &lt; .6
+prt &lt;- partition(df, threshold = .6)
+prt</code></pre>
+<pre><code>## Partitioner:
+##    Director: Minimum Distance (Pearson) 
+##    Metric: Intraclass Correlation 
+##    Reducer: Scaled Mean
+## 
+## Reduced Variables:
+## 1 reduced variables created from 2 observed variables
+## 
+## Mappings:
+## reduced_var_1 = {block2_x3, block2_x4}
+## 
+## Minimum information:
+## 0.602</code></pre>
+<p>The <code>partition</code> object returned by <code>partition()</code> contains the reduced data.</p>
+<pre class="r"><code># return reduced data
+partition_scores(prt)</code></pre>
+<pre><code>## # A tibble: 100 x 11
+##    block1_x1 block1_x2 block1_x3 block2_x1 block2_x2 block3_x1 block3_x2
+##        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+##  1   -1.00     -0.344      1.35     -0.526    -1.25      1.13     0.357 
+##  2    0.518    -0.434     -0.361    -1.48     -1.53     -0.317    0.290 
+##  3   -1.77     -0.913     -0.722     0.122     0.224    -0.529    0.114 
+##  4   -1.49     -0.998      0.189     0.149    -0.994    -0.433    0.0120
+##  5    0.616     0.0211     0.895     1.09     -1.25      0.440   -0.550 
+##  6    0.0765    0.522      1.20     -0.152    -0.419    -0.912   -0.362 
+##  7    1.74      0.0993    -0.654    -1.26     -0.502    -0.792   -1.03  
+##  8    1.05      2.19       0.913     0.254     0.328    -1.07    -0.976 
+##  9   -1.07     -0.292     -0.763     0.437     0.739     0.899   -0.342 
+## 10   -1.02     -0.959     -1.33     -1.57     -1.11      0.618    0.153 
+## # … with 90 more rows, and 4 more variables: block3_x3 &lt;dbl&gt;,
+## #   block3_x4 &lt;dbl&gt;, block3_x5 &lt;dbl&gt;, reduced_var_1 &lt;dbl&gt;</code></pre>
+<p>You can also access the mappings of the original data to the clusters. Variables map to one and only one cluster.</p>
+<pre class="r"><code># access mapping keys
+mapping_key(prt)</code></pre>
+<pre><code>## # A tibble: 11 x 4
+##    variable      mapping   information indices  
+##    &lt;chr&gt;         &lt;list&gt;          &lt;dbl&gt; &lt;list&gt;   
+##  1 block1_x1     &lt;chr [1]&gt;       1     &lt;int [1]&gt;
+##  2 block1_x2     &lt;chr [1]&gt;       1     &lt;int [1]&gt;
+##  3 block1_x3     &lt;chr [1]&gt;       1     &lt;int [1]&gt;
+##  4 block2_x1     &lt;chr [1]&gt;       1     &lt;int [1]&gt;
+##  5 block2_x2     &lt;chr [1]&gt;       1     &lt;int [1]&gt;
+##  6 block3_x1     &lt;chr [1]&gt;       1     &lt;int [1]&gt;
+##  7 block3_x2     &lt;chr [1]&gt;       1     &lt;int [1]&gt;
+##  8 block3_x3     &lt;chr [1]&gt;       1     &lt;int [1]&gt;
+##  9 block3_x4     &lt;chr [1]&gt;       1     &lt;int [1]&gt;
+## 10 block3_x5     &lt;chr [1]&gt;       1     &lt;int [1]&gt;
+## 11 reduced_var_1 &lt;chr [2]&gt;       0.602 &lt;int [2]&gt;</code></pre>
+<pre class="r"><code>unnest_mappings(prt)</code></pre>
+<pre><code>## # A tibble: 12 x 4
+##    variable      mapping   information indices
+##    &lt;chr&gt;         &lt;chr&gt;           &lt;dbl&gt;   &lt;int&gt;
+##  1 block1_x1     block1_x1       1           1
+##  2 block1_x2     block1_x2       1           2
+##  3 block1_x3     block1_x3       1           3
+##  4 block2_x1     block2_x1       1           4
+##  5 block2_x2     block2_x2       1           5
+##  6 block3_x1     block3_x1       1           8
+##  7 block3_x2     block3_x2       1           9
+##  8 block3_x3     block3_x3       1          10
+##  9 block3_x4     block3_x4       1          11
+## 10 block3_x5     block3_x5       1          12
+## 11 reduced_var_1 block2_x3       0.602       6
+## 12 reduced_var_1 block2_x4       0.602       7</code></pre>
+</div>
+<div id="using-partitioners" class="section level1">
+<h1>Using partitioners</h1>
+<p>partition uses an approach called Direct-Measure-Reduce to agglomerate the data: functions called partitioners tell the algorithm 1) where to look in the data 2) how to measure information loss and 3) how to reduce the data. The default partitioner that <code>partition()</code> uses called <code>part_icc()</code>, which 1) finds the closest pair of variables using a correlation-based distance matrix 2) measures information using intraclass correlation and 3) reduces acceptable clusters using scaled rowmeans.</p>
+<p>partition also has a number of other options. <code>part_kmeans()</code>, for instance, uses the K-means algorithm to find potential reductions and reduces to the minimum level of <code>k</code> that is still above the information threshold, measured by ICC.</p>
+<pre class="r"><code># use a lower threshold of information loss
+partition(df, threshold = .5, partitioner = part_kmeans())</code></pre>
+<pre><code>## Partitioner:
+##    Director: K-Means Clusters 
+##    Metric: Minimum Intraclass Correlation 
+##    Reducer: Scaled Mean
+## 
+## Reduced Variables:
+## 2 reduced variables created from 7 observed variables
+## 
+## Mappings:
+## reduced_var_1 = {block3_x1, block3_x2, block3_x5}
+## reduced_var_2 = {block2_x1, block2_x2, block2_x3, block2_x4}
+## 
+## Minimum information:
+## 0.508</code></pre>
+<p>See the <a href="https://uscbiostats.github.io/partition/articles/introduction-to-partition.html">introductory vignette</a> for more information on the built-in partitioners.</p>
+<p><code>partition()</code> is actually agnostic to the Direct-Measure-Reduce approach used. This makes partition extremely flexible. You can edit existing partitioners or create completely new ones. For instance, if we want <code>part_icc()</code> to return raw row means rather than scaled row means, we can replace the <code>reduce</code> component of the function (here, with <code>rowmeans()</code>).</p>
+<pre class="r"><code># use a custom partitioner
+part_icc_rowmeans &lt;- replace_partitioner(
+  part_icc, 
+  reduce = as_reducer(rowMeans)
+)
+partition(df, threshold = .6, partitioner = part_icc_rowmeans) </code></pre>
+<pre><code>## Partitioner:
+##    Director: Minimum Distance (Pearson) 
+##    Metric: Intraclass Correlation 
+##    Reducer: &lt;custom reducer&gt;
+## 
+## Reduced Variables:
+## 1 reduced variables created from 2 observed variables
+## 
+## Mappings:
+## reduced_var_1 = {block2_x3, block2_x4}
+## 
+## Minimum information:
+## 0.602</code></pre>
+<p><code>partition()</code> works seamlessly with changes to the partitioner. See the <a href="https://uscbiostats.github.io/partition/articles/extending-partition.html">vignette on extending partition</a> for more information on customizing partitioners.</p>
+<p>partition also supports a number of ways to visualize partitions and permutation tests; these functions all start with <code>plot_*()</code>. These functions all return ggplots and can thus be extended using ggplot2.</p>
+<pre class="r"><code>plot_stacked_area_clusters(df) +
+  ggplot2::theme_minimal(14)</code></pre>
+<p><img src="/post/2019-05-20-introducing-the-partition-package/index_files/figure-html/unnamed-chunk-6-1.png" width="2240" /></p>
+<p>Install partition now from CRAN or install the <a href="https://github.com/USCbiostats/partition">development version on GitHub</a>.</p>
+</div>
+<div id="learn-more" class="section level1">
+<h1>Learn More</h1>
+<ul>
+<li><a href="https://uscbiostats.github.io/partition/articles/introduction-to-partition.html">Vignette: Introduction to partition</a></li>
+<li><a href="https://uscbiostats.github.io/partition/articles/extending-partition.html">Vignette: Extending partition</a></li>
+<li><a href="https://uscbiostats.github.io/partition/">partition web site</a></li>
+<li><a href="https://github.com/USCbiostats/partition">GitHub Repo</a></li>
+</ul>
+</div>

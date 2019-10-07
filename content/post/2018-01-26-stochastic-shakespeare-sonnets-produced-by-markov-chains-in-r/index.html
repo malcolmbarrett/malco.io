@@ -1,0 +1,363 @@
+---
+title: 'Stochastic Shakespeare: Sonnets Produced by Markov Chains in R'
+author: Malcolm Barrett
+date: '2018-01-26'
+slug: stochastic-shakespeare-sonnets-produced-by-markov-chains-in-r
+categories:
+  - r
+tags:
+  - textanalysis
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2018-01-26'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: [] 
+---
+
+
+
+<div id="update-with-markovifyr" class="section level1">
+<h1>Update with <code>markovifyR</code></h1>
+<p>Thanks to Maëlle Salmon, who referred me to <a href="https://stackoverflow.blog/2018/01/15/thanks-million-jon-skeet/">this post</a> by Julia Silge and Nick Larsen, I explored doing this using the <code>markovifyR</code> package, and the results are unbelievable. <a href="#update">See the bottom of the post for an updated batch of sonnets!</a></p>
+</div>
+<div id="original-post" class="section level1">
+<h1>Original post</h1>
+<p>I recently saw <a href="http://katiejolly.io/blog/2018-01-05/random-rupi-markov-chain-poems">Katie Jolly’s post</a>, in which she produced Rupi Kuar-style poems using Markov Chains in R. I absolutely loved it, so I decided to try it with Shakespeare’s 154 sonnets using her post as a skeleton.</p>
+</div>
+<div id="downloading-and-cleaning-the-sonnets" class="section level1">
+<h1>Downloading and cleaning the sonnets</h1>
+<p>In addition to <code>markovchain</code> and <code>tidyverse</code>, I’m going to use the <code>gutenberger</code> package to download the sonnets.</p>
+<pre class="r"><code>library(gutenbergr)
+library(tidyverse) 
+library(markovchain) </code></pre>
+<pre class="r"><code>shakespeare &lt;- gutenberg_works(title == &quot;Shakespeare&#39;s Sonnets&quot;) %&gt;% 
+  pull(gutenberg_id) %&gt;% 
+  gutenberg_download(verbose = FALSE)
+
+shakespeare</code></pre>
+<pre><code>## # A tibble: 2,625 x 2
+##    gutenberg_id text                                          
+##           &lt;int&gt; &lt;chr&gt;                                         
+##  1         1041 THE SONNETS                                   
+##  2         1041 &quot;&quot;                                            
+##  3         1041 by William Shakespeare                        
+##  4         1041 &quot;&quot;                                            
+##  5         1041 &quot;&quot;                                            
+##  6         1041 &quot;&quot;                                            
+##  7         1041 &quot;&quot;                                            
+##  8         1041 &quot;  I&quot;                                         
+##  9         1041 &quot;&quot;                                            
+## 10         1041 &quot;  From fairest creatures we desire increase,&quot;
+## # … with 2,615 more rows</code></pre>
+<p>Because the sonnets are in <code>gutenberger</code>, they’re already in a nice format to work with. I just need to do a little cleaning up: like Katie, I removed the punctuation, but I also have to clear out the sonnet titles, which were Roman numerals, and some title info.</p>
+<pre class="r"><code>#  a little function to make life easier
+`%not_in%` &lt;- function(lhs, rhs) {
+  !(lhs %in% rhs)
+}
+
+#  remove new lines symbol, sonnet Roman numerals, and punctation
+#  and split into vector
+bills_words &lt;- shakespeare %&gt;% 
+  mutate(text = text %&gt;% 
+    str_trim() %&gt;% 
+    str_replace_all(&quot;--&quot;, &quot; &quot;) %&gt;% 
+    str_replace_all(&quot;[^[:alnum:][:space:]&#39;]&quot;, &quot;&quot;) %&gt;% 
+    str_replace_all(&quot;^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$&quot;, 
+                    &quot;&quot;) %&gt;% 
+    str_to_lower()) %&gt;% 
+  filter(text %not_in% c(&quot;the sonnets&quot;, &quot;by william shakespeare&quot;, &quot;&quot;, &quot; &quot;)) %&gt;% 
+  pull(text) %&gt;% 
+  str_split(&quot; &quot;) %&gt;% 
+  unlist() </code></pre>
+<p>I’m also going to extract the punctuation and assess how many of each there are for when I actually assemble the sonnets later.</p>
+<pre class="r"><code>punctuation &lt;- shakespeare %&gt;% 
+  pull(text) %&gt;% 
+  str_extract_all(&quot;[^[:alnum:][:space:]&#39;]&quot;) %&gt;% 
+  unlist()
+
+punctuation_probs &lt;- punctuation[punctuation %not_in% c(&quot;-&quot;, &quot;(&quot;, &quot;)&quot;)] %&gt;% 
+  table() %&gt;% 
+  prop.table()</code></pre>
+</div>
+<div id="fit-the-markov-chain" class="section level1">
+<h1>Fit the Markov Chain</h1>
+<p>Now fit the Markov Chain with the vector of words.</p>
+<pre class="r"><code>#  fit a Markov Chain
+sonnet_chain &lt;- markovchainFit(bills_words)
+cat(markovchainSequence(n = 10, markovchain = sonnet_chain$estimate), collapse =  &quot; &quot;)</code></pre>
+<p>i can afford no longer nurseth the joy my poverty</p>
+<p><img src="https://media.giphy.com/media/bXKWWJXUJkBsQ/giphy.gif" /></p>
+<p>And finally, here are a few functions to piece together lines to make them look like a sonnet using the <code>walk()</code> function from <code>purrr</code> to print out the lines (since it’s a side effect). No, they’re not actually iambic pentameter :(</p>
+<pre class="r"><code>write_a_line &lt;- function(n_lines = 1) {
+  walk(1:n_lines, function(.x) {
+  # put together lines of more or less average length
+    lines &lt;- markovchainSequence(n = sample(c(6:9), 1), 
+                               markovchain = sonnet_chain$estimate) %&gt;% 
+      paste(collapse = &quot; &quot;)
+  
+  #  add end-of-line punctuation based on their occurence 
+  end_punctuation &lt;- ifelse(.x == n_lines, &quot;.&quot;, 
+                            sample(names(punctuation_probs), 
+                                   size = 1, 
+                                   prob = punctuation_probs))
+  cat(paste0(lines, end_punctuation, &quot;  \n&quot;))
+  })
+}
+
+psuedosonnet &lt;- function() {
+  walk(1:3, function(.x) {
+    write_a_line(4)
+    cat(&quot;  \n&quot;)
+  })
+  
+  write_a_line(2)
+}</code></pre>
+</div>
+<div id="generating-the-sonnets" class="section level1">
+<h1>Generating the sonnets</h1>
+<p>Let’s try it out.</p>
+<div id="psuedosonnet-1" class="section level2">
+<h2>Psuedosonnet 1:</h2>
+<pre class="r"><code>set.seed(154)
+psuedosonnet()</code></pre>
+<p>wing and folly doctorlike controlling skill who knows the,<br />
+again assur’d and given grace but when all date:<br />
+shook three till my mind these blenches,<br />
+in sweetest things deem’d not so dear delight.</p>
+<p>the mouths of love swearing in these,<br />
+and soon to woe compar’d with;<br />
+at your bounty cherish she is ’greeing and yet,<br />
+by lies buried age and simple savour pitiful thrivers.</p>
+<p>am now with intelligence as the stage presenteth nought,<br />
+which it for me suffering my?<br />
+days making lascivious grace is not thy days are:<br />
+expired for myself and tombs of my.</p>
+<p>right my heart another gay why dost,<br />
+of my use your self thou.</p>
+</div>
+<div id="psuedosonnet-2" class="section level2">
+<h2>Psuedosonnet 2:</h2>
+<pre class="r"><code>psuedosonnet()</code></pre>
+<p>past reason hunted and checked with thee;<br />
+or changes right or at least so strong,<br />
+the ashes of glass his prescriptions,<br />
+him to decay lest eyes be false borrowed face.</p>
+<p>and all kinds of love her blood that,<br />
+o none but in these offices so.<br />
+and his spring within the view!<br />
+to weigh how thy book of.</p>
+<p>by a tomb of public means which,<br />
+or who moving points on to?<br />
+can yet do see my state and age unbred?<br />
+muse brings forth the orient when.</p>
+<p>thy hair the world away to show thee:<br />
+one by day when in love things.</p>
+</div>
+<div id="psuedosonnet-3" class="section level2">
+<h2>Psuedosonnet 3:</h2>
+<pre class="r"><code>psuedosonnet()</code></pre>
+<p>or else receiv’st not fade die but.<br />
+grief to mend to stay whilst;<br />
+reeks i hold thee devouring time that,<br />
+with you pattern of such day my love happy.</p>
+<p>hate me last so bright who leaves thy beauty.<br />
+each friend and your true that one that,<br />
+whilst like a vengeful canker blooms?<br />
+and therefore my bad thus to.</p>
+<p>should i not counted fair whose,<br />
+state but day arising from hands to;<br />
+of flower with his presence grace impiety,<br />
+only herald to the beast that plea.</p>
+<p>eyelids open wide in posterity thou send’st from,<br />
+nor shall have err’d and kept unused.</p>
+</div>
+<div id="psuedosonnet-4" class="section level2">
+<h2>Psuedosonnet 4:</h2>
+<pre class="r"><code>psuedosonnet()</code></pre>
+<p>that pine to my home of thine own,<br />
+love being crown’d with that man’s;<br />
+what need’st thou usurer why of this thy love’s,<br />
+with sovereign cure i question make him that i.</p>
+<p>to the ear confounds him have drawn,<br />
+fight and beauty should my muse and strangely.<br />
+liv’d alone stands but one so,<br />
+whilst i alone o in the lines that brightness.</p>
+<p>creature the lease dost wake elsewhere but me;<br />
+evil tempteth my love that which still,<br />
+i am attainted that in the thing to.<br />
+it thy sweet deaths be but those.</p>
+<p>that our appetite which he is hanging still:<br />
+inhabit on death to make one.</p>
+</div>
+<div id="psuedosonnet-5" class="section level2">
+<h2>Psuedosonnet 5:</h2>
+<pre class="r"><code>psuedosonnet()</code></pre>
+<p>and confounds in me not my?<br />
+alchemy to all my comfort now i send,<br />
+the pleasure thine own desert and no hatred in,<br />
+with disdain lest guilty goddess go since.</p>
+<p>seem right myself i’ll fight after you,<br />
+wane so love and simple truth.<br />
+ah do dispense you like of time despite,<br />
+to store harsh featureless and by.</p>
+<p>my reason is daily new lo,<br />
+love thee i’ll run and in themselves forsake me;<br />
+thou through windows to play as ’twixt a,<br />
+me both and to love of.</p>
+<p>still my bonds in disgrace with newer:<br />
+morrow to slavery my side against the weary.</p>
+<p><img src="https://media.giphy.com/media/3o6Ztf18L1Tsmxd528/giphy.gif" /></p>
+</div>
+</div>
+<div id="update" class="section level1">
+<h1>Update</h1>
+<p>Alright, this time I’m going to try it with the <code>markovifyR</code> package. I’m basically going to do the same cleaning as above, but this time I’ll be putting entire sentences, punctuation and all, into the Markov model. The <code>markovify_text()</code> function also accepts start words, so I thought it might look good to start with a sample of 100 starting words from the sonnets and construct the lines from there.</p>
+<pre class="r"><code>library(markovifyR)</code></pre>
+<pre class="r"><code>#  same as above, but maintain as sentences and keep punctuation
+bills_sentences &lt;- shakespeare %&gt;% 
+  mutate(text = text %&gt;% 
+    str_trim() %&gt;% 
+    str_replace_all(&quot;--&quot;, &quot; &quot;) %&gt;% 
+    str_replace_all(&quot;^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$&quot;, 
+                    &quot;&quot;) %&gt;% 
+    str_to_lower()) %&gt;% 
+  filter(text %not_in% c(&quot;the sonnets&quot;, &quot;by william shakespeare&quot;, &quot;&quot;, &quot; &quot;))
+
+#  fit the Markov Chain
+markovify_model &lt;-
+  generate_markovify_model(
+    input_text = bills_sentences$text,
+    markov_state_size = 2L,
+    max_overlap_total = 25,
+    max_overlap_ratio = .85
+  )
+
+#  generate a sonnet
+markovify_sonnet &lt;- function() {
+  lines &lt;- markovify_text(
+      markov_model = markovify_model,
+      maximum_sentence_length = 75,
+      output_column_name = &#39;sonnet_line&#39;,
+      count = 50,
+      tries = 1000, 
+      start_words = sample(generate_start_words(markovify_model)$wordStart, 100),
+      only_distinct = TRUE,
+      return_message = FALSE) %&gt;% 
+    filter(str_count(sonnet_line, &quot;\\w+&quot;) &gt; 5 &amp; str_count(sonnet_line, &quot;\\w+&quot;) &lt; 10) %&gt;% 
+    slice(sample(1:n(), 14)) %&gt;% 
+    mutate(id = 1:n()) %&gt;% 
+    select(id, sonnet_line) 
+  
+   #  add a period to the last line if the last charachter isn&#39;t punctuation 
+   #  that ends a sentence  
+   last_line &lt;- lines[lines$id == 14, &quot;sonnet_line&quot;]
+   lines[lines$id == 14, &quot;sonnet_line&quot;] &lt;- str_replace(last_line, 
+                                                       &quot;.$(?&lt;!//.//!//?|[:alnum:])&quot;, &quot;.&quot;)
+   
+   #  print in a sonnet-like format
+   walk(1:14, function(.x) {
+     cat(lines$sonnet_line[.x], &quot; \n&quot;)
+     
+     #  add a space every four lines
+     if (.x %% 4 == 0) cat(&quot;\n&quot;) 
+   })
+}</code></pre>
+<div id="markovify-sonnet-1" class="section level2">
+<h2>Markovify Sonnet 1:</h2>
+<pre class="r"><code>markovify_sonnet()</code></pre>
+<p>now counting best to be invited<br />
+then, in the breath of words respect,<br />
+are windows to my dear time’s waste:<br />
+speak of that which thou departest;</p>
+<p>speak of my faults thy sweet graces graced be;<br />
+reserve them for my sin you did impute,<br />
+then, beauteous niggard, why dost thou to mine eyes,<br />
+die to themselves. sweet roses do not kill</p>
+<p>this silence for my love, yea take them all;<br />
+are windows to my thoughts as food to life,<br />
+beauty’s effect with beauty of thy days.<br />
+there is but as the rich, whose blessed key,</p>
+<p>this were to be cross’d:<br />
+not from the book of honour razed quite.</p>
+</div>
+<div id="markovify-sonnet-2" class="section level2">
+<h2>Markovify Sonnet 2:</h2>
+<pre class="r"><code>markovify_sonnet()</code></pre>
+<p>thine eyes i love, and look strange;<br />
+haply i think my love alone.<br />
+which should transport me farthest from your tongue;<br />
+entitled in thy power to lend base subjects light?</p>
+<p>wishing me like to the very same;<br />
+not that the world’s fresh ornament,<br />
+looking with pretty ruth upon my brow;<br />
+of faults conceal’d, wherein i am forsworn,</p>
+<p>too base of thee this i do change:<br />
+now all is done, save what is told.<br />
+to this composed wonder of your fame!<br />
+disdains the tillage of thy days.</p>
+<p>till i return, of posting is no remedy,<br />
+not wondering at the present nor the prophetic soul</p>
+</div>
+<div id="markovify-sonnet-3" class="section level2">
+<h2>Markovify Sonnet 3:</h2>
+<pre class="r"><code>markovify_sonnet()</code></pre>
+<p>want nothing that the world an end,<br />
+kill me with that which it doth catch;<br />
+within the knowledge of mine own love’s might.<br />
+o! change thy thought, that i prove,</p>
+<p>within the level of your love.<br />
+presume not on thy humour doth depend:<br />
+ere you were once unkind befriends me now,<br />
+when sometime lofty towers i see thee,</p>
+<p>wishing me like to the world enjoys it;<br />
+who taught thee how thy precious minutes waste;<br />
+mad in pursuit of the time,<br />
+have added feathers to the time,</p>
+<p>the summer’s flower is to render thee.<br />
+what merit do i not to be invited</p>
+</div>
+<div id="markovify-sonnet-4" class="section level2">
+<h2>Markovify Sonnet 4:</h2>
+<pre class="r"><code>markovify_sonnet()</code></pre>
+<p>o, no! it is a man right fair,<br />
+by seeing farther than my barren rhyme?<br />
+even that your love taught it this alchemy,<br />
+theirs for their habitation chose out thee,</p>
+<p>just to the edge of doom.<br />
+full many a holy and obsequious tear<br />
+two loves i have frequent been with unknown minds,<br />
+how have mine eyes be blessed made</p>
+<p>speak of that which still doth grow?<br />
+kind is my love’s breath? the purple pride<br />
+him in thy steel bosom’s ward,<br />
+even so, being full of blame,</p>
+<p>speak of the dead, which now appear<br />
+will be true despite thy scythe and crooked knife.</p>
+</div>
+<div id="markovify-sonnet-5" class="section level2">
+<h2>Markovify Sonnet 5:</h2>
+<pre class="r"><code>markovify_sonnet()</code></pre>
+<p>never believe though in thy creation did decree<br />
+make but my five senses can<br />
+but all alone beweep my outcast state,<br />
+alack! what poverty my muse want subject to invent,</p>
+<p>but wherefore do not do the thing they see;<br />
+lo! in the number let me be borne alone.<br />
+steal from his low tract, and look strange;<br />
+so, either by thy beauty being mute,</p>
+<p>betwixt mine eye loves it and doth first begin.<br />
+whence hast thou this becoming of their excellence.<br />
+dost thou to mine own worth do define,<br />
+wretched in this line some interest,</p>
+<p>yet, do thy worst to steal thyself away,<br />
+although thou steal thy sweet self prove.</p>
+<p><img src="https://media.giphy.com/media/JPW7lVDXKJgXu/giphy.gif" width="75%" /></p>
+<p>Well, call me Shockedspeare.</p>
+<p><em>Exit, pursued by a bear</em></p>
+</div>
+</div>

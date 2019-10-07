@@ -1,0 +1,100 @@
+---
+title: Introducing the partition package
+author: Malcolm Barrett
+date: '2019-05-20'
+slug: introducing-the-partition-package
+categories:
+  - r
+  - releases
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2019-05-20'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, dpi = 320)
+```
+
+
+I'm pleased to announce the CRAN release of partition 0.1.0. partition is a fast and flexible data reduction framework that minimizes information loss and creates interpretable clusters. partition uses agglomorative clustering: it starts from the ground up, matching pairs of variables and assessing the amount of information that would be explained by their reduction. If the information is above this user-specified threshold, the data is reduced. This type of reduction is particularly useful in very redundant data, such as high-resolution genetic data.
+
+# Creating partitions
+
+`partition()` takes a data frame and reduces it as much as possible without creating clusters below the minimum amount of information specified in the `threshold` argument.
+
+```{r}
+# install.packages("partition")
+library(partition)
+set.seed(1234)
+#  simulate correlated data
+df <- simulate_block_data(c(3, 4, 5), lower_corr = .4, upper_corr = .6, n = 100)
+
+#  don't accept reductions where information < .6
+prt <- partition(df, threshold = .6)
+prt
+```
+
+The `partition` object returned by `partition()` contains the reduced data.
+
+```{r}
+# return reduced data
+partition_scores(prt)
+```
+
+You can also access the mappings of the original data to the clusters. Variables map to one and only one cluster.
+
+```{r}
+# access mapping keys
+mapping_key(prt)
+
+unnest_mappings(prt)
+```
+
+# Using partitioners
+
+partition uses an approach called Direct-Measure-Reduce to agglomerate the data: functions called partitioners tell the algorithm 1) where to look in the data 2) how to measure information loss and 3) how to reduce the data. The default partitioner that `partition()` uses called `part_icc()`, which 1) finds the closest pair of variables using a correlation-based distance matrix 2) measures information using intraclass correlation and 3) reduces acceptable clusters using scaled rowmeans.
+
+partition also has a number of other options. `part_kmeans()`, for instance, uses the K-means algorithm to find potential reductions and reduces to the minimum level of `k` that is still above the information threshold, measured by ICC.
+
+```{r}
+# use a lower threshold of information loss
+partition(df, threshold = .5, partitioner = part_kmeans())
+```
+
+See the [introductory vignette](https://uscbiostats.github.io/partition/articles/introduction-to-partition.html) for more information on the built-in partitioners.
+
+`partition()` is actually agnostic to the Direct-Measure-Reduce approach used. This makes partition extremely flexible. You can edit existing partitioners or create completely new ones. For instance, if we want `part_icc()` to return raw row means rather than scaled row means, we can replace the `reduce` component of the function (here, with `rowmeans()`).
+
+```{r}
+# use a custom partitioner
+part_icc_rowmeans <- replace_partitioner(
+  part_icc, 
+  reduce = as_reducer(rowMeans)
+)
+partition(df, threshold = .6, partitioner = part_icc_rowmeans) 
+```
+
+`partition()` works seamlessly with changes to the partitioner. See the [vignette on extending partition](https://uscbiostats.github.io/partition/articles/extending-partition.html) for more information on customizing partitioners.
+
+partition also supports a number of ways to visualize partitions and permutation tests; these functions all start with `plot_*()`. These functions all return ggplots and can thus be extended using ggplot2.
+
+```{r, dpi = 320}
+plot_stacked_area_clusters(df) +
+  ggplot2::theme_minimal(14)
+```
+
+Install partition now from CRAN or install the [development version on GitHub](https://github.com/USCbiostats/partition).
+
+# Learn More
+* [Vignette: Introduction to partition](https://uscbiostats.github.io/partition/articles/introduction-to-partition.html)
+* [Vignette: Extending partition](https://uscbiostats.github.io/partition/articles/extending-partition.html)
+* [partition web site](https://uscbiostats.github.io/partition/)
+* [GitHub Repo](https://github.com/USCbiostats/partition)

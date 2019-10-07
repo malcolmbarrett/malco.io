@@ -1,0 +1,262 @@
+---
+title: 'Stochastic Shakespeare: Sonnets Produced by Markov Chains in R'
+author: Malcolm Barrett
+date: '2018-01-26'
+slug: stochastic-shakespeare-sonnets-produced-by-markov-chains-in-r
+categories:
+  - r
+tags:
+  - textanalysis
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2018-01-26'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: [] 
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(reticulate)
+reticulate::use_virtualenv("r-reticulate") 
+reticulate::use_python("/Users/malcolmbarrett/.pyenv/shims/python")
+py_config()
+```
+
+# Update with `markovifyR`
+ 
+Thanks to Maëlle Salmon, who referred me to [this post](https://stackoverflow.blog/2018/01/15/thanks-million-jon-skeet/) by Julia Silge and Nick Larsen, I explored doing this using the `markovifyR` package, and the results are unbelievable. [See the bottom of the post for an updated batch of sonnets!](#update)
+
+# Original post
+
+I recently saw [Katie Jolly's post](http://katiejolly.io/blog/2018-01-05/random-rupi-markov-chain-poems), in which she produced Rupi Kuar-style poems using Markov Chains in R. I absolutely loved it, so I decided to try it with Shakespeare's 154 sonnets using her post as a skeleton. 
+
+# Downloading and cleaning the sonnets
+
+In addition to `markovchain` and `tidyverse`, I'm going to use the `gutenberger` package to download the sonnets.
+
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+library(gutenbergr)
+library(tidyverse) 
+library(markovchain) 
+```
+
+```{r download_sonnets, cache=TRUE}
+shakespeare <- gutenberg_works(title == "Shakespeare's Sonnets") %>% 
+  pull(gutenberg_id) %>% 
+  gutenberg_download(verbose = FALSE)
+
+shakespeare
+```
+
+Because the sonnets are in `gutenberger`, they're already in a nice format to work with. I just need to do a little cleaning up: like Katie, I removed the punctuation, but I also have to clear out the sonnet titles, which were Roman numerals, and some title info.
+
+```{r process_sonnets, cache=TRUE, message=FALSE, warning=FALSE}
+#  a little function to make life easier
+`%not_in%` <- function(lhs, rhs) {
+  !(lhs %in% rhs)
+}
+
+#  remove new lines symbol, sonnet Roman numerals, and punctation
+#  and split into vector
+bills_words <- shakespeare %>% 
+  mutate(text = text %>% 
+    str_trim() %>% 
+    str_replace_all("--", " ") %>% 
+    str_replace_all("[^[:alnum:][:space:]']", "") %>% 
+    str_replace_all("^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$", 
+                    "") %>% 
+    str_to_lower()) %>% 
+  filter(text %not_in% c("the sonnets", "by william shakespeare", "", " ")) %>% 
+  pull(text) %>% 
+  str_split(" ") %>% 
+  unlist() 
+```
+
+I'm also going to extract the punctuation and assess how many of each there are for when I actually assemble the sonnets later.
+
+```{r punctuation}
+punctuation <- shakespeare %>% 
+  pull(text) %>% 
+  str_extract_all("[^[:alnum:][:space:]']") %>% 
+  unlist()
+
+punctuation_probs <- punctuation[punctuation %not_in% c("-", "(", ")")] %>% 
+  table() %>% 
+  prop.table()
+```
+
+
+# Fit the Markov Chain
+
+Now fit the Markov Chain with the vector of words.
+
+```{r markov_chain, cache=TRUE, dependson="process_sonnets", results='asis'}
+#  fit a Markov Chain
+sonnet_chain <- markovchainFit(bills_words)
+cat(markovchainSequence(n = 10, markovchain = sonnet_chain$estimate), collapse =  " ")
+```
+
+![](https://media.giphy.com/media/bXKWWJXUJkBsQ/giphy.gif)
+
+And finally, here are a few functions to piece together lines to make them look like a sonnet using the `walk()` function from `purrr` to print out the lines (since it's a side effect). No, they're not actually iambic pentameter :(
+
+```{r functions}
+write_a_line <- function(n_lines = 1) {
+  walk(1:n_lines, function(.x) {
+  # put together lines of more or less average length
+    lines <- markovchainSequence(n = sample(c(6:9), 1), 
+                               markovchain = sonnet_chain$estimate) %>% 
+      paste(collapse = " ")
+  
+  #  add end-of-line punctuation based on their occurence 
+  end_punctuation <- ifelse(.x == n_lines, ".", 
+                            sample(names(punctuation_probs), 
+                                   size = 1, 
+                                   prob = punctuation_probs))
+  cat(paste0(lines, end_punctuation, "  \n"))
+  })
+}
+
+psuedosonnet <- function() {
+  walk(1:3, function(.x) {
+    write_a_line(4)
+    cat("  \n")
+  })
+  
+  write_a_line(2)
+}
+```
+
+# Generating the sonnets
+Let's try it out.
+
+## Psuedosonnet 1: 
+```{r sonnet1, results='asis'}
+set.seed(154)
+psuedosonnet()
+```
+
+
+## Psuedosonnet 2: 
+```{r sonnet2, results='asis'}
+psuedosonnet()
+```
+
+## Psuedosonnet 3: 
+```{r sonnet3, results='asis'}
+psuedosonnet()
+```
+
+## Psuedosonnet 4: 
+```{r sonnet4, results='asis'}
+psuedosonnet()
+```
+
+## Psuedosonnet 5: 
+```{r sonnet5, results='asis'}
+psuedosonnet()
+```
+
+![](https://media.giphy.com/media/3o6Ztf18L1Tsmxd528/giphy.gif)
+
+# Update {#update}
+
+Alright, this time I'm going to try it with the `markovifyR` package. I'm basically going to do the same cleaning as above, but this time I'll be putting entire sentences, punctuation and all, into the Markov model. The `markovify_text()` function also accepts start words, so I thought it might look good to start with a sample of 100 starting words from the sonnets and construct the lines from there.
+
+```{r, warning=FALSE, message=FALSE}
+library(markovifyR)
+```
+
+```{r}
+#  same as above, but maintain as sentences and keep punctuation
+bills_sentences <- shakespeare %>% 
+  mutate(text = text %>% 
+    str_trim() %>% 
+    str_replace_all("--", " ") %>% 
+    str_replace_all("^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$", 
+                    "") %>% 
+    str_to_lower()) %>% 
+  filter(text %not_in% c("the sonnets", "by william shakespeare", "", " "))
+
+#  fit the Markov Chain
+markovify_model <-
+  generate_markovify_model(
+    input_text = bills_sentences$text,
+    markov_state_size = 2L,
+    max_overlap_total = 25,
+    max_overlap_ratio = .85
+  )
+
+#  generate a sonnet
+markovify_sonnet <- function() {
+  lines <- markovify_text(
+      markov_model = markovify_model,
+      maximum_sentence_length = 75,
+      output_column_name = 'sonnet_line',
+      count = 50,
+      tries = 1000, 
+      start_words = sample(generate_start_words(markovify_model)$wordStart, 100),
+      only_distinct = TRUE,
+      return_message = FALSE) %>% 
+    filter(str_count(sonnet_line, "\\w+") > 5 & str_count(sonnet_line, "\\w+") < 10) %>% 
+    slice(sample(1:n(), 14)) %>% 
+    mutate(id = 1:n()) %>% 
+    select(id, sonnet_line) 
+  
+   #  add a period to the last line if the last charachter isn't punctuation 
+   #  that ends a sentence  
+   last_line <- lines[lines$id == 14, "sonnet_line"]
+   lines[lines$id == 14, "sonnet_line"] <- str_replace(last_line, 
+                                                       ".$(?<!//.//!//?|[:alnum:])", ".")
+   
+   #  print in a sonnet-like format
+   walk(1:14, function(.x) {
+     cat(lines$sonnet_line[.x], " \n")
+     
+     #  add a space every four lines
+     if (.x %% 4 == 0) cat("\n") 
+   })
+}
+```
+
+## Markovify Sonnet 1: 
+```{r msonnet1, results='asis'}
+markovify_sonnet()
+```
+
+## Markovify Sonnet 2: 
+```{r msonnet2, results='asis'}
+markovify_sonnet()
+```
+ 
+## Markovify Sonnet 3: 
+```{r msonnet3, results='asis'}
+markovify_sonnet()
+```
+
+## Markovify Sonnet 4: 
+```{r msonnet4, results='asis'}
+markovify_sonnet()
+```
+
+## Markovify Sonnet 5:  
+```{r msonnet5, results='asis'}
+markovify_sonnet()
+``` 
+
+
+```{r, echo=FALSE, out.width="75%"}
+knitr::include_graphics("https://media.giphy.com/media/JPW7lVDXKJgXu/giphy.gif")
+```
+
+
+Well, call me Shockedspeare.
+
+*Exit, pursued by a bear*

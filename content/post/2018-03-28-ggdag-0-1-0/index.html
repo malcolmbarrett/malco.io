@@ -1,0 +1,54 @@
+---
+title: ggdag 0.1.0
+author: Malcolm Barrett
+date: '2018-03-28'
+categories:
+  - r
+  - dataviz
+  - releases
+  - causalinference
+tags:
+  - ggdag
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2018-03-28'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: 
+  - ggdag
+---
+
+
+
+<p>I’m pleased to announce the release of <code>ggdag</code> 0.1.0 on CRAN! <code>ggdag</code> uses the powerful <code>dagitty</code> package to create and analyze structural causal models and plot them using <code>ggplot2</code> and <code>ggraph</code> in a tidy, consistent, and easy manner. You can use <code>dagitty</code> objects directly in <code>ggdag</code>, but <code>ggdag</code> also includes wrappers to make DAGs using a more R-like syntax:</p>
+<pre class="r"><code># install.packages(&quot;ggdag&quot;)
+library(ggdag)
+
+dag &lt;- dagify(y ~ x + z,
+       x ~ z) %&gt;% 
+  tidy_dagitty()
+
+dag</code></pre>
+<pre><code>## # A DAG with 3 nodes and 3 edges
+## #
+## # A tibble: 4 x 8
+##   name      x     y direction to     xend  yend circular
+##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;     &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;   
+## 1 x      8.21  7.43 -&gt;        y      7.57  8.19 FALSE   
+## 2 z      8.55  8.37 -&gt;        x      8.21  7.43 FALSE   
+## 3 z      8.55  8.37 -&gt;        y      7.57  8.19 FALSE   
+## 4 y      7.57  8.19 &lt;NA&gt;      &lt;NA&gt;  NA    NA    FALSE</code></pre>
+<pre class="r"><code>ggdag(dag)</code></pre>
+<p><img src="/post/2018-03-28-ggdag-0-1-0/index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>You can learn more about it on the <a href="https://ggdag.netlify.com/">ggdag website</a>, a <code>pkgdown</code> site that includes rendered documentation and the following vignettes:</p>
+<ul>
+<li><a href="https://ggdag.netlify.com/articles/intro-to-ggdag.html">An Introduction to ggdag</a></li>
+<li><a href="https://ggdag.netlify.com/articles/intro-to-dags.html">An Introduction to Directed Acyclic Graphs</a></li>
+<li><a href="https://ggdag.netlify.com/articles/bias-structures.html">Common Structures of Bias</a></li>
+</ul>
+<p>Give it a try, and please file an bugs or suggestions to the <a href="https://github.com/malcolmbarrett/ggdag">GitHub repo</a>.</p>
+<p>I also want to thank a few of my fellow USC PhDs, David Bogumil, Ugonna Ihenacho, and Zhi Yang, for helping me polish the articles and offering helpful suggestions on some of the aesthetic details of <code>ggdag</code>. Thanks, y’all!</p>

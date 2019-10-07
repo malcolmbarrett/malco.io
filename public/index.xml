@@ -1,0 +1,2137 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Malcolm Barrett</title>
+    <link>/</link>
+      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <description>Malcolm Barrett</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019 Malcolm Barrett</copyright><lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Malcolm Barrett</title>
+      <link>/</link>
+    </image>
+    
+    <item>
+      <title>Example Page 1</title>
+      <link>/courses/example/example1/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/example/example1/</guid>
+      <description>
+
+&lt;p&gt;In this tutorial, I&amp;rsquo;ll share my top 10 tips for getting started with Academic:&lt;/p&gt;
+
+&lt;h2 id=&#34;tip-1&#34;&gt;Tip 1&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+
+&lt;h2 id=&#34;tip-2&#34;&gt;Tip 2&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Example Page 2</title>
+      <link>/courses/example/example2/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/example/example2/</guid>
+      <description>
+
+&lt;p&gt;Here are some more tips for getting started with Academic:&lt;/p&gt;
+
+&lt;h2 id=&#34;tip-3&#34;&gt;Tip 3&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+
+&lt;h2 id=&#34;tip-4&#34;&gt;Tip 4&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introducing ymlthis: a toolkit for working with YAML</title>
+      <link>/2019/10/06/introducing-ymlthis/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/2019/10/06/introducing-ymlthis/</guid>
+      <description>
+
+
+&lt;p&gt;I’m pleased to announce that &lt;a href=&#34;http://ymlthis.r-lib.org&#34;&gt;ymlthis 0.1.0&lt;/a&gt; is now on CRAN! ymlthis is a toolkit to reduce the pain of working with YAML. The two most common issues when working with YAML are getting the syntax right, particularly the white space, and understanding what options you can specify. ymlthis solves these problems by building and documenting YAML from R. ymlthis supports many other R Markdown packages, such as blogdown, bookdown, and pkgdown, and also offers new ways of working with R Markdown and YAML files.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# install from CRAN
+install.packages(&amp;quot;ymlthis&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;write-yaml&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Write YAML&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;yml()&lt;/code&gt; is the basic building-block of ymlthis; by default, it adds your name and R code to write the date programatically.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ymlthis)
+yml()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;yaml&#34;&gt;&lt;code&gt;---
+author: Malcolm Barrett
+date: &amp;#39;`r format(Sys.Date())`&amp;#39;
+---&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;ymlthis uses the pipe syntax to add more elements to the underlying YAML.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;yml() %&amp;gt;% 
+  yml_output(bookdown::html_document2(toc = TRUE)) %&amp;gt;% 
+  yml_title(&amp;quot;Introducing ymlthis&amp;quot;) %&amp;gt;% 
+  yml_category(c(&amp;quot;r&amp;quot;, &amp;quot;rmarkdown&amp;quot;, &amp;quot;yaml&amp;quot;)) %&amp;gt;% 
+  yml_citations(
+    bibliography = &amp;quot;references.bib&amp;quot;, # file with citations
+    csl = &amp;quot;aje.csl&amp;quot; # file with citation styles
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;yaml&#34;&gt;&lt;code&gt;---
+author: Malcolm Barrett
+date: &amp;#39;`r format(Sys.Date())`&amp;#39;
+output:
+  bookdown::html_document2:
+    toc: true
+title: Introducing ymlthis
+category:
+- r
+- rmarkdown
+- yaml
+bibliography: references.bib
+csl: aje.csl
+---&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;write-r-markdown-and-yaml-files&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Write R Markdown and YAML files&lt;/h1&gt;
+&lt;p&gt;ymlthis prints cleanly to the console, so you can easily copy and paste it into your R Markdown document (or use &lt;code&gt;use_yml()&lt;/code&gt; to programatically place it on your clipboard). However, this might not fit the needs of your workflow. &lt;code&gt;use_rmarkdown()&lt;/code&gt; and friends take &lt;code&gt;yml&lt;/code&gt; objects and write them to R Markdown files.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;use_rmarkdown(path = &amp;quot;myreport.Rmd&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## ✔ Writing &amp;#39;/var/folders/03/9x7925g54mncswxx06wpkxl00000gn/T/RtmpWdgusY/filed546cbbee51/myreport.Rmd&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Read the &lt;a href=&#34;http://ymlthis.r-lib.org/articles/introduction-to-ymlthis.html&#34;&gt;vignette introducing ymlthis&lt;/a&gt; for more on working with R Markdown and YAML files, as well as for using ymlthis to create R Markdown templates.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;learn-more-about-yaml-and-yaml-options&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Learn more about YAML and YAML options&lt;/h1&gt;
+&lt;p&gt;Because these YAML fields are expressed as R function arguments, they are explicitly documented in &lt;code&gt;yml_*()&lt;/code&gt; functions. For instance, if you want to know the LaTeX options you can set while knitting to a PDF file, you can look at the help page for &lt;code&gt;?yml_latex_opts()&lt;/code&gt;. If you’re not quite sure where to look, all of the YAML fields documented in ymlthis are compiled in a single place in the &lt;a href=&#34;http://ymlthis.r-lib.org/articles/yaml-fieldguide.html&#34;&gt;YAML Fieldguide&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ymlthis also has a &lt;a href=&#34;http://ymlthis.r-lib.org/articles/yaml-overview.html&#34;&gt;vignette introducing YAML in general&lt;/a&gt;, if you’d like to learn more about using it directly.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;where-do-i-learn-more-about-ymlthis&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Where do I learn more about ymlthis?&lt;/h1&gt;
+&lt;p&gt;Learn more about ymlthis on the &lt;a href=&#34;http://ymlthis.r-lib.org&#34;&gt;package website&lt;/a&gt;. There you’ll find articles on &lt;a href=&#34;http://ymlthis.r-lib.org/articles/introduction-to-ymlthis.html&#34;&gt;with a detailed introduction to ymlthis&lt;/a&gt;, &lt;a href=&#34;http://ymlthis.r-lib.org/articles/yaml-overview.html&#34;&gt;introducing YAML&lt;/a&gt;, and &lt;a href=&#34;http://ymlthis.r-lib.org/articles/yaml-fieldguide.html&#34;&gt;the YAML Fieldguide&lt;/a&gt;, which documents in one place all the YAML fields contained in ymlthis.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Functional programming with purrr</title>
+      <link>/talk/functional-programming-with-purrr/</link>
+      <pubDate>Thu, 26 Sep 2019 18:30:00 +0000</pubDate>
+      <guid>/talk/functional-programming-with-purrr/</guid>
+      <description>
+
+
+
+</description>
+    </item>
+    
+    <item>
+      <title>Tidy causal DAGs with ggdag 0.2.0</title>
+      <link>/2019/09/17/tidy-causal-dags-with-ggdag-0-2-0/</link>
+      <pubDate>Tue, 17 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>/2019/09/17/tidy-causal-dags-with-ggdag-0-2-0/</guid>
+      <description>
+
+
+&lt;p&gt;I’m please to announce that &lt;a href=&#34;https://ggdag.malco.io/&#34;&gt;ggdag 0.2.0&lt;/a&gt; is now on CRAN! ggdag links the dagitty package, which contains powerful algorithms for analyzing causal DAGs, with the unlimited flexibility of ggplot2. ggdag coverts dagitty objects to a tidy DAG data structure, which allows you to both analyze your DAG and plot it easily in ggplot2. Let’s look at an example for a causal diagram of the effect of smoking on cardiac arrest.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggdag)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;smoking_ca_dag &amp;lt;- dagify(cardiacarrest ~ cholesterol,
+       cholesterol ~ smoking + weight,
+       smoking ~ unhealthy,
+       weight ~ unhealthy,
+       labels = c(&amp;quot;cardiacarrest&amp;quot; = &amp;quot;Cardiac\n Arrest&amp;quot;, 
+                  &amp;quot;smoking&amp;quot; = &amp;quot;Smoking&amp;quot;,
+                  &amp;quot;cholesterol&amp;quot; = &amp;quot;Cholesterol&amp;quot;,
+                  &amp;quot;unhealthy&amp;quot; = &amp;quot;Unhealthy\n Lifestyle&amp;quot;,
+                  &amp;quot;weight&amp;quot; = &amp;quot;Weight&amp;quot;),
+       latent = &amp;quot;unhealthy&amp;quot;,
+       exposure = &amp;quot;smoking&amp;quot;,
+       outcome = &amp;quot;cardiacarrest&amp;quot;) %&amp;gt;% 
+  tidy_dagitty()
+
+smoking_ca_dag&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A DAG with 5 nodes and 5 edges
+## #
+## # Exposure: smoking
+## # Outcome: cardiacarrest
+## # Latent Variable: unhealthy
+## #
+## # A tibble: 6 x 9
+##   name          x     y direction to        xend  yend circular label      
+##   &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;lgl&amp;gt;    &amp;lt;chr&amp;gt;      
+## 1 choleste…  13.2  11.8 -&amp;gt;        cardiac…  12.0  11.2 FALSE    Cholesterol
+## 2 smoking    14.5  11.7 -&amp;gt;        cholest…  13.2  11.8 FALSE    Smoking    
+## 3 unhealthy  15.0  12.8 -&amp;gt;        smoking   14.5  11.7 FALSE    &amp;quot;Unhealthy…
+## 4 unhealthy  15.0  12.8 -&amp;gt;        weight    13.8  13.0 FALSE    &amp;quot;Unhealthy…
+## 5 weight     13.8  13.0 -&amp;gt;        cholest…  13.2  11.8 FALSE    Weight     
+## 6 cardiaca…  12.0  11.2 &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;      NA    NA   FALSE    &amp;quot;Cardiac\n…&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The tidy DAG structure looks like a &lt;code&gt;tibble&lt;/code&gt;. ggdag 0.2.0 also prints some information about the DAG at the top.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggdag(smoking_ca_dag, text = FALSE, use_labels = &amp;quot;label&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Here, smoking does increase the risk of cardiac arrest, but it’s also confounded by an unmeasured variable, a tendency towards an unhealthy lifestyle. That means that there are two open paths from smoking to cardiac arrest: the causal path through cholesterol and the backdoor path through weight. (This DAG is probably not quite right, because smoking also affects weight, but we’ll leave it as is for demonstration purposes.)&lt;/p&gt;
+&lt;p&gt;If you used ggdag 0.1.0, you may notice a big difference here: ggdag plots now look a lot more like base ggplot2 plots. While this has been the case in the development version for some time, one of the bigger mistakes in the initial release of ggdag was too much out-of-box customization. ggdag now does a much better job getting out of the way of ggplot2’s incredible system for aesthetics and themes. Let’s analyze the paths in the smoking DAG but take advantage of tools from ggplot2 to customize the plot.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggdag_paths(smoking_ca_dag, text = FALSE, use_labels = &amp;quot;label&amp;quot;, shadow = TRUE) +
+  theme_dag(base_size = 14) +
+  theme(legend.position = &amp;quot;none&amp;quot;, strip.text = element_blank()) + 
+  # set node aesthetics
+  scale_color_manual(values = &amp;quot;#0072B2&amp;quot;, na.value = &amp;quot;grey80&amp;quot;) + 
+  # set label aesthetics
+  scale_fill_manual(values = &amp;quot;#0072B2&amp;quot;, na.value = &amp;quot;grey80&amp;quot;) + 
+  # set arrow aesthetics
+  ggraph::scale_edge_color_manual(values = &amp;quot;#0072B2&amp;quot;, na.value = &amp;quot;grey80&amp;quot;) +
+  ggtitle(&amp;quot;Open paths from smoking to cardiac arrest&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;There are also many new themes available, each of which is prefixed with &lt;code&gt;theme_dag*()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Learn more about ggdag on the &lt;a href=&#34;https://ggdag.malco.io/&#34;&gt;package website&lt;/a&gt;. There you’ll find articles on &lt;a href=&#34;https://ggdag.malco.io/articles/intro-to-ggdag.html&#34;&gt;introducing ggdag&lt;/a&gt;, &lt;a href=&#34;https://ggdag.malco.io/articles/intro-to-dags.html&#34;&gt;introducing DAGs&lt;/a&gt;, and discussing &lt;a href=&#34;https://ggdag.malco.io/articles/bias-structures.html&#34;&gt;common structures of bias&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;what-else-is-new&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;What else is new?&lt;/h2&gt;
+&lt;p&gt;This release ensures compatibility with ggraph 2.0.0 and also fixes a number of bugs (see the &lt;a href=&#34;https://ggdag.malco.io/news/index.html&#34;&gt;news&lt;/a&gt; section of the pkgdown site). In addition to better support for ggplot2 aesthetic functions, ggdag also now has better support for working directly in tidygraph/ggraph. ggraph is essential to ggdag’s geoms, but you might prefer to work with the full toolkit from that package.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidygraph)
+library(ggraph)
+tblgraph_dag &amp;lt;- as_tbl_graph(smoking_ca_dag)
+
+tblgraph_dag&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tbl_graph: 5 nodes and 5 edges
+## #
+## # A directed acyclic simple graph with 1 component
+## #
+## # Node Data: 5 x 1 (active)
+##   name         
+##   &amp;lt;chr&amp;gt;        
+## 1 cholesterol  
+## 2 smoking      
+## 3 unhealthy    
+## 4 weight       
+## 5 cardiacarrest
+## #
+## # Edge Data: 5 x 9
+##    from    to     x     y direction  xend  yend circular label             
+##   &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;lgl&amp;gt;    &amp;lt;chr&amp;gt;             
+## 1     1     5  13.2  11.8 -&amp;gt;         12.0  11.2 FALSE    Cholesterol       
+## 2     2     1  14.5  11.7 -&amp;gt;         13.2  11.8 FALSE    Smoking           
+## 3     3     2  15.0  12.8 -&amp;gt;         14.5  11.7 FALSE    &amp;quot;Unhealthy\n Life…
+## # … with 2 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tblgraph_dag %&amp;gt;% 
+  ggraph() +
+  geom_node_text(aes(label = name)) + 
+  geom_edge_link(aes(
+    start_cap = label_rect(node1.name),
+    end_cap = label_rect(node2.name)
+  ), arrow = arrow()) +
+  theme_graph()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;tidygraph is designed to work with network data rather than causal diagrams, so many of the features are not as useful for causal DAGs as the algorithms from dagitty. However, tidygraph and ggraph have many tools for manipulating network-like data that are very powerful.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;miss-the-old-look&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Miss the old look?&lt;/h2&gt;
+&lt;p&gt;A lot has changed in the look of ggdag, but the old style hasn’t gone away. You can set the old theme with &lt;code&gt;theme_dag_gray()&lt;/code&gt; and set the stylized nodes with &lt;code&gt;geom_dag_node()&lt;/code&gt; (instead of &lt;code&gt;geom_dag_point()&lt;/code&gt;) or with the &lt;code&gt;stylized&lt;/code&gt; argument in the quick plotting functions.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggdag(confounder_triangle(), stylized = TRUE) +
+  theme_dag_gray()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>#SER2019 In Review</title>
+      <link>/2019/06/23/ser2019-in-review/</link>
+      <pubDate>Sun, 23 Jun 2019 00:00:00 +0000</pubDate>
+      <guid>/2019/06/23/ser2019-in-review/</guid>
+      <description>
+
+
+&lt;p&gt;The annual meeting of the &lt;a href=&#34;https://epiresearch.org&#34;&gt;Society for Epidemiologic Research&lt;/a&gt; (SER) took place June 18-21. The past two years, I’ve collected Twitter data (&lt;a href=&#34;https://github.com/malcolmbarrett/ser_tweets&#34;&gt;2018&lt;/a&gt;, &lt;a href=&#34;https://github.com/malcolmbarrett/ser_conf_2019&#34;&gt;2019&lt;/a&gt;). The data were collected with the excellent &lt;a href=&#34;https://rtweet.info/&#34;&gt;rtweet&lt;/a&gt; package, and the data collection code was based on related code by &lt;a href=&#34;https://mikewk.com/&#34;&gt;Mike Kearney&lt;/a&gt;, the author of rtweet.&lt;/p&gt;
+&lt;div id=&#34;setup&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Setup&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# for everything else :)
+library(tidyverse)
+# for tidy eval
+library(rlang)
+# for labeling tweets in plots
+library(ggrepel)
+# for network graphs
+library(ggraph)
+library(tidygraph)
+# for text analysis
+library(tidytext)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Since the data were collected over several days, I’m going to read the saved data straight from GitHub. You’ll note that there is also some code to turn the tweets into network data (who is tweeting whom); I’ll also read that in.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ser_tweets &amp;lt;- read_rds(url(&amp;quot;https://github.com/malcolmbarrett/ser_conf_2019/blob/master/data/search.rds?raw=true&amp;quot;))
+ser_tweets_2018 &amp;lt;- read_rds(url(&amp;quot;https://github.com/malcolmbarrett/ser_tweets/blob/master/data/search.rds?raw=true&amp;quot;))
+twitter_graph &amp;lt;- readr::read_rds(url(&amp;quot;https://github.com/malcolmbarrett/ser_conf_2019/raw/master/data/twitter_graph.rds&amp;quot;))
+
+# simplify tweet tibble
+ser_tweets &amp;lt;- ser_tweets %&amp;gt;% 
+  select(screen_name, text, created_at, favorite_count, retweet_count, is_retweet, hashtags, media_type)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First, a few functions to help us out: &lt;code&gt;plot_barchat()&lt;/code&gt; to plot horizontal bar charts, &lt;code&gt;plot_tweets()&lt;/code&gt; to make a scatterplot labeled with the tweet text, and &lt;code&gt;plot_screen_names()&lt;/code&gt; to quickly count number of times a screen name appeared and plot the top ten with &lt;code&gt;plot_barchat()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot horizontal bar charts
+plot_barchat &amp;lt;- function(.df, y) {
+  y &amp;lt;- enquo(y)
+  .df %&amp;gt;% 
+    #  put the bars in order of their appearance
+    mutate(!!y := fct_rev(fct_inorder(!!y))) %&amp;gt;% 
+    #  y first because we&amp;#39;re flipping
+    ggplot(aes(y = n, x = !!y)) + 
+    geom_col(color = NA, fill = &amp;quot;#0172B1&amp;quot;) +
+    theme_minimal(14) +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.minor.x = element_blank()
+    ) + 
+    coord_flip()
+}
+
+# plot points labelled with tweet text
+plot_tweets &amp;lt;- function(.df, y) {
+  y &amp;lt;- enquo(y)
+  .df %&amp;gt;% 
+    mutate(text = str_wrap(text, 50)) %&amp;gt;% 
+    ggplot(aes(x = fct_inorder(screen_name), y = !!y)) + 
+    geom_point(color = &amp;quot;#0172B1&amp;quot;, size = 2) +
+    geom_label_repel(
+      aes(label = text), 
+      size = 2.5, 
+      force = 4, 
+      nudge_y = 3, 
+      point.padding = .5
+    ) +
+    theme_minimal(14)
+}
+
+# group by screen name, count, and plot 1st 10
+plot_screen_name &amp;lt;- function(.df) {
+  .df %&amp;gt;% 
+    group_by(screen_name) %&amp;gt;% 
+    summarize(n = n()) %&amp;gt;% 
+    mutate(screen_name = paste0(&amp;quot;@&amp;quot;, screen_name)) %&amp;gt;% 
+    arrange(desc(n)) %&amp;gt;% 
+    top_n(10) %&amp;gt;% 
+    plot_barchat(screen_name) +
+    xlab(element_blank())
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tweets-vs.2018&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Tweets vs. 2018&lt;/h1&gt;
+&lt;p&gt;I noticed this almost immediately: there were &lt;em&gt;many&lt;/em&gt; more tweets this year. Between the 2018 and 2019, there was tremendous growth in the epidemiology Twitter community under the hashtag &lt;a href=&#34;https://twitter.com/search?q=%23epitwitter&amp;amp;src=tyah&#34;&gt;#epitwitter&lt;/a&gt;, and it showed. There were about twice as many original tweets and retweets during the official days of the conference.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;n_2019 &amp;lt;- ser_tweets %&amp;gt;% 
+  filter(between(created_at, as.POSIXct(&amp;quot;2019-06-18&amp;quot;), as.POSIXct(&amp;quot;2019-06-21&amp;quot;))) %&amp;gt;% 
+  group_by(is_retweet) %&amp;gt;% 
+  summarize(n = n()) %&amp;gt;% 
+  mutate(year = &amp;quot;2019&amp;quot;)
+
+n_2018 &amp;lt;- ser_tweets_2018 %&amp;gt;% 
+  filter(between(created_at, as.POSIXct(&amp;quot;2018-06-19&amp;quot;), as.POSIXct(&amp;quot;2018-06-22&amp;quot;))) %&amp;gt;% 
+  group_by(is_retweet) %&amp;gt;% 
+  summarize(n = n()) %&amp;gt;% 
+  mutate(year = &amp;quot;2018&amp;quot;)
+
+label_retweet &amp;lt;- function(x) ifelse(x, &amp;quot;retweet&amp;quot;, &amp;quot;original tweet&amp;quot;)
+
+bind_rows(n_2019, n_2018) %&amp;gt;% 
+  plot_barchat(year) +
+  facet_wrap(~is_retweet, labeller = as_labeller(label_retweet))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;twitter-connections-and-network-centrality&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Twitter connections and network centrality&lt;/h2&gt;
+&lt;p&gt;1,026 users tweeted or retweeted a tweet with the #SER2019 hashtag. Many were single tweets, but there were hundreds of people interacting. From the 2019 repo:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;knitr::include_graphics(&amp;quot;https://raw.githubusercontent.com/malcolmbarrett/ser_conf_2019/master/tweet_network.png&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/malcolmbarrett/ser_conf_2019/master/tweet_network.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;p&gt;A big reason for the growth in #EpiTwitter is the community building that &lt;a href=&#34;https://twitter.com/EpiEllie&#34;&gt;Ellie Murray&lt;/a&gt;, aka &lt;span class=&#34;citation&#34;&gt;@EpiEllie&lt;/span&gt;, has done. Unsurprisingly, she is the most central person in the Twitter graph, followed by the &lt;a href=&#34;https://twitter.com/societyforepi&#34;&gt;SER twitter account&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;twitter_graph %&amp;gt;% 
+  activate(nodes) %&amp;gt;% 
+  arrange(desc(value)) %&amp;gt;% 
+  as_tibble() %&amp;gt;% 
+  top_n(10) %&amp;gt;% 
+  mutate(name = paste0(&amp;quot;@&amp;quot;, name), n = value) %&amp;gt;% 
+  plot_barchat(name) +
+  labs(y = &amp;quot;centrality&amp;quot;, x = element_blank())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;subjects-by-day&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Subjects by day&lt;/h2&gt;
+&lt;p&gt;A few months back, I read &lt;a href=&#34;https://www.tidytextmining.com&#34;&gt;Tidy Text Mining with R&lt;/a&gt;, and since then, I’ve just been waiting to analyze word use by day of the conference. I won’t go over this code in detail, but it uses &lt;a href=&#34;https://www.wikiwand.com/en/Tf%E2%80%93idf&#34;&gt;tf-dif&lt;/a&gt; to analyze words that were unique to each day. You can find &lt;a href=&#34;https://www.tidytextmining.com/tfidf.html&#34;&gt;a discussion and more examples&lt;/a&gt; of this approach in the book.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tfidf_tweets &amp;lt;- ser_tweets %&amp;gt;% 
+  filter(
+    !is_retweet,
+    between(created_at, as.POSIXct(&amp;quot;2019-06-18&amp;quot;), as.POSIXct(&amp;quot;2019-06-21&amp;quot;))
+  ) %&amp;gt;% 
+  #  tidytext doesn&amp;#39;t like these list columns
+  select_if(~ !is_list(.x)) %&amp;gt;% 
+  #  create day of tweet
+  mutate(day = lubridate::wday(created_at, label = TRUE)) %&amp;gt;% 
+  #  unnest by word and count each word by day
+  unnest_tokens(word, text) %&amp;gt;%
+  group_by(day) %&amp;gt;% 
+  count(word, sort = TRUE) %&amp;gt;%
+  ungroup() %&amp;gt;% 
+  #  add tf-idf and sort
+  bind_tf_idf(word, day, n) %&amp;gt;% 
+  arrange(desc(tf_idf)) %&amp;gt;% 
+  mutate(word = fct_rev(fct_inorder(word))) %&amp;gt;% 
+  #  pick top 10 by day
+  group_by(day) %&amp;gt;% 
+  top_n(10) %&amp;gt;%
+  ungroup()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So, what was unique to each day? Tuesday was full of workshops, including workshops on R, g-computation, and E-values. Wednesday started with a fantastic keynote by &lt;a href=&#34;https://www.npr.org/people/90889243/alix-spiegel&#34;&gt;Alix Spiegel of Invisibilia&lt;/a&gt;, which was like a live version of the podcast. People also talked about &lt;a href=&#34;https://twitter.com/Dr_S_Jefferson&#34;&gt;Dr. Shawnita Sealy-Jefferson&lt;/a&gt;’s powerful talk, “Listen to and trust black women.” Thursday began with a debate by &lt;a href=&#34;https://twitter.com/sandrogalea&#34;&gt;Sandro Galea&lt;/a&gt; and &lt;a href=&#34;https://twitter.com/_MiguelHernan&#34;&gt;Miguel Hernán&lt;/a&gt; about the role of causal inference in social epidemiology. The same day, people were talking about race and racism in relation to health epidemiology. On the final day of the conference, people were talking about the reunion parties the night before, #blackgirlmagic, and &lt;a href=&#34;https://twitter.com/HealthEquityDoc&#34;&gt;Dr. Sharrelle Barber&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tfidf_tweets %&amp;gt;% 
+  ggplot(aes(word, tf_idf)) + 
+  geom_col(color = NA, fill = &amp;quot;#0172B1&amp;quot;) +
+  theme_minimal(14) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.minor.x = element_blank()
+  ) + 
+  coord_flip() + 
+  facet_wrap(~ day, scales = &amp;quot;free&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;other-active-hashtags&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Other active hashtags&lt;/h2&gt;
+&lt;p&gt;What other hashtags were used with #SER2019? Unsurprisingly, #EpiTwitter leads the list, followed by #SPER2019, related to the &lt;a href=&#34;https://sper.org/annual-meeting-2/&#34;&gt;SPER&lt;/a&gt; meeting that happens immediately before SER. People were also talking about the better poster design, open science, causal inference, &lt;a href=&#34;https://twitter.com/lisabodnar&#34;&gt;Lisa Bodnar’s&lt;/a&gt; annual SER party, and more.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unnested_hashtags &amp;lt;- ser_tweets %&amp;gt;% 
+  filter(!is_retweet) %&amp;gt;% 
+  unnest(hashtags) %&amp;gt;% 
+  mutate_at(vars(hashtags), tolower) %&amp;gt;% 
+  filter(
+    stringr::str_detect(
+      hashtags, 
+      stringr::fixed(&amp;quot;SER2019&amp;quot;, ignore_case = TRUE),
+      negate = TRUE
+    )
+  )
+
+unnested_hashtags %&amp;gt;% 
+  group_by(hashtags) %&amp;gt;% 
+  summarize(n = n()) %&amp;gt;% 
+  arrange(desc(n)) %&amp;gt;% 
+  top_n(10) %&amp;gt;% 
+  plot_barchat(hashtags)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;blackepimatters&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;BlackEpiMatters&lt;/h2&gt;
+&lt;p&gt;One particularly powerful event was the inception of the &lt;a href=&#34;https://twitter.com/search?q=%23BlackEpiMatters&amp;amp;src=typd&#34;&gt;#BlackEpiMatters&lt;/a&gt; hashtag, which lead to the creation of the @&lt;a href=&#34;https://twitter.com/black_epi&#34;&gt;black_epi&lt;/a&gt; account. There were many incredible talks by black epidemiologists at this meeting, and the fact that the rooms were absolutely packed for these talks magnified the fact that most were in smaller rooms. Many people called out SER for this, and they have promised to address it for SER 2020. Additionally, many black epidemiologists who are active on Twitter will be doing &lt;a href=&#34;https://twitter.com/societyforepi/status/1142068033407651841&#34;&gt;Twitter takeovers of the SER account over the next year&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So who were the people using #blackepimatters during the meeting? &lt;a href=&#34;https://twitter.com/HealthEquityDoc&#34;&gt;Sharrelle Barber&lt;/a&gt; lead the way.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unnested_hashtags %&amp;gt;% 
+  filter(
+    hashtags %in% c(&amp;quot;blackepimatters&amp;quot;, &amp;quot;blackepidemiologymatters&amp;quot;)
+  ) %&amp;gt;% 
+  plot_screen_name()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Finally, how about a few rankings?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;most-retweets&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Most retweets&lt;/h2&gt;
+&lt;p&gt;My poster got the most retweets 😱😱😱. Also popular were Jess Rohmann’s &lt;a href=&#34;https://docs.google.com/document/d/1a-_VYQrZDLIAWCUs_JKvnwNT2onn-rIiLh69W53fh1o/&#34;&gt;list of DAG papers&lt;/a&gt; and the “Beyond ‘Is Race a Cause?’” session, which was standing-room with a line out the door (I know this because I couldn’t get in the door!).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ser_tweets %&amp;gt;% 
+  filter(!is_retweet) %&amp;gt;% 
+  arrange(desc(retweet_count)) %&amp;gt;%
+  top_n(5, retweet_count) %&amp;gt;% 
+  plot_tweets(retweet_count) +
+  labs(x = &amp;quot;twitter user&amp;quot;, y = &amp;quot;n retweets&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;most-favorites&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Most favorites&lt;/h2&gt;
+&lt;p&gt;My poster also got the most favorites 😱😱😱. One high-impact tweet was &lt;a href=&#34;https://twitter.com/BillMiller_Epi&#34;&gt;Bill Miller&lt;/a&gt;’s offer to mentor attendees. I barely had a chance to say hi to him he was so busy! People also liked Ellie’s temporary tattoos, #SER2019 bingo, and the #betterposter design.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ser_tweets %&amp;gt;% 
+  filter(!is_retweet) %&amp;gt;% 
+  arrange(desc(favorite_count)) %&amp;gt;%
+  top_n(5, favorite_count) %&amp;gt;% 
+  plot_tweets(favorite_count) +
+  labs(x = &amp;quot;twitter user&amp;quot;, y = &amp;quot;n favorites&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;most-tweets&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Most tweets&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;@AbbyCScience&lt;/span&gt; (taking a well-deserved Twitter break) was responsible for the most original tweets by a long shot.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# number original tweets
+ser_tweets %&amp;gt;% 
+  filter(!is_retweet) %&amp;gt;% 
+  plot_screen_name()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;most-retweets-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Most retweets&lt;/h2&gt;
+&lt;p&gt;Unsurprisingly, the most retweets came from my &lt;a href=&#34;https://twitter.com/epi_twit&#34;&gt;EpiBot&lt;/a&gt;, which retweets #EpiTwitter. But Ellie is a surprisingly close second!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# number retweets
+ser_tweets %&amp;gt;% 
+  filter(is_retweet) %&amp;gt;% 
+  plot_screen_name()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;most-photos-posted&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Most photos posted&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://twitter.com/PWGTennant&#34;&gt;Peter Tennant&lt;/a&gt; posted the most photos (plus, there’s a &lt;a href=&#34;https://twitter.com/kellyn_arnold/status/1141820251467857928&#34;&gt;video of his poster presentation&lt;/a&gt;).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ser_tweets %&amp;gt;% 
+  filter(!is_retweet) %&amp;gt;% 
+  unnest(media_type) %&amp;gt;% 
+  filter(media_type == &amp;quot;photo&amp;quot;) %&amp;gt;% 
+  plot_screen_name()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;And that’s it for #SER2019!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Data manipulation, visualization, and reproducible documents with R and the Tidyverse</title>
+      <link>/talk/2019-06-18-ser-workshop/</link>
+      <pubDate>Tue, 18 Jun 2019 08:00:00 +0000</pubDate>
+      <guid>/talk/2019-06-18-ser-workshop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Introducing the partition package</title>
+      <link>/2019/05/20/introducing-the-partition-package/</link>
+      <pubDate>Mon, 20 May 2019 00:00:00 +0000</pubDate>
+      <guid>/2019/05/20/introducing-the-partition-package/</guid>
+      <description>
+
+
+&lt;p&gt;I’m pleased to announce the CRAN release of partition 0.1.0. partition is a fast and flexible data reduction framework that minimizes information loss and creates interpretable clusters. partition uses agglomorative clustering: it starts from the ground up, matching pairs of variables and assessing the amount of information that would be explained by their reduction. If the information is above this user-specified threshold, the data is reduced. This type of reduction is particularly useful in very redundant data, such as high-resolution genetic data.&lt;/p&gt;
+&lt;div id=&#34;creating-partitions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Creating partitions&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;partition()&lt;/code&gt; takes a data frame and reduces it as much as possible without creating clusters below the minimum amount of information specified in the &lt;code&gt;threshold&lt;/code&gt; argument.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# install.packages(&amp;quot;partition&amp;quot;)
+library(partition)
+set.seed(1234)
+#  simulate correlated data
+df &amp;lt;- simulate_block_data(c(3, 4, 5), lower_corr = .4, upper_corr = .6, n = 100)
+
+#  don&amp;#39;t accept reductions where information &amp;lt; .6
+prt &amp;lt;- partition(df, threshold = .6)
+prt&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Partitioner:
+##    Director: Minimum Distance (Pearson) 
+##    Metric: Intraclass Correlation 
+##    Reducer: Scaled Mean
+## 
+## Reduced Variables:
+## 1 reduced variables created from 2 observed variables
+## 
+## Mappings:
+## reduced_var_1 = {block2_x3, block2_x4}
+## 
+## Minimum information:
+## 0.602&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;partition&lt;/code&gt; object returned by &lt;code&gt;partition()&lt;/code&gt; contains the reduced data.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# return reduced data
+partition_scores(prt)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 100 x 11
+##    block1_x1 block1_x2 block1_x3 block2_x1 block2_x2 block3_x1 block3_x2
+##        &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;
+##  1   -1.00     -0.344      1.35     -0.526    -1.25      1.13     0.357 
+##  2    0.518    -0.434     -0.361    -1.48     -1.53     -0.317    0.290 
+##  3   -1.77     -0.913     -0.722     0.122     0.224    -0.529    0.114 
+##  4   -1.49     -0.998      0.189     0.149    -0.994    -0.433    0.0120
+##  5    0.616     0.0211     0.895     1.09     -1.25      0.440   -0.550 
+##  6    0.0765    0.522      1.20     -0.152    -0.419    -0.912   -0.362 
+##  7    1.74      0.0993    -0.654    -1.26     -0.502    -0.792   -1.03  
+##  8    1.05      2.19       0.913     0.254     0.328    -1.07    -0.976 
+##  9   -1.07     -0.292     -0.763     0.437     0.739     0.899   -0.342 
+## 10   -1.02     -0.959     -1.33     -1.57     -1.11      0.618    0.153 
+## # … with 90 more rows, and 4 more variables: block3_x3 &amp;lt;dbl&amp;gt;,
+## #   block3_x4 &amp;lt;dbl&amp;gt;, block3_x5 &amp;lt;dbl&amp;gt;, reduced_var_1 &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also access the mappings of the original data to the clusters. Variables map to one and only one cluster.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# access mapping keys
+mapping_key(prt)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 11 x 4
+##    variable      mapping   information indices  
+##    &amp;lt;chr&amp;gt;         &amp;lt;list&amp;gt;          &amp;lt;dbl&amp;gt; &amp;lt;list&amp;gt;   
+##  1 block1_x1     &amp;lt;chr [1]&amp;gt;       1     &amp;lt;int [1]&amp;gt;
+##  2 block1_x2     &amp;lt;chr [1]&amp;gt;       1     &amp;lt;int [1]&amp;gt;
+##  3 block1_x3     &amp;lt;chr [1]&amp;gt;       1     &amp;lt;int [1]&amp;gt;
+##  4 block2_x1     &amp;lt;chr [1]&amp;gt;       1     &amp;lt;int [1]&amp;gt;
+##  5 block2_x2     &amp;lt;chr [1]&amp;gt;       1     &amp;lt;int [1]&amp;gt;
+##  6 block3_x1     &amp;lt;chr [1]&amp;gt;       1     &amp;lt;int [1]&amp;gt;
+##  7 block3_x2     &amp;lt;chr [1]&amp;gt;       1     &amp;lt;int [1]&amp;gt;
+##  8 block3_x3     &amp;lt;chr [1]&amp;gt;       1     &amp;lt;int [1]&amp;gt;
+##  9 block3_x4     &amp;lt;chr [1]&amp;gt;       1     &amp;lt;int [1]&amp;gt;
+## 10 block3_x5     &amp;lt;chr [1]&amp;gt;       1     &amp;lt;int [1]&amp;gt;
+## 11 reduced_var_1 &amp;lt;chr [2]&amp;gt;       0.602 &amp;lt;int [2]&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unnest_mappings(prt)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 12 x 4
+##    variable      mapping   information indices
+##    &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;           &amp;lt;dbl&amp;gt;   &amp;lt;int&amp;gt;
+##  1 block1_x1     block1_x1       1           1
+##  2 block1_x2     block1_x2       1           2
+##  3 block1_x3     block1_x3       1           3
+##  4 block2_x1     block2_x1       1           4
+##  5 block2_x2     block2_x2       1           5
+##  6 block3_x1     block3_x1       1           8
+##  7 block3_x2     block3_x2       1           9
+##  8 block3_x3     block3_x3       1          10
+##  9 block3_x4     block3_x4       1          11
+## 10 block3_x5     block3_x5       1          12
+## 11 reduced_var_1 block2_x3       0.602       6
+## 12 reduced_var_1 block2_x4       0.602       7&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;using-partitioners&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Using partitioners&lt;/h1&gt;
+&lt;p&gt;partition uses an approach called Direct-Measure-Reduce to agglomerate the data: functions called partitioners tell the algorithm 1) where to look in the data 2) how to measure information loss and 3) how to reduce the data. The default partitioner that &lt;code&gt;partition()&lt;/code&gt; uses called &lt;code&gt;part_icc()&lt;/code&gt;, which 1) finds the closest pair of variables using a correlation-based distance matrix 2) measures information using intraclass correlation and 3) reduces acceptable clusters using scaled rowmeans.&lt;/p&gt;
+&lt;p&gt;partition also has a number of other options. &lt;code&gt;part_kmeans()&lt;/code&gt;, for instance, uses the K-means algorithm to find potential reductions and reduces to the minimum level of &lt;code&gt;k&lt;/code&gt; that is still above the information threshold, measured by ICC.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# use a lower threshold of information loss
+partition(df, threshold = .5, partitioner = part_kmeans())&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Partitioner:
+##    Director: K-Means Clusters 
+##    Metric: Minimum Intraclass Correlation 
+##    Reducer: Scaled Mean
+## 
+## Reduced Variables:
+## 2 reduced variables created from 7 observed variables
+## 
+## Mappings:
+## reduced_var_1 = {block3_x1, block3_x2, block3_x5}
+## reduced_var_2 = {block2_x1, block2_x2, block2_x3, block2_x4}
+## 
+## Minimum information:
+## 0.508&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;See the &lt;a href=&#34;https://uscbiostats.github.io/partition/articles/introduction-to-partition.html&#34;&gt;introductory vignette&lt;/a&gt; for more information on the built-in partitioners.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;partition()&lt;/code&gt; is actually agnostic to the Direct-Measure-Reduce approach used. This makes partition extremely flexible. You can edit existing partitioners or create completely new ones. For instance, if we want &lt;code&gt;part_icc()&lt;/code&gt; to return raw row means rather than scaled row means, we can replace the &lt;code&gt;reduce&lt;/code&gt; component of the function (here, with &lt;code&gt;rowmeans()&lt;/code&gt;).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# use a custom partitioner
+part_icc_rowmeans &amp;lt;- replace_partitioner(
+  part_icc, 
+  reduce = as_reducer(rowMeans)
+)
+partition(df, threshold = .6, partitioner = part_icc_rowmeans) &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Partitioner:
+##    Director: Minimum Distance (Pearson) 
+##    Metric: Intraclass Correlation 
+##    Reducer: &amp;lt;custom reducer&amp;gt;
+## 
+## Reduced Variables:
+## 1 reduced variables created from 2 observed variables
+## 
+## Mappings:
+## reduced_var_1 = {block2_x3, block2_x4}
+## 
+## Minimum information:
+## 0.602&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;partition()&lt;/code&gt; works seamlessly with changes to the partitioner. See the &lt;a href=&#34;https://uscbiostats.github.io/partition/articles/extending-partition.html&#34;&gt;vignette on extending partition&lt;/a&gt; for more information on customizing partitioners.&lt;/p&gt;
+&lt;p&gt;partition also supports a number of ways to visualize partitions and permutation tests; these functions all start with &lt;code&gt;plot_*()&lt;/code&gt;. These functions all return ggplots and can thus be extended using ggplot2.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_stacked_area_clusters(df) +
+  ggplot2::theme_minimal(14)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-05-20-introducing-the-partition-package/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Install partition now from CRAN or install the &lt;a href=&#34;https://github.com/USCbiostats/partition&#34;&gt;development version on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;learn-more&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Learn More&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://uscbiostats.github.io/partition/articles/introduction-to-partition.html&#34;&gt;Vignette: Introduction to partition&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://uscbiostats.github.io/partition/articles/extending-partition.html&#34;&gt;Vignette: Extending partition&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://uscbiostats.github.io/partition/&#34;&gt;partition web site&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/USCbiostats/partition&#34;&gt;GitHub Repo&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introduction to the Tidyverse, part 3: functional programming with purrr</title>
+      <link>/talk/2019-05-16-tidyverse-3/</link>
+      <pubDate>Thu, 16 May 2019 10:00:00 +0000</pubDate>
+      <guid>/talk/2019-05-16-tidyverse-3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>An example preprint / working paper</title>
+      <link>/publication/preprint/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/preprint/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Why should I use the here package when I&#39;m already using projects?</title>
+      <link>/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/</link>
+      <pubDate>Mon, 05 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/</guid>
+      <description>
+
+
+&lt;div id=&#34;tldr-why-should-i-use-here&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;TL;DR: Why should I use &lt;code&gt;here&lt;/code&gt;?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;here&lt;/code&gt; package makes it easier to use sub-directories within projects&lt;/li&gt;
+&lt;li&gt;It’s robust to other ways people open and run your code&lt;/li&gt;
+&lt;li&gt;Like its base R cousin, &lt;code&gt;file.path()&lt;/code&gt;, it writes paths safely across operating systems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Like a lot of people, when I learned R, I was taught to put &lt;code&gt;setwd()&lt;/code&gt; and &lt;code&gt;rm(list = ls())&lt;/code&gt; at the beginning of scripts. Getting rid of any leftovers in the environment and setting the working directory so I can use relative paths made sense to me. It seemed like good practice! But &lt;code&gt;setwd()&lt;/code&gt; and &lt;code&gt;rm(list = ls())&lt;/code&gt; are problematic. &lt;code&gt;rm()&lt;/code&gt; doesn’t actually give you a clean R session; it doesn’t, for instance, detach packages. &lt;code&gt;setwd()&lt;/code&gt;, meanwhile, is completely dependent on the way you organize your files. If you set a working directory that is an absolute path on your computer, it will only run for someone else if they rewrite the absolute path to where it is on &lt;em&gt;their&lt;/em&gt; computer.&lt;/p&gt;
+&lt;p&gt;Last year, Jenny Bryan shared some slides from a talk on this subject. I’ll let them speak for themselves:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;If the first line of your R script is&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;setwd(&amp;quot;C:\Users\jenny\path\that\only\I\have&amp;quot;)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I will come into your office and SET YOUR COMPUTER ON FIRE&lt;/em&gt; 🔥.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;If the first line of your R script is&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rm(list = ls())&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I will come into your office and SET YOUR COMPUTER ON FIRE&lt;/em&gt; 🔥.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If you haven’t read &lt;a href=&#34;https://www.tidyverse.org/articles/2017/12/workflow-vs-script/&#34;&gt;her write-up on what the issues and solutions are&lt;/a&gt;, you should. Here’s the basic idea:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use Rstudio projects. They set up a local working directory in a fresh R session, which makes it much easier for someone else to open&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;here()&lt;/code&gt; from the &lt;code&gt;here&lt;/code&gt; package to write file paths&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=etkSsF6r2iU&#34;&gt;Setting up a project is easy&lt;/a&gt;&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. Projects can handle both of the problems &lt;code&gt;setwd()&lt;/code&gt; and &lt;code&gt;rm(list = ls())&lt;/code&gt; are trying to solve for you. You can &lt;a href=&#34;https://community.rstudio.com/t/first-line-of-every-r-script/799/11&#34;&gt;set it so you have a fresh R session when opening a project&lt;/a&gt; (either locally in the project or globally in Rstudio). Additionally, when you’re in a project, you don’t need to set your working directory. The working directory is just wherever the project is.&lt;/p&gt;
+&lt;p&gt;So, it may not be obvious: what’s the benefit of using the &lt;code&gt;here&lt;/code&gt; package if projects solve both those problems?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://media.giphy.com/media/YByMQsx1NrmPKLuYqF/giphy.gif&#34; width=&#34;75%&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;whats-under-here&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What’s under here?&lt;/h1&gt;
+&lt;p&gt;It may seem like &lt;code&gt;here&lt;/code&gt; is just pasting paths together for you, but let’s look at what it’s actually doing. The &lt;code&gt;here&lt;/code&gt; package is essentially a wrapper for the &lt;code&gt;rprojroot&lt;/code&gt; package. &lt;code&gt;rprojroot&lt;/code&gt; is a powerful tool for working with project directories, but &lt;code&gt;here&lt;/code&gt; offers a simpler set of functions that take care of its main purpose: detecting the root directory and working with paths within it in a platform-independent way.&lt;/p&gt;
+&lt;p&gt;If you use &lt;code&gt;here()&lt;/code&gt;, it will tell you your project root directory, which will look something like this.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(here)
+here()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## here() starts at /Users/malcolmbarrett/folders/to/directory/
+## [1] &amp;quot;/Users/malcolmbarrett/folders/to/directory/&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Essentially, &lt;code&gt;here()&lt;/code&gt; is looking around for a few things that signify a root directory, like a &lt;code&gt;.Rproj&lt;/code&gt; project file. &lt;code&gt;here&lt;/code&gt; also has a function, &lt;code&gt;set_here()&lt;/code&gt;, that will tag a directory as root using a &lt;code&gt;.here&lt;/code&gt; file, even if it’s not a project. In fact, &lt;code&gt;.here&lt;/code&gt; files take priority, then &lt;code&gt;.Rproj&lt;/code&gt; files, followed by several other file formats (see the documentation at &lt;code&gt;?here&lt;/code&gt;). The last resort is the working directory. If you’re not sure why &lt;code&gt;here&lt;/code&gt; is picking a root directory, you can ask it to explain itself using &lt;code&gt;dr_here()&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dr_here()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## here() starts at /Users/malcolmbarrett/folders/to/directory/, because it contains a file matching `[.]Rproj$` with contents matching `^Version: ` in the first line&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;here()&lt;/code&gt; also works a lot like &lt;code&gt;file.path()&lt;/code&gt; in that it will create a platform-independent path for you (e.g. it will work on Windows and Mac alike). On my Mac, it looks something like this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;here(&amp;quot;figure&amp;quot;, &amp;quot;figure.png&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## [1] &amp;quot;/Users/malcolmbarrett/folders/to/directory/figure/figure.png&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;i-have-a-project.-why-not-just-use-relative-paths&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;I have a project. Why not just use relative paths?&lt;/h2&gt;
+&lt;p&gt;I already touched on one reason to avoid writing paths yourself: the rules aren’t necessarily the same between operating systems. You could, of course, use &lt;code&gt;file.path()&lt;/code&gt; from base R, which safely creates a relative path for you.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;file.path(&amp;quot;figure&amp;quot;, &amp;quot;figure.png&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## [1] &amp;quot;figure/figure.png&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But &lt;code&gt;here&lt;/code&gt; has some added benefits: it makes it easier to manage sub-directories, and it makes your code more robust outside of projects. &lt;a href=&#34;https://github.com/malcolmbarrett/here_here&#34;&gt;As an example, I’ve set up an R project on my GitHub&lt;/a&gt; that has a file directory like this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;here_here
+|--data
+    |--mtcars.csv
+|--figs
+    |--mpg_hp.png
+|--rmd
+    |--01_read_data.Rmd
+    |--01_read_data.pdf
+|--scripts
+    |--read_data.R
+|--here_here.Rproj&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In &lt;code&gt;rmd/01_read_data.Rmd&lt;/code&gt;, I try to call the data using a relative path from the root directory, but Rmarkdown sets a local working directory, so it fails:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+read_csv(&amp;quot;data/mtcars.csv&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Error: &amp;#39;data/mtcars.csv&amp;#39; does not exist in current working directory&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I can solve this with some of the usual wonky backtracking, e.g. &lt;code&gt;../data/mtcars.csv&lt;/code&gt;, but &lt;code&gt;here()&lt;/code&gt; will take care if it for me by finding the project directory:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;read_csv(here(&amp;quot;data&amp;quot;, &amp;quot;mtcars.csv&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 32 x 11
+##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+##  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+##  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+##  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+##  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+##  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+##  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+##  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+## # … with 22 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It works with no trouble. Likewise, saving output to other sub-directories is no issue:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(mtcars, aes(mpg, hp)) + geom_point()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-11-05-why-should-i-use-the-here-package-when-i-m-already-using-projects/index_files/figure-html/makee_ggplot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(here(&amp;quot;figs&amp;quot;, &amp;quot;mpg_hp.png&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which puts it in the &lt;code&gt;figs&lt;/code&gt; folder despite being called from the &lt;code&gt;rmd&lt;/code&gt; folder.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;|--figs
+    |--mpg_hp.png&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is nice, as well, because if I move a file, I don’t need to change the relative directory: it works from the root up.&lt;/p&gt;
+&lt;p&gt;Another benefit is that, if I open any of these files outside of an Rstudio project, they will still run. For Rmarkdown files, using a relative path may be fine because it sets a local working directory when running, but &lt;code&gt;.R&lt;/code&gt; files don’t. If you open &lt;code&gt;scripts/read_data.R&lt;/code&gt; in a different Rstudio session, for instance, the relative path fails, but &lt;code&gt;here()&lt;/code&gt; still works fine. That’s because it knows where the right directory is based on the &lt;code&gt;.Rproj&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://malco.io/img/outside_project.gif&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Likewise, if you or someone else sets a working directory within your project, &lt;code&gt;here&lt;/code&gt; will still work correctly because project directories take precedence. If you need to manually change it for some reason, it’s better in this case to use &lt;code&gt;set_here()&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;more-than-a-path-paster&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;More than a path paster&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;here&lt;/code&gt; is one of the many tools in our toolkit for addressing reproducibility. Because it’s designed to work with Rstudio projects, it’s a natural tool to use within them. &lt;code&gt;here&lt;/code&gt; is also robust to other ways people run your code. If that doesn’t convince you, you can at least sleep soundly knowing that your computer will live another day.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://media.giphy.com/media/XQt3RY9g48OwU/giphy.gif&#34; width=&#34;75%&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;And if you’re on a Mac, you can also combine it with Alfred. &lt;a href=&#34;https://www.youtube.com/watch?v=boKFxBniUH0&#34;&gt;Check out Hadley’s workflow with projects and Alfred here&lt;/a&gt;.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introduction to the Tidyverse, part 2: data visualization with ggplot2</title>
+      <link>/talk/2018-10-25-tidyverse-2/</link>
+      <pubDate>Thu, 25 Oct 2018 10:00:00 +0000</pubDate>
+      <guid>/talk/2018-10-25-tidyverse-2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Introduction to the Tidyverse, part 1: wrangling data with dplyr</title>
+      <link>/talk/2018-10-11-tidyverse-1/</link>
+      <pubDate>Thu, 11 Oct 2018 10:00:00 +0000</pubDate>
+      <guid>/talk/2018-10-11-tidyverse-1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ggplotline: telling a story with labels, colors, and layout</title>
+      <link>/talk/2018-10-08-ggplotline/</link>
+      <pubDate>Mon, 08 Oct 2018 18:30:00 +0000</pubDate>
+      <guid>/talk/2018-10-08-ggplotline/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>USC Preventive Medicine R Bootcamp</title>
+      <link>/talk/2018-08-13-usc-rbootcamp/</link>
+      <pubDate>Mon, 13 Aug 2018 10:00:00 +0000</pubDate>
+      <guid>/talk/2018-08-13-usc-rbootcamp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>When interaction is not interaction: confounding and measurement error</title>
+      <link>/2018/08/04/when-interaction-is-not-interaction-confounding-and-measurement-error/</link>
+      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
+      <guid>/2018/08/04/when-interaction-is-not-interaction-confounding-and-measurement-error/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;Last week, I presented &lt;a href=&#34;https://ggdag.netlify.com&#34;&gt;ggdag&lt;/a&gt; at JSM in Vancouver. As you can imagine, I had a lot of conversations with people about DAGs, confounding, colliders, and all the types of bias that can arise in research. One strange type of bias came up a couple of times that I don’t see discussed very often: measuring either the effect you are studying (&lt;code&gt;x&lt;/code&gt;) or a variable along a confounding pathway (&lt;code&gt;z&lt;/code&gt;) incorrectly can make it appear as if there is an interaction between &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;z&lt;/code&gt;, even if there isn’t one.&lt;/p&gt;
+&lt;p&gt;Let’s consider a simple example: there’s an association between &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt;, which is what we’re interested in, and this association is confounded by &lt;code&gt;z&lt;/code&gt;. This is a classic example of confounding.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(broom)
+library(tidyverse)
+library(kableExtra) # to add headers on kable() tables
+library(knitr)
+library(ggdag)
+library(patchwork) # to combine the plots
+options(knitr.kable.NA = &amp;quot;--&amp;quot;) # don&amp;#39;t show NA values in kable()
+
+set.seed(293951)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;confounder_triangle(x_y_associated = TRUE) %&amp;gt;% 
+  ggdag() +
+  theme_dag()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/dag1-1.png&#34; width=&#34;384&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Let’s simulate some data. &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; are both continuous, and &lt;code&gt;z&lt;/code&gt; is binary (0 or 1, with only about 10% of the population with &lt;code&gt;z=1&lt;/code&gt;). We’ll simulate 10,000 participants so random error is not a big issue.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;z &amp;lt;- sample(0:1, 10000, replace = TRUE, prob = c(.9, .1))
+x &amp;lt;- rnorm(10000) + 2*z
+y &amp;lt;- 1 + 2*x + 1.5*z + rnorm(10000)
+
+df &amp;lt;- data_frame(y, x, z)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: `data_frame()` is deprecated, use `tibble()`.
+## This warning is displayed once per session.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 10,000 x 3
+##          y       x     z
+##      &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;
+##  1 -0.494  -0.463      0
+##  2 -0.649   0.0242     0
+##  3  2.50   -0.146      0
+##  4  1.36    0.0434     1
+##  5  3.41    1.00       0
+##  6 -2.17   -1.94       0
+##  7  0.989   0.209      0
+##  8  0.0667 -0.831      0
+##  9  1.98    0.0196     0
+## 10  1.45    0.0405     0
+## # … with 9,990 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We’ll consider what happens when we mismeasure &lt;code&gt;x&lt;/code&gt; or &lt;code&gt;z&lt;/code&gt;. For each scenario, we’ll compare models with and without an interaction term (&lt;code&gt;x*z&lt;/code&gt;). To fit, tidy, and compare the models, let’s write a few functions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;tidy_lm()&lt;/code&gt; tidies the regression models and formats the numbers a little&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;models_kable()&lt;/code&gt; joins two tables and renders them with &lt;code&gt;kable()&lt;/code&gt; using the &lt;code&gt;kableExtra&lt;/code&gt; package to add a couple of headers&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;compare_models()&lt;/code&gt; combines these two functions and accepts the variables we want to change as arguments so we don’t need to rewrite formulas every time&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;plot_models()&lt;/code&gt; plots the relationship between &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; by levels of &lt;code&gt;z&lt;/code&gt; with hex bins (for the distribution) and regression lines (to assess interaction), combining them with the &lt;code&gt;patchwork&lt;/code&gt; and &lt;code&gt;cowplot&lt;/code&gt; packages (plus a little tidy eval magic!)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tidy_lm &amp;lt;- function(model) {
+  model %&amp;gt;% 
+    tidy() %&amp;gt;% 
+    mutate(p.value = ifelse(p.value &amp;lt; .001, &amp;quot;&amp;lt;.001&amp;quot;, round(p.value, 3))) %&amp;gt;% 
+    mutate_if(is.numeric, round, 2)
+}
+
+models_kable &amp;lt;- function(no_int, int, ...) {
+  no_int &amp;lt;- select(no_int, term, estimate, p.value)
+  int &amp;lt;- select(int, term, estimate, p.value)
+  full_join(no_int, int, by = &amp;quot;term&amp;quot;) %&amp;gt;% 
+    mutate(term = c(&amp;quot;(Intercept)&amp;quot;, &amp;quot;x&amp;quot;, &amp;quot;z&amp;quot;, &amp;quot;x * z&amp;quot;)) %&amp;gt;% 
+    kable(col.names = c(&amp;quot;Term&amp;quot;, rep(c(&amp;quot;Estimate&amp;quot;, &amp;quot;P-Value&amp;quot;), 2)), ...) %&amp;gt;%
+    add_header_above(c(&amp;quot; &amp;quot;, &amp;quot;No Interaction&amp;quot; = 2, &amp;quot;Interaction&amp;quot; = 2))
+}
+
+compare_models &amp;lt;- function(exposure = &amp;quot;x&amp;quot;, confounder = &amp;quot;z&amp;quot;, ...) {
+  fmla &amp;lt;- as.formula(paste(&amp;quot;y ~ &amp;quot;, exposure, &amp;quot; + &amp;quot;, confounder)) # create a formula
+  no_int &amp;lt;- lm(fmla, data = df) %&amp;gt;% 
+    tidy_lm()
+  
+  fmla_int &amp;lt;-   fmla &amp;lt;- as.formula(paste(&amp;quot;y ~ &amp;quot;, exposure, &amp;quot; * &amp;quot;, confounder))
+  int &amp;lt;- lm(fmla_int, data = df) %&amp;gt;% 
+    tidy_lm()
+  
+  models_kable(no_int, int, ...)
+}
+
+plot_models &amp;lt;- function(x = x,
+                        z = z,
+                        x_label = &amp;quot;x (Measured well)&amp;quot;, 
+                        z_label = &amp;quot;Confounder (Measured well)&amp;quot;,
+                        crude = FALSE) {
+  x &amp;lt;- rlang::enquo(x)
+  z &amp;lt;- rlang::enquo(z)
+  
+  p1 &amp;lt;- df %&amp;gt;% 
+    ggplot(aes(x = !!x, y = y, col = factor(!!z))) +
+      geom_hex(aes(fill = factor(z)), col = &amp;quot;white&amp;quot;, alpha = .7) +
+      scale_color_manual(name = z_label, values = c(&amp;quot;#56B4E9&amp;quot;, &amp;quot;#EFA722&amp;quot;, &amp;quot;#E36A25&amp;quot;)) + 
+      scale_fill_manual(name = z_label, values = c(&amp;quot;#56B4E9&amp;quot;, &amp;quot;#EFA722&amp;quot;, &amp;quot;#E36A25&amp;quot;)) + 
+      theme_minimal(base_size = 14) +
+      theme(legend.position = &amp;quot;bottom&amp;quot;,
+            axis.title.x = element_blank()) +
+      labs(y = &amp;quot;y (Measured well)&amp;quot;) + 
+      ylim(c(-10, 16))
+  
+  legend &amp;lt;- cowplot::get_legend(p1)
+  
+  p1a &amp;lt;- p1 + theme(legend.position = &amp;quot;none&amp;quot;)
+  
+  p2 &amp;lt;- df %&amp;gt;% 
+    ggplot(aes(x = !!x, y = y, col = factor(!!z))) +
+      geom_hex(fill = &amp;quot;grey92&amp;quot;, col = &amp;quot;white&amp;quot;, alpha = .8) +
+      geom_smooth(method = &amp;quot;lm&amp;quot;, se = FALSE, size = 1) + 
+      scale_color_manual(name = z_label, values = c(&amp;quot;#56B4E9&amp;quot;, &amp;quot;#EFA722&amp;quot;, &amp;quot;#E36A25&amp;quot;)) + 
+      theme_minimal(base_size = 14) +
+      theme(legend.position = &amp;quot;none&amp;quot;,
+              axis.title = element_blank()) +
+      ylim(c(-10, 16))
+  
+  if (crude) {
+    p2 &amp;lt;- p2 + 
+            geom_smooth(aes(group = 1, col = &amp;quot;Crude Estimate&amp;quot;), 
+                                    method = &amp;quot;lm&amp;quot;, se = FALSE, size = 1) +
+            theme(legend.position = &amp;quot;bottom&amp;quot;)
+    legend &amp;lt;- cowplot::get_legend(p2)
+    p2 &amp;lt;- p2 + theme(legend.position = &amp;quot;none&amp;quot;)
+    }
+  
+  patchworked &amp;lt;- p1a + p2
+  pl1 &amp;lt;- cowplot::plot_grid(patchworked, align = &amp;quot;h&amp;quot;)
+  pl2 &amp;lt;- cowplot::add_sub(pl1, x_label, 
+                          vpadding = grid::unit(0,&amp;quot;lines&amp;quot;), 
+                          y = 4.5, x = .5, vjust = 4.5)
+  pl3 &amp;lt;- cowplot::plot_grid(NULL, legend, NULL, nrow = 1)
+  cowplot::plot_grid(pl2, pl3, ncol = 1, rel_heights = c(1.5, .2))
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If all three variables are measured well, there’s no problem. The effect estimates are about right, and there’s no false interaction. For the plot, notice how 1) the crude estimate (which ignores &lt;code&gt;z&lt;/code&gt;) is an mix of the other two lines and 2) the slopes of the lines for &lt;code&gt;z=0&lt;/code&gt; and &lt;code&gt;z=1&lt;/code&gt; are parallel.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;compare_models()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;1&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+No Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Term
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+(Intercept)
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.99
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.99
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.46
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.47
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x * z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0.912
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_models(crude = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.
+
+## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.
+
+## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/correct_model-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;measurement-error-for-the-outcome-x&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Measurement error for the outcome (&lt;code&gt;x&lt;/code&gt;)&lt;/h2&gt;
+&lt;p&gt;Let’s say that, in practice, we are measuring &lt;code&gt;x&lt;/code&gt; incorrectly (measurement error). The only device around to measure &lt;code&gt;x&lt;/code&gt; is an old 1980 version of the measureator, which by complete coincidence is the same year Sander Greenland &lt;a href=&#34;https://academic.oup.com/aje/article-abstract/112/4/564/59323?redirectedFrom=fulltext&#34;&gt;first talked about this issue&lt;/a&gt;. The 1980 version of this device has a problem: it measures &lt;code&gt;x&lt;/code&gt; better in people who have values of &lt;code&gt;y&lt;/code&gt; above 0 than those below 0. The 2018 version of the device still measures &lt;code&gt;x&lt;/code&gt; with error, but the manufacturer fixed the problem with &lt;code&gt;y&lt;/code&gt;, and now it has nothing to do with that.&lt;/p&gt;
+&lt;div id=&#34;mismeasured-x-dependent-on-y&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Mismeasured &lt;code&gt;x&lt;/code&gt;, dependent on &lt;code&gt;y&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;When we use &lt;code&gt;x_1980&lt;/code&gt; as a proxy for &lt;code&gt;x&lt;/code&gt;, there now appears to be an interaction with &lt;code&gt;z&lt;/code&gt;. It’s present in both the model estimates and the plot. The slopes are no longer parallel. The effect of &lt;code&gt;x&lt;/code&gt; on &lt;code&gt;y&lt;/code&gt; seems like it’s heterogeneous for levels of &lt;code&gt;z&lt;/code&gt;: for people with &lt;code&gt;z=1&lt;/code&gt;, the effect of &lt;code&gt;x&lt;/code&gt; on &lt;code&gt;y&lt;/code&gt; is stronger.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;measureator2018 &amp;lt;- function(x) x + rnorm(10000)
+measureator1980 &amp;lt;- function(x) ifelse(y &amp;gt; 2, x + rnorm(10000, sd = 1.5), ifelse(y &amp;gt; 0, x + rnorm(10000, sd = 2), x + rnorm(10000, sd = 3)))
+
+df &amp;lt;- df %&amp;gt;% 
+  mutate(
+    x_2018 = measureator2018(x),
+    x_1980 = measureator1980(x)
+  )
+
+compare_models(&amp;quot;x_1980&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;1&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+No Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Term
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+(Intercept)
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.98
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.98
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.80
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.28
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x * z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.29
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_models(x = x_1980, x_label = &amp;quot;Mismeasured x (1980 device)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.
+
+## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/x_1980-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;What’s going on here? The plot helps demonstrate the distortion in x (it’s much less stable when &lt;code&gt;y&lt;/code&gt; is below 0 and most people with &lt;code&gt;z=1&lt;/code&gt; are above 0). We can put this together in a DAG. In the case of the 1980 device, we have differential measurement error, so called because the degree of mismeasurement is affected by &lt;code&gt;y&lt;/code&gt;. We want to estimate the effect of &lt;code&gt;x&lt;/code&gt;, but what we really have is an approximation, &lt;code&gt;x_m&lt;/code&gt;, dependent on both &lt;code&gt;error&lt;/code&gt; (the amount of mismeasurement) and &lt;code&gt;x&lt;/code&gt;. &lt;code&gt;error&lt;/code&gt; is dependent on &lt;code&gt;y&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dme &amp;lt;- dagify(y ~ x + z, 
+       x ~ z, 
+       x_m ~ x + error,
+       error ~ y) 
+
+ggdag(dme) +
+  theme_dag()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/dag2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Because two arrows are leading into it, &lt;code&gt;x_m&lt;/code&gt; is a &lt;a href=&#34;https://ggdag.netlify.com/articles/intro-to-dags.html#colliders-and-collider-stratification-bias&#34;&gt;collider&lt;/a&gt;. Including a collider in the regression model will induce an association between its parents, creating bias. Collider bias can also travel upstream (see the previous link), here affecting &lt;code&gt;z&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt;, as well. Look at the web of associations it creates!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggdag_adjust(dme, c(&amp;quot;x_m&amp;quot;, &amp;quot;z&amp;quot;)) +
+  theme_dag() +
+    scale_color_manual(values = c(&amp;quot;#2C7FBF&amp;quot;, &amp;quot;#E69F00&amp;quot;)) + 
+    ggraph::scale_edge_color_manual(values = c(&amp;quot;#E7E7E7&amp;quot;, &amp;quot;#E69F00&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/dag3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mismeasured-x-independent-of-y&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Mismeasured &lt;code&gt;x&lt;/code&gt;, independent of &lt;code&gt;y&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Things are a little different if we use the 2018 device, which measures &lt;code&gt;x&lt;/code&gt; incorrectly but has nothing to do with &lt;code&gt;y&lt;/code&gt;. In this case, there’s no apparent interaction.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;compare_models(&amp;quot;x_2018&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;1&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+No Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Term
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+(Intercept)
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.97
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.97
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.99
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.99
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.48
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.40
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x * z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.04
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0.27
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_models(x = x_2018, x_label = &amp;quot;Mismeasured x (1980 device)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.
+
+## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/x_2018-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This is a case of non-differential measurement error; the error is not dependent on the outcome, &lt;code&gt;y&lt;/code&gt;. &lt;code&gt;x_m&lt;/code&gt; is still a collider but it ends up being less important. Instead, the model underestimate the effect of &lt;code&gt;x&lt;/code&gt; on &lt;code&gt;y&lt;/code&gt; (otherwise known as bias towards the null, which is what happens under most cases of non-differential error) and attributes too much of the effect on &lt;code&gt;y&lt;/code&gt; to &lt;code&gt;z&lt;/code&gt; (&lt;code&gt;x&lt;/code&gt; is a mediator of &lt;code&gt;z&lt;/code&gt;’s impact on &lt;code&gt;y&lt;/code&gt;).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ndme &amp;lt;- dagify(y ~ x + z, 
+       x ~ z, 
+       x_m ~ x + error) 
+
+ggdag(ndme) +
+  theme_dag()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/dag4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;measurement-error-for-covariates-z&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Measurement error for covariates (&lt;code&gt;z&lt;/code&gt;)&lt;/h2&gt;
+&lt;p&gt;What about if we measure &lt;code&gt;x&lt;/code&gt; well but mismeasure the confounder, &lt;code&gt;z&lt;/code&gt;? Let’s say we have a similar situation: one device that occasionally misclassifies &lt;code&gt;z&lt;/code&gt; but isn’t effected by &lt;code&gt;y&lt;/code&gt; and another, broken device that measures &lt;code&gt;z&lt;/code&gt; in people who have higher values of &lt;code&gt;y&lt;/code&gt; better.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;swap &amp;lt;- function(x) ifelse(x == 1, 0, 1)
+
+z_ometer &amp;lt;- function(z) {
+  mismeasured &amp;lt;- sample(c(TRUE, FALSE), size = 10000, replace = TRUE, prob = c(.3, .7))
+  ifelse(mismeasured, swap(z), z)
+}
+
+z_ometer_broken &amp;lt;- function(z) {
+  mismeasured &amp;lt;- ifelse(
+    df$y &amp;gt; 0,
+    sample(c(TRUE, FALSE), size = 10000, replace = TRUE, prob = c(.5, .5)),
+    sample(c(TRUE, FALSE), size = 10000, replace = TRUE, prob = c(.1, .9))
+  )
+  ifelse(mismeasured, swap(z), z)
+}
+
+df &amp;lt;- df %&amp;gt;% 
+  mutate(
+    z_results = z_ometer(z),
+    z_results_broken = z_ometer_broken(z)
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The DAGs for &lt;code&gt;z_m&lt;/code&gt; look pretty similar to &lt;code&gt;x_m&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ndme_z &amp;lt;- dagify(y ~ x + z, 
+       x ~ z, 
+       z_m ~ z + error) 
+
+dme_z &amp;lt;- dagify(y ~ x + z, 
+       x ~ z, 
+       z_m ~ z + error,
+       error ~ y) 
+
+dag1 &amp;lt;- ggdag(ndme_z) +
+  theme_dag() +
+  ggtitle(&amp;quot;Wrongly measure z, independent of y&amp;quot;)
+
+dag2 &amp;lt;- ggdag(dme_z) +
+  theme_dag() +
+  ggtitle(&amp;quot;Wrongly measure z, dependent on y&amp;quot;)
+
+dag1 + dag2&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/dag5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;For both devices, there appears to be a little interaction (probably only detectable because of our large sample size). While that’s often the case, the larger issue is that our proxies for &lt;code&gt;z&lt;/code&gt; are no longer blocking the back-door path between &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt;. In other words, there’s residual confounding. In this example, what ends up happening is a little bit of false interaction for both differential and non-differential misclassification of &lt;code&gt;z&lt;/code&gt; and a lot of confounding bias. The estimate for &lt;code&gt;x&lt;/code&gt; is a little bit off (about 10% too high), and &lt;code&gt;z&lt;/code&gt; is much too low (it’s biased towards the null).&lt;/p&gt;
+&lt;div id=&#34;mismeasured-z-dependent-on-y&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Mismeasured &lt;code&gt;z&lt;/code&gt;, dependent on &lt;code&gt;y&lt;/code&gt;&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;compare_models(confounder = &amp;quot;z_results_broken&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;1&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+No Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Term
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+(Intercept)
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.19
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.22
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.23
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.26
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x * z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+-0.08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_models(z = z_results_broken, z_label = &amp;quot;Confounder (Z-ometer, broken)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.
+
+## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/z_results-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mismeasured-z-independent-of-y&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Mismeasured &lt;code&gt;z&lt;/code&gt;, independent of &lt;code&gt;y&lt;/code&gt;&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;compare_models(confounder = &amp;quot;z_results&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;1&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+No Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Term
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+(Intercept)
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.03
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.04
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.16
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x * z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.19
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_models(z = z_results, z_label = &amp;quot;Confounder (Z-ometer, broken)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.
+
+## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/z_results_broken-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;So, mismeasurement of both &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;z&lt;/code&gt; can cause problems. Under most circumstances, of course, we are mismeasuring more than one variable (including &lt;code&gt;y&lt;/code&gt;!). Moreover, the errors in the way those variables are measured may themselves be dependent. We need to, then, be very mindful of the structures of these bias and, if necessary, try to address them with bias analysis approaches.&lt;/p&gt;
+&lt;p&gt;If you want to learn about more about these methods, you may be interested in this great-looking resource from Maarten van Smeden:&lt;/p&gt;
+&lt;p&gt;{{&amp;lt; tweet 1025990407757422592 &amp;gt;}}&lt;/p&gt;
+&lt;p&gt;Thanks to him for providing it!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Privacy Policy</title>
+      <link>/privacy/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
+      <guid>/privacy/</guid>
+      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Terms</title>
+      <link>/terms/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
+      <guid>/terms/</guid>
+      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ggdag 0.1.0</title>
+      <link>/2018/03/28/ggdag-0.1.0/</link>
+      <pubDate>Wed, 28 Mar 2018 00:00:00 +0000</pubDate>
+      <guid>/2018/03/28/ggdag-0.1.0/</guid>
+      <description>
+
+
+&lt;p&gt;I’m pleased to announce the release of &lt;code&gt;ggdag&lt;/code&gt; 0.1.0 on CRAN! &lt;code&gt;ggdag&lt;/code&gt; uses the powerful &lt;code&gt;dagitty&lt;/code&gt; package to create and analyze structural causal models and plot them using &lt;code&gt;ggplot2&lt;/code&gt; and &lt;code&gt;ggraph&lt;/code&gt; in a tidy, consistent, and easy manner. You can use &lt;code&gt;dagitty&lt;/code&gt; objects directly in &lt;code&gt;ggdag&lt;/code&gt;, but &lt;code&gt;ggdag&lt;/code&gt; also includes wrappers to make DAGs using a more R-like syntax:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# install.packages(&amp;quot;ggdag&amp;quot;)
+library(ggdag)
+
+dag &amp;lt;- dagify(y ~ x + z,
+       x ~ z) %&amp;gt;% 
+  tidy_dagitty()
+
+dag&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A DAG with 3 nodes and 3 edges
+## #
+## # A tibble: 4 x 8
+##   name      x     y direction to     xend  yend circular
+##   &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;     &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;lgl&amp;gt;   
+## 1 x      8.21  7.43 -&amp;gt;        y      7.57  8.19 FALSE   
+## 2 z      8.55  8.37 -&amp;gt;        x      8.21  7.43 FALSE   
+## 3 z      8.55  8.37 -&amp;gt;        y      7.57  8.19 FALSE   
+## 4 y      7.57  8.19 &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;  NA    NA    FALSE&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggdag(dag)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-03-28-ggdag-0-1-0/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;You can learn more about it on the &lt;a href=&#34;https://ggdag.netlify.com/&#34;&gt;ggdag website&lt;/a&gt;, a &lt;code&gt;pkgdown&lt;/code&gt; site that includes rendered documentation and the following vignettes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://ggdag.netlify.com/articles/intro-to-ggdag.html&#34;&gt;An Introduction to ggdag&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ggdag.netlify.com/articles/intro-to-dags.html&#34;&gt;An Introduction to Directed Acyclic Graphs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ggdag.netlify.com/articles/bias-structures.html&#34;&gt;Common Structures of Bias&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Give it a try, and please file an bugs or suggestions to the &lt;a href=&#34;https://github.com/malcolmbarrett/ggdag&#34;&gt;GitHub repo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I also want to thank a few of my fellow USC PhDs, David Bogumil, Ugonna Ihenacho, and Zhi Yang, for helping me polish the articles and offering helpful suggestions on some of the aesthetic details of &lt;code&gt;ggdag&lt;/code&gt;. Thanks, y’all!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Data Visualization for Meta-Analysis</title>
+      <link>/talk/metaanalysis-viz/</link>
+      <pubDate>Thu, 01 Mar 2018 10:00:00 +0000</pubDate>
+      <guid>/talk/metaanalysis-viz/</guid>
+      <description>
+
+
+
+</description>
+    </item>
+    
+    <item>
+      <title>Stochastic Shakespeare: Sonnets Produced by Markov Chains in R</title>
+      <link>/2018/01/26/stochastic-shakespeare-sonnets-produced-by-markov-chains-in-r/</link>
+      <pubDate>Fri, 26 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>/2018/01/26/stochastic-shakespeare-sonnets-produced-by-markov-chains-in-r/</guid>
+      <description>
+
+
+&lt;div id=&#34;update-with-markovifyr&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Update with &lt;code&gt;markovifyR&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;Thanks to Maëlle Salmon, who referred me to &lt;a href=&#34;https://stackoverflow.blog/2018/01/15/thanks-million-jon-skeet/&#34;&gt;this post&lt;/a&gt; by Julia Silge and Nick Larsen, I explored doing this using the &lt;code&gt;markovifyR&lt;/code&gt; package, and the results are unbelievable. &lt;a href=&#34;#update&#34;&gt;See the bottom of the post for an updated batch of sonnets!&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;original-post&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Original post&lt;/h1&gt;
+&lt;p&gt;I recently saw &lt;a href=&#34;http://katiejolly.io/blog/2018-01-05/random-rupi-markov-chain-poems&#34;&gt;Katie Jolly’s post&lt;/a&gt;, in which she produced Rupi Kuar-style poems using Markov Chains in R. I absolutely loved it, so I decided to try it with Shakespeare’s 154 sonnets using her post as a skeleton.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;downloading-and-cleaning-the-sonnets&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Downloading and cleaning the sonnets&lt;/h1&gt;
+&lt;p&gt;In addition to &lt;code&gt;markovchain&lt;/code&gt; and &lt;code&gt;tidyverse&lt;/code&gt;, I’m going to use the &lt;code&gt;gutenberger&lt;/code&gt; package to download the sonnets.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(gutenbergr)
+library(tidyverse) 
+library(markovchain) &lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;shakespeare &amp;lt;- gutenberg_works(title == &amp;quot;Shakespeare&amp;#39;s Sonnets&amp;quot;) %&amp;gt;% 
+  pull(gutenberg_id) %&amp;gt;% 
+  gutenberg_download(verbose = FALSE)
+
+shakespeare&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 2,625 x 2
+##    gutenberg_id text                                          
+##           &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;                                         
+##  1         1041 THE SONNETS                                   
+##  2         1041 &amp;quot;&amp;quot;                                            
+##  3         1041 by William Shakespeare                        
+##  4         1041 &amp;quot;&amp;quot;                                            
+##  5         1041 &amp;quot;&amp;quot;                                            
+##  6         1041 &amp;quot;&amp;quot;                                            
+##  7         1041 &amp;quot;&amp;quot;                                            
+##  8         1041 &amp;quot;  I&amp;quot;                                         
+##  9         1041 &amp;quot;&amp;quot;                                            
+## 10         1041 &amp;quot;  From fairest creatures we desire increase,&amp;quot;
+## # … with 2,615 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Because the sonnets are in &lt;code&gt;gutenberger&lt;/code&gt;, they’re already in a nice format to work with. I just need to do a little cleaning up: like Katie, I removed the punctuation, but I also have to clear out the sonnet titles, which were Roman numerals, and some title info.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  a little function to make life easier
+`%not_in%` &amp;lt;- function(lhs, rhs) {
+  !(lhs %in% rhs)
+}
+
+#  remove new lines symbol, sonnet Roman numerals, and punctation
+#  and split into vector
+bills_words &amp;lt;- shakespeare %&amp;gt;% 
+  mutate(text = text %&amp;gt;% 
+    str_trim() %&amp;gt;% 
+    str_replace_all(&amp;quot;--&amp;quot;, &amp;quot; &amp;quot;) %&amp;gt;% 
+    str_replace_all(&amp;quot;[^[:alnum:][:space:]&amp;#39;]&amp;quot;, &amp;quot;&amp;quot;) %&amp;gt;% 
+    str_replace_all(&amp;quot;^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$&amp;quot;, 
+                    &amp;quot;&amp;quot;) %&amp;gt;% 
+    str_to_lower()) %&amp;gt;% 
+  filter(text %not_in% c(&amp;quot;the sonnets&amp;quot;, &amp;quot;by william shakespeare&amp;quot;, &amp;quot;&amp;quot;, &amp;quot; &amp;quot;)) %&amp;gt;% 
+  pull(text) %&amp;gt;% 
+  str_split(&amp;quot; &amp;quot;) %&amp;gt;% 
+  unlist() &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I’m also going to extract the punctuation and assess how many of each there are for when I actually assemble the sonnets later.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;punctuation &amp;lt;- shakespeare %&amp;gt;% 
+  pull(text) %&amp;gt;% 
+  str_extract_all(&amp;quot;[^[:alnum:][:space:]&amp;#39;]&amp;quot;) %&amp;gt;% 
+  unlist()
+
+punctuation_probs &amp;lt;- punctuation[punctuation %not_in% c(&amp;quot;-&amp;quot;, &amp;quot;(&amp;quot;, &amp;quot;)&amp;quot;)] %&amp;gt;% 
+  table() %&amp;gt;% 
+  prop.table()&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;fit-the-markov-chain&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Fit the Markov Chain&lt;/h1&gt;
+&lt;p&gt;Now fit the Markov Chain with the vector of words.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  fit a Markov Chain
+sonnet_chain &amp;lt;- markovchainFit(bills_words)
+cat(markovchainSequence(n = 10, markovchain = sonnet_chain$estimate), collapse =  &amp;quot; &amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;i can afford no longer nurseth the joy my poverty&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://media.giphy.com/media/bXKWWJXUJkBsQ/giphy.gif&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;And finally, here are a few functions to piece together lines to make them look like a sonnet using the &lt;code&gt;walk()&lt;/code&gt; function from &lt;code&gt;purrr&lt;/code&gt; to print out the lines (since it’s a side effect). No, they’re not actually iambic pentameter :(&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;write_a_line &amp;lt;- function(n_lines = 1) {
+  walk(1:n_lines, function(.x) {
+  # put together lines of more or less average length
+    lines &amp;lt;- markovchainSequence(n = sample(c(6:9), 1), 
+                               markovchain = sonnet_chain$estimate) %&amp;gt;% 
+      paste(collapse = &amp;quot; &amp;quot;)
+  
+  #  add end-of-line punctuation based on their occurence 
+  end_punctuation &amp;lt;- ifelse(.x == n_lines, &amp;quot;.&amp;quot;, 
+                            sample(names(punctuation_probs), 
+                                   size = 1, 
+                                   prob = punctuation_probs))
+  cat(paste0(lines, end_punctuation, &amp;quot;  \n&amp;quot;))
+  })
+}
+
+psuedosonnet &amp;lt;- function() {
+  walk(1:3, function(.x) {
+    write_a_line(4)
+    cat(&amp;quot;  \n&amp;quot;)
+  })
+  
+  write_a_line(2)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;generating-the-sonnets&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Generating the sonnets&lt;/h1&gt;
+&lt;p&gt;Let’s try it out.&lt;/p&gt;
+&lt;div id=&#34;psuedosonnet-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Psuedosonnet 1:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(154)
+psuedosonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;wing and folly doctorlike controlling skill who knows the,&lt;br /&gt;
+again assur’d and given grace but when all date:&lt;br /&gt;
+shook three till my mind these blenches,&lt;br /&gt;
+in sweetest things deem’d not so dear delight.&lt;/p&gt;
+&lt;p&gt;the mouths of love swearing in these,&lt;br /&gt;
+and soon to woe compar’d with;&lt;br /&gt;
+at your bounty cherish she is ’greeing and yet,&lt;br /&gt;
+by lies buried age and simple savour pitiful thrivers.&lt;/p&gt;
+&lt;p&gt;am now with intelligence as the stage presenteth nought,&lt;br /&gt;
+which it for me suffering my?&lt;br /&gt;
+days making lascivious grace is not thy days are:&lt;br /&gt;
+expired for myself and tombs of my.&lt;/p&gt;
+&lt;p&gt;right my heart another gay why dost,&lt;br /&gt;
+of my use your self thou.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;psuedosonnet-2&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Psuedosonnet 2:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;psuedosonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;past reason hunted and checked with thee;&lt;br /&gt;
+or changes right or at least so strong,&lt;br /&gt;
+the ashes of glass his prescriptions,&lt;br /&gt;
+him to decay lest eyes be false borrowed face.&lt;/p&gt;
+&lt;p&gt;and all kinds of love her blood that,&lt;br /&gt;
+o none but in these offices so.&lt;br /&gt;
+and his spring within the view!&lt;br /&gt;
+to weigh how thy book of.&lt;/p&gt;
+&lt;p&gt;by a tomb of public means which,&lt;br /&gt;
+or who moving points on to?&lt;br /&gt;
+can yet do see my state and age unbred?&lt;br /&gt;
+muse brings forth the orient when.&lt;/p&gt;
+&lt;p&gt;thy hair the world away to show thee:&lt;br /&gt;
+one by day when in love things.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;psuedosonnet-3&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Psuedosonnet 3:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;psuedosonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or else receiv’st not fade die but.&lt;br /&gt;
+grief to mend to stay whilst;&lt;br /&gt;
+reeks i hold thee devouring time that,&lt;br /&gt;
+with you pattern of such day my love happy.&lt;/p&gt;
+&lt;p&gt;hate me last so bright who leaves thy beauty.&lt;br /&gt;
+each friend and your true that one that,&lt;br /&gt;
+whilst like a vengeful canker blooms?&lt;br /&gt;
+and therefore my bad thus to.&lt;/p&gt;
+&lt;p&gt;should i not counted fair whose,&lt;br /&gt;
+state but day arising from hands to;&lt;br /&gt;
+of flower with his presence grace impiety,&lt;br /&gt;
+only herald to the beast that plea.&lt;/p&gt;
+&lt;p&gt;eyelids open wide in posterity thou send’st from,&lt;br /&gt;
+nor shall have err’d and kept unused.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;psuedosonnet-4&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Psuedosonnet 4:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;psuedosonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;that pine to my home of thine own,&lt;br /&gt;
+love being crown’d with that man’s;&lt;br /&gt;
+what need’st thou usurer why of this thy love’s,&lt;br /&gt;
+with sovereign cure i question make him that i.&lt;/p&gt;
+&lt;p&gt;to the ear confounds him have drawn,&lt;br /&gt;
+fight and beauty should my muse and strangely.&lt;br /&gt;
+liv’d alone stands but one so,&lt;br /&gt;
+whilst i alone o in the lines that brightness.&lt;/p&gt;
+&lt;p&gt;creature the lease dost wake elsewhere but me;&lt;br /&gt;
+evil tempteth my love that which still,&lt;br /&gt;
+i am attainted that in the thing to.&lt;br /&gt;
+it thy sweet deaths be but those.&lt;/p&gt;
+&lt;p&gt;that our appetite which he is hanging still:&lt;br /&gt;
+inhabit on death to make one.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;psuedosonnet-5&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Psuedosonnet 5:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;psuedosonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and confounds in me not my?&lt;br /&gt;
+alchemy to all my comfort now i send,&lt;br /&gt;
+the pleasure thine own desert and no hatred in,&lt;br /&gt;
+with disdain lest guilty goddess go since.&lt;/p&gt;
+&lt;p&gt;seem right myself i’ll fight after you,&lt;br /&gt;
+wane so love and simple truth.&lt;br /&gt;
+ah do dispense you like of time despite,&lt;br /&gt;
+to store harsh featureless and by.&lt;/p&gt;
+&lt;p&gt;my reason is daily new lo,&lt;br /&gt;
+love thee i’ll run and in themselves forsake me;&lt;br /&gt;
+thou through windows to play as ’twixt a,&lt;br /&gt;
+me both and to love of.&lt;/p&gt;
+&lt;p&gt;still my bonds in disgrace with newer:&lt;br /&gt;
+morrow to slavery my side against the weary.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://media.giphy.com/media/3o6Ztf18L1Tsmxd528/giphy.gif&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;update&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Update&lt;/h1&gt;
+&lt;p&gt;Alright, this time I’m going to try it with the &lt;code&gt;markovifyR&lt;/code&gt; package. I’m basically going to do the same cleaning as above, but this time I’ll be putting entire sentences, punctuation and all, into the Markov model. The &lt;code&gt;markovify_text()&lt;/code&gt; function also accepts start words, so I thought it might look good to start with a sample of 100 starting words from the sonnets and construct the lines from there.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(markovifyR)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  same as above, but maintain as sentences and keep punctuation
+bills_sentences &amp;lt;- shakespeare %&amp;gt;% 
+  mutate(text = text %&amp;gt;% 
+    str_trim() %&amp;gt;% 
+    str_replace_all(&amp;quot;--&amp;quot;, &amp;quot; &amp;quot;) %&amp;gt;% 
+    str_replace_all(&amp;quot;^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$&amp;quot;, 
+                    &amp;quot;&amp;quot;) %&amp;gt;% 
+    str_to_lower()) %&amp;gt;% 
+  filter(text %not_in% c(&amp;quot;the sonnets&amp;quot;, &amp;quot;by william shakespeare&amp;quot;, &amp;quot;&amp;quot;, &amp;quot; &amp;quot;))
+
+#  fit the Markov Chain
+markovify_model &amp;lt;-
+  generate_markovify_model(
+    input_text = bills_sentences$text,
+    markov_state_size = 2L,
+    max_overlap_total = 25,
+    max_overlap_ratio = .85
+  )
+
+#  generate a sonnet
+markovify_sonnet &amp;lt;- function() {
+  lines &amp;lt;- markovify_text(
+      markov_model = markovify_model,
+      maximum_sentence_length = 75,
+      output_column_name = &amp;#39;sonnet_line&amp;#39;,
+      count = 50,
+      tries = 1000, 
+      start_words = sample(generate_start_words(markovify_model)$wordStart, 100),
+      only_distinct = TRUE,
+      return_message = FALSE) %&amp;gt;% 
+    filter(str_count(sonnet_line, &amp;quot;\\w+&amp;quot;) &amp;gt; 5 &amp;amp; str_count(sonnet_line, &amp;quot;\\w+&amp;quot;) &amp;lt; 10) %&amp;gt;% 
+    slice(sample(1:n(), 14)) %&amp;gt;% 
+    mutate(id = 1:n()) %&amp;gt;% 
+    select(id, sonnet_line) 
+  
+   #  add a period to the last line if the last charachter isn&amp;#39;t punctuation 
+   #  that ends a sentence  
+   last_line &amp;lt;- lines[lines$id == 14, &amp;quot;sonnet_line&amp;quot;]
+   lines[lines$id == 14, &amp;quot;sonnet_line&amp;quot;] &amp;lt;- str_replace(last_line, 
+                                                       &amp;quot;.$(?&amp;lt;!//.//!//?|[:alnum:])&amp;quot;, &amp;quot;.&amp;quot;)
+   
+   #  print in a sonnet-like format
+   walk(1:14, function(.x) {
+     cat(lines$sonnet_line[.x], &amp;quot; \n&amp;quot;)
+     
+     #  add a space every four lines
+     if (.x %% 4 == 0) cat(&amp;quot;\n&amp;quot;) 
+   })
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;markovify-sonnet-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Markovify Sonnet 1:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;markovify_sonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;now counting best to be invited&lt;br /&gt;
+then, in the breath of words respect,&lt;br /&gt;
+are windows to my dear time’s waste:&lt;br /&gt;
+speak of that which thou departest;&lt;/p&gt;
+&lt;p&gt;speak of my faults thy sweet graces graced be;&lt;br /&gt;
+reserve them for my sin you did impute,&lt;br /&gt;
+then, beauteous niggard, why dost thou to mine eyes,&lt;br /&gt;
+die to themselves. sweet roses do not kill&lt;/p&gt;
+&lt;p&gt;this silence for my love, yea take them all;&lt;br /&gt;
+are windows to my thoughts as food to life,&lt;br /&gt;
+beauty’s effect with beauty of thy days.&lt;br /&gt;
+there is but as the rich, whose blessed key,&lt;/p&gt;
+&lt;p&gt;this were to be cross’d:&lt;br /&gt;
+not from the book of honour razed quite.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;markovify-sonnet-2&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Markovify Sonnet 2:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;markovify_sonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;thine eyes i love, and look strange;&lt;br /&gt;
+haply i think my love alone.&lt;br /&gt;
+which should transport me farthest from your tongue;&lt;br /&gt;
+entitled in thy power to lend base subjects light?&lt;/p&gt;
+&lt;p&gt;wishing me like to the very same;&lt;br /&gt;
+not that the world’s fresh ornament,&lt;br /&gt;
+looking with pretty ruth upon my brow;&lt;br /&gt;
+of faults conceal’d, wherein i am forsworn,&lt;/p&gt;
+&lt;p&gt;too base of thee this i do change:&lt;br /&gt;
+now all is done, save what is told.&lt;br /&gt;
+to this composed wonder of your fame!&lt;br /&gt;
+disdains the tillage of thy days.&lt;/p&gt;
+&lt;p&gt;till i return, of posting is no remedy,&lt;br /&gt;
+not wondering at the present nor the prophetic soul&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;markovify-sonnet-3&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Markovify Sonnet 3:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;markovify_sonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;want nothing that the world an end,&lt;br /&gt;
+kill me with that which it doth catch;&lt;br /&gt;
+within the knowledge of mine own love’s might.&lt;br /&gt;
+o! change thy thought, that i prove,&lt;/p&gt;
+&lt;p&gt;within the level of your love.&lt;br /&gt;
+presume not on thy humour doth depend:&lt;br /&gt;
+ere you were once unkind befriends me now,&lt;br /&gt;
+when sometime lofty towers i see thee,&lt;/p&gt;
+&lt;p&gt;wishing me like to the world enjoys it;&lt;br /&gt;
+who taught thee how thy precious minutes waste;&lt;br /&gt;
+mad in pursuit of the time,&lt;br /&gt;
+have added feathers to the time,&lt;/p&gt;
+&lt;p&gt;the summer’s flower is to render thee.&lt;br /&gt;
+what merit do i not to be invited&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;markovify-sonnet-4&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Markovify Sonnet 4:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;markovify_sonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;o, no! it is a man right fair,&lt;br /&gt;
+by seeing farther than my barren rhyme?&lt;br /&gt;
+even that your love taught it this alchemy,&lt;br /&gt;
+theirs for their habitation chose out thee,&lt;/p&gt;
+&lt;p&gt;just to the edge of doom.&lt;br /&gt;
+full many a holy and obsequious tear&lt;br /&gt;
+two loves i have frequent been with unknown minds,&lt;br /&gt;
+how have mine eyes be blessed made&lt;/p&gt;
+&lt;p&gt;speak of that which still doth grow?&lt;br /&gt;
+kind is my love’s breath? the purple pride&lt;br /&gt;
+him in thy steel bosom’s ward,&lt;br /&gt;
+even so, being full of blame,&lt;/p&gt;
+&lt;p&gt;speak of the dead, which now appear&lt;br /&gt;
+will be true despite thy scythe and crooked knife.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;markovify-sonnet-5&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Markovify Sonnet 5:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;markovify_sonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;never believe though in thy creation did decree&lt;br /&gt;
+make but my five senses can&lt;br /&gt;
+but all alone beweep my outcast state,&lt;br /&gt;
+alack! what poverty my muse want subject to invent,&lt;/p&gt;
+&lt;p&gt;but wherefore do not do the thing they see;&lt;br /&gt;
+lo! in the number let me be borne alone.&lt;br /&gt;
+steal from his low tract, and look strange;&lt;br /&gt;
+so, either by thy beauty being mute,&lt;/p&gt;
+&lt;p&gt;betwixt mine eye loves it and doth first begin.&lt;br /&gt;
+whence hast thou this becoming of their excellence.&lt;br /&gt;
+dost thou to mine own worth do define,&lt;br /&gt;
+wretched in this line some interest,&lt;/p&gt;
+&lt;p&gt;yet, do thy worst to steal thyself away,&lt;br /&gt;
+although thou steal thy sweet self prove.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://media.giphy.com/media/JPW7lVDXKJgXu/giphy.gif&#34; width=&#34;75%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Well, call me Shockedspeare.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Exit, pursued by a bear&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>External Project</title>
+      <link>/project/external-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>/project/external-project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Internal Project</title>
+      <link>/project/internal-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>/project/internal-project/</guid>
+      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>An example journal article</title>
+      <link>/publication/journal-article/</link>
+      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
+      <guid>/publication/journal-article/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>An example conference paper</title>
+      <link>/publication/conference-paper/</link>
+      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
+      <guid>/publication/conference-paper/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

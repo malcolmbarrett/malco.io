@@ -1,0 +1,48 @@
+---
+title: ggdag 0.1.0
+author: Malcolm Barrett
+date: '2018-03-28'
+categories:
+  - r
+  - dataviz
+  - releases
+  - causalinference
+tags:
+  - ggdag
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2018-03-28'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: 
+  - ggdag
+---
+
+I'm pleased to announce the release of `ggdag` 0.1.0 on CRAN! `ggdag` uses the powerful `dagitty` package to create and analyze structural causal models and plot them using `ggplot2` and `ggraph` in a tidy, consistent, and easy manner. You can use `dagitty` objects directly in `ggdag`, but `ggdag` also includes wrappers to make DAGs using a more R-like syntax:
+
+```{r warning=FALSE, message=FALSE}
+# install.packages("ggdag")
+library(ggdag)
+
+dag <- dagify(y ~ x + z,
+       x ~ z) %>% 
+  tidy_dagitty()
+
+dag
+
+ggdag(dag)
+```
+
+You can learn more about it on the [ggdag website](https://ggdag.netlify.com/), a `pkgdown` site that includes rendered documentation and the following vignettes:
+
+- [An Introduction to ggdag](https://ggdag.netlify.com/articles/intro-to-ggdag.html)
+- [An Introduction to Directed Acyclic Graphs](https://ggdag.netlify.com/articles/intro-to-dags.html)
+- [Common Structures of Bias](https://ggdag.netlify.com/articles/bias-structures.html)
+
+Give it a try, and please file an bugs or suggestions to the [GitHub repo](https://github.com/malcolmbarrett/ggdag).
+
+I also want to thank a few of my fellow USC PhDs, David Bogumil, Ugonna Ihenacho, and Zhi Yang, for helping me polish the articles and offering helpful suggestions on some of the aesthetic details of `ggdag`. Thanks, y'all!

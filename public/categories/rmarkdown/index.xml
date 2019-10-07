@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rmarkdown | Malcolm Barrett</title>
+    <link>/categories/rmarkdown/</link>
+      <atom:link href="/categories/rmarkdown/index.xml" rel="self" type="application/rss+xml" />
+    <description>rmarkdown</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019 Malcolm Barrett</copyright><lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>rmarkdown</title>
+      <link>/categories/rmarkdown/</link>
+    </image>
+    
+    <item>
+      <title>Introducing ymlthis: a toolkit for working with YAML</title>
+      <link>/2019/10/06/introducing-ymlthis/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/2019/10/06/introducing-ymlthis/</guid>
+      <description>
+
+
+&lt;p&gt;I’m pleased to announce that &lt;a href=&#34;http://ymlthis.r-lib.org&#34;&gt;ymlthis 0.1.0&lt;/a&gt; is now on CRAN! ymlthis is a toolkit to reduce the pain of working with YAML. The two most common issues when working with YAML are getting the syntax right, particularly the white space, and understanding what options you can specify. ymlthis solves these problems by building and documenting YAML from R. ymlthis supports many other R Markdown packages, such as blogdown, bookdown, and pkgdown, and also offers new ways of working with R Markdown and YAML files.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# install from CRAN
+install.packages(&amp;quot;ymlthis&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;write-yaml&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Write YAML&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;yml()&lt;/code&gt; is the basic building-block of ymlthis; by default, it adds your name and R code to write the date programatically.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ymlthis)
+yml()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;yaml&#34;&gt;&lt;code&gt;---
+author: Malcolm Barrett
+date: &amp;#39;`r format(Sys.Date())`&amp;#39;
+---&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;ymlthis uses the pipe syntax to add more elements to the underlying YAML.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;yml() %&amp;gt;% 
+  yml_output(bookdown::html_document2(toc = TRUE)) %&amp;gt;% 
+  yml_title(&amp;quot;Introducing ymlthis&amp;quot;) %&amp;gt;% 
+  yml_category(c(&amp;quot;r&amp;quot;, &amp;quot;rmarkdown&amp;quot;, &amp;quot;yaml&amp;quot;)) %&amp;gt;% 
+  yml_citations(
+    bibliography = &amp;quot;references.bib&amp;quot;, # file with citations
+    csl = &amp;quot;aje.csl&amp;quot; # file with citation styles
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;yaml&#34;&gt;&lt;code&gt;---
+author: Malcolm Barrett
+date: &amp;#39;`r format(Sys.Date())`&amp;#39;
+output:
+  bookdown::html_document2:
+    toc: true
+title: Introducing ymlthis
+category:
+- r
+- rmarkdown
+- yaml
+bibliography: references.bib
+csl: aje.csl
+---&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;write-r-markdown-and-yaml-files&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Write R Markdown and YAML files&lt;/h1&gt;
+&lt;p&gt;ymlthis prints cleanly to the console, so you can easily copy and paste it into your R Markdown document (or use &lt;code&gt;use_yml()&lt;/code&gt; to programatically place it on your clipboard). However, this might not fit the needs of your workflow. &lt;code&gt;use_rmarkdown()&lt;/code&gt; and friends take &lt;code&gt;yml&lt;/code&gt; objects and write them to R Markdown files.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;use_rmarkdown(path = &amp;quot;myreport.Rmd&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## ✔ Writing &amp;#39;/var/folders/03/9x7925g54mncswxx06wpkxl00000gn/T/RtmpWdgusY/filed546cbbee51/myreport.Rmd&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Read the &lt;a href=&#34;http://ymlthis.r-lib.org/articles/introduction-to-ymlthis.html&#34;&gt;vignette introducing ymlthis&lt;/a&gt; for more on working with R Markdown and YAML files, as well as for using ymlthis to create R Markdown templates.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;learn-more-about-yaml-and-yaml-options&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Learn more about YAML and YAML options&lt;/h1&gt;
+&lt;p&gt;Because these YAML fields are expressed as R function arguments, they are explicitly documented in &lt;code&gt;yml_*()&lt;/code&gt; functions. For instance, if you want to know the LaTeX options you can set while knitting to a PDF file, you can look at the help page for &lt;code&gt;?yml_latex_opts()&lt;/code&gt;. If you’re not quite sure where to look, all of the YAML fields documented in ymlthis are compiled in a single place in the &lt;a href=&#34;http://ymlthis.r-lib.org/articles/yaml-fieldguide.html&#34;&gt;YAML Fieldguide&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ymlthis also has a &lt;a href=&#34;http://ymlthis.r-lib.org/articles/yaml-overview.html&#34;&gt;vignette introducing YAML in general&lt;/a&gt;, if you’d like to learn more about using it directly.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;where-do-i-learn-more-about-ymlthis&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Where do I learn more about ymlthis?&lt;/h1&gt;
+&lt;p&gt;Learn more about ymlthis on the &lt;a href=&#34;http://ymlthis.r-lib.org&#34;&gt;package website&lt;/a&gt;. There you’ll find articles on &lt;a href=&#34;http://ymlthis.r-lib.org/articles/introduction-to-ymlthis.html&#34;&gt;with a detailed introduction to ymlthis&lt;/a&gt;, &lt;a href=&#34;http://ymlthis.r-lib.org/articles/yaml-overview.html&#34;&gt;introducing YAML&lt;/a&gt;, and &lt;a href=&#34;http://ymlthis.r-lib.org/articles/yaml-fieldguide.html&#34;&gt;the YAML Fieldguide&lt;/a&gt;, which documents in one place all the YAML fields contained in ymlthis.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Why should I use the here package when I&#39;m already using projects?</title>
+      <link>/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/</link>
+      <pubDate>Mon, 05 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>/2018/11/05/why-should-i-use-the-here-package-when-i-m-already-using-projects/</guid>
+      <description>
+
+
+&lt;div id=&#34;tldr-why-should-i-use-here&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;TL;DR: Why should I use &lt;code&gt;here&lt;/code&gt;?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;here&lt;/code&gt; package makes it easier to use sub-directories within projects&lt;/li&gt;
+&lt;li&gt;It’s robust to other ways people open and run your code&lt;/li&gt;
+&lt;li&gt;Like its base R cousin, &lt;code&gt;file.path()&lt;/code&gt;, it writes paths safely across operating systems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Like a lot of people, when I learned R, I was taught to put &lt;code&gt;setwd()&lt;/code&gt; and &lt;code&gt;rm(list = ls())&lt;/code&gt; at the beginning of scripts. Getting rid of any leftovers in the environment and setting the working directory so I can use relative paths made sense to me. It seemed like good practice! But &lt;code&gt;setwd()&lt;/code&gt; and &lt;code&gt;rm(list = ls())&lt;/code&gt; are problematic. &lt;code&gt;rm()&lt;/code&gt; doesn’t actually give you a clean R session; it doesn’t, for instance, detach packages. &lt;code&gt;setwd()&lt;/code&gt;, meanwhile, is completely dependent on the way you organize your files. If you set a working directory that is an absolute path on your computer, it will only run for someone else if they rewrite the absolute path to where it is on &lt;em&gt;their&lt;/em&gt; computer.&lt;/p&gt;
+&lt;p&gt;Last year, Jenny Bryan shared some slides from a talk on this subject. I’ll let them speak for themselves:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;If the first line of your R script is&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;setwd(&amp;quot;C:\Users\jenny\path\that\only\I\have&amp;quot;)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I will come into your office and SET YOUR COMPUTER ON FIRE&lt;/em&gt; 🔥.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;If the first line of your R script is&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rm(list = ls())&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I will come into your office and SET YOUR COMPUTER ON FIRE&lt;/em&gt; 🔥.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If you haven’t read &lt;a href=&#34;https://www.tidyverse.org/articles/2017/12/workflow-vs-script/&#34;&gt;her write-up on what the issues and solutions are&lt;/a&gt;, you should. Here’s the basic idea:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use Rstudio projects. They set up a local working directory in a fresh R session, which makes it much easier for someone else to open&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;here()&lt;/code&gt; from the &lt;code&gt;here&lt;/code&gt; package to write file paths&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=etkSsF6r2iU&#34;&gt;Setting up a project is easy&lt;/a&gt;&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. Projects can handle both of the problems &lt;code&gt;setwd()&lt;/code&gt; and &lt;code&gt;rm(list = ls())&lt;/code&gt; are trying to solve for you. You can &lt;a href=&#34;https://community.rstudio.com/t/first-line-of-every-r-script/799/11&#34;&gt;set it so you have a fresh R session when opening a project&lt;/a&gt; (either locally in the project or globally in Rstudio). Additionally, when you’re in a project, you don’t need to set your working directory. The working directory is just wherever the project is.&lt;/p&gt;
+&lt;p&gt;So, it may not be obvious: what’s the benefit of using the &lt;code&gt;here&lt;/code&gt; package if projects solve both those problems?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://media.giphy.com/media/YByMQsx1NrmPKLuYqF/giphy.gif&#34; width=&#34;75%&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;whats-under-here&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What’s under here?&lt;/h1&gt;
+&lt;p&gt;It may seem like &lt;code&gt;here&lt;/code&gt; is just pasting paths together for you, but let’s look at what it’s actually doing. The &lt;code&gt;here&lt;/code&gt; package is essentially a wrapper for the &lt;code&gt;rprojroot&lt;/code&gt; package. &lt;code&gt;rprojroot&lt;/code&gt; is a powerful tool for working with project directories, but &lt;code&gt;here&lt;/code&gt; offers a simpler set of functions that take care of its main purpose: detecting the root directory and working with paths within it in a platform-independent way.&lt;/p&gt;
+&lt;p&gt;If you use &lt;code&gt;here()&lt;/code&gt;, it will tell you your project root directory, which will look something like this.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(here)
+here()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## here() starts at /Users/malcolmbarrett/folders/to/directory/
+## [1] &amp;quot;/Users/malcolmbarrett/folders/to/directory/&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Essentially, &lt;code&gt;here()&lt;/code&gt; is looking around for a few things that signify a root directory, like a &lt;code&gt;.Rproj&lt;/code&gt; project file. &lt;code&gt;here&lt;/code&gt; also has a function, &lt;code&gt;set_here()&lt;/code&gt;, that will tag a directory as root using a &lt;code&gt;.here&lt;/code&gt; file, even if it’s not a project. In fact, &lt;code&gt;.here&lt;/code&gt; files take priority, then &lt;code&gt;.Rproj&lt;/code&gt; files, followed by several other file formats (see the documentation at &lt;code&gt;?here&lt;/code&gt;). The last resort is the working directory. If you’re not sure why &lt;code&gt;here&lt;/code&gt; is picking a root directory, you can ask it to explain itself using &lt;code&gt;dr_here()&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dr_here()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## here() starts at /Users/malcolmbarrett/folders/to/directory/, because it contains a file matching `[.]Rproj$` with contents matching `^Version: ` in the first line&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;here()&lt;/code&gt; also works a lot like &lt;code&gt;file.path()&lt;/code&gt; in that it will create a platform-independent path for you (e.g. it will work on Windows and Mac alike). On my Mac, it looks something like this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;here(&amp;quot;figure&amp;quot;, &amp;quot;figure.png&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## [1] &amp;quot;/Users/malcolmbarrett/folders/to/directory/figure/figure.png&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;i-have-a-project.-why-not-just-use-relative-paths&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;I have a project. Why not just use relative paths?&lt;/h2&gt;
+&lt;p&gt;I already touched on one reason to avoid writing paths yourself: the rules aren’t necessarily the same between operating systems. You could, of course, use &lt;code&gt;file.path()&lt;/code&gt; from base R, which safely creates a relative path for you.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;file.path(&amp;quot;figure&amp;quot;, &amp;quot;figure.png&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## [1] &amp;quot;figure/figure.png&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But &lt;code&gt;here&lt;/code&gt; has some added benefits: it makes it easier to manage sub-directories, and it makes your code more robust outside of projects. &lt;a href=&#34;https://github.com/malcolmbarrett/here_here&#34;&gt;As an example, I’ve set up an R project on my GitHub&lt;/a&gt; that has a file directory like this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;here_here
+|--data
+    |--mtcars.csv
+|--figs
+    |--mpg_hp.png
+|--rmd
+    |--01_read_data.Rmd
+    |--01_read_data.pdf
+|--scripts
+    |--read_data.R
+|--here_here.Rproj&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In &lt;code&gt;rmd/01_read_data.Rmd&lt;/code&gt;, I try to call the data using a relative path from the root directory, but Rmarkdown sets a local working directory, so it fails:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+read_csv(&amp;quot;data/mtcars.csv&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Error: &amp;#39;data/mtcars.csv&amp;#39; does not exist in current working directory&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I can solve this with some of the usual wonky backtracking, e.g. &lt;code&gt;../data/mtcars.csv&lt;/code&gt;, but &lt;code&gt;here()&lt;/code&gt; will take care if it for me by finding the project directory:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;read_csv(here(&amp;quot;data&amp;quot;, &amp;quot;mtcars.csv&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 32 x 11
+##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+##  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+##  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+##  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+##  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+##  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+##  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+##  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+## # … with 22 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It works with no trouble. Likewise, saving output to other sub-directories is no issue:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(mtcars, aes(mpg, hp)) + geom_point()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-11-05-why-should-i-use-the-here-package-when-i-m-already-using-projects/index_files/figure-html/makee_ggplot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(here(&amp;quot;figs&amp;quot;, &amp;quot;mpg_hp.png&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which puts it in the &lt;code&gt;figs&lt;/code&gt; folder despite being called from the &lt;code&gt;rmd&lt;/code&gt; folder.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;|--figs
+    |--mpg_hp.png&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is nice, as well, because if I move a file, I don’t need to change the relative directory: it works from the root up.&lt;/p&gt;
+&lt;p&gt;Another benefit is that, if I open any of these files outside of an Rstudio project, they will still run. For Rmarkdown files, using a relative path may be fine because it sets a local working directory when running, but &lt;code&gt;.R&lt;/code&gt; files don’t. If you open &lt;code&gt;scripts/read_data.R&lt;/code&gt; in a different Rstudio session, for instance, the relative path fails, but &lt;code&gt;here()&lt;/code&gt; still works fine. That’s because it knows where the right directory is based on the &lt;code&gt;.Rproj&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://malco.io/img/outside_project.gif&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Likewise, if you or someone else sets a working directory within your project, &lt;code&gt;here&lt;/code&gt; will still work correctly because project directories take precedence. If you need to manually change it for some reason, it’s better in this case to use &lt;code&gt;set_here()&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;more-than-a-path-paster&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;More than a path paster&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;here&lt;/code&gt; is one of the many tools in our toolkit for addressing reproducibility. Because it’s designed to work with Rstudio projects, it’s a natural tool to use within them. &lt;code&gt;here&lt;/code&gt; is also robust to other ways people run your code. If that doesn’t convince you, you can at least sleep soundly knowing that your computer will live another day.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://media.giphy.com/media/XQt3RY9g48OwU/giphy.gif&#34; width=&#34;75%&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;And if you’re on a Mac, you can also combine it with Alfred. &lt;a href=&#34;https://www.youtube.com/watch?v=boKFxBniUH0&#34;&gt;Check out Hadley’s workflow with projects and Alfred here&lt;/a&gt;.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>epidemiology | Malcolm Barrett</title>
+    <link>/tags/epidemiology/</link>
+      <atom:link href="/tags/epidemiology/index.xml" rel="self" type="application/rss+xml" />
+    <description>epidemiology</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019 Malcolm Barrett</copyright><lastBuildDate>Sat, 04 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>epidemiology</title>
+      <link>/tags/epidemiology/</link>
+    </image>
+    
+    <item>
+      <title>When interaction is not interaction: confounding and measurement error</title>
+      <link>/2018/08/04/when-interaction-is-not-interaction-confounding-and-measurement-error/</link>
+      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
+      <guid>/2018/08/04/when-interaction-is-not-interaction-confounding-and-measurement-error/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;Last week, I presented &lt;a href=&#34;https://ggdag.netlify.com&#34;&gt;ggdag&lt;/a&gt; at JSM in Vancouver. As you can imagine, I had a lot of conversations with people about DAGs, confounding, colliders, and all the types of bias that can arise in research. One strange type of bias came up a couple of times that I don’t see discussed very often: measuring either the effect you are studying (&lt;code&gt;x&lt;/code&gt;) or a variable along a confounding pathway (&lt;code&gt;z&lt;/code&gt;) incorrectly can make it appear as if there is an interaction between &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;z&lt;/code&gt;, even if there isn’t one.&lt;/p&gt;
+&lt;p&gt;Let’s consider a simple example: there’s an association between &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt;, which is what we’re interested in, and this association is confounded by &lt;code&gt;z&lt;/code&gt;. This is a classic example of confounding.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(broom)
+library(tidyverse)
+library(kableExtra) # to add headers on kable() tables
+library(knitr)
+library(ggdag)
+library(patchwork) # to combine the plots
+options(knitr.kable.NA = &amp;quot;--&amp;quot;) # don&amp;#39;t show NA values in kable()
+
+set.seed(293951)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;confounder_triangle(x_y_associated = TRUE) %&amp;gt;% 
+  ggdag() +
+  theme_dag()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/dag1-1.png&#34; width=&#34;384&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Let’s simulate some data. &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; are both continuous, and &lt;code&gt;z&lt;/code&gt; is binary (0 or 1, with only about 10% of the population with &lt;code&gt;z=1&lt;/code&gt;). We’ll simulate 10,000 participants so random error is not a big issue.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;z &amp;lt;- sample(0:1, 10000, replace = TRUE, prob = c(.9, .1))
+x &amp;lt;- rnorm(10000) + 2*z
+y &amp;lt;- 1 + 2*x + 1.5*z + rnorm(10000)
+
+df &amp;lt;- data_frame(y, x, z)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: `data_frame()` is deprecated, use `tibble()`.
+## This warning is displayed once per session.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 10,000 x 3
+##          y       x     z
+##      &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;
+##  1 -0.494  -0.463      0
+##  2 -0.649   0.0242     0
+##  3  2.50   -0.146      0
+##  4  1.36    0.0434     1
+##  5  3.41    1.00       0
+##  6 -2.17   -1.94       0
+##  7  0.989   0.209      0
+##  8  0.0667 -0.831      0
+##  9  1.98    0.0196     0
+## 10  1.45    0.0405     0
+## # … with 9,990 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We’ll consider what happens when we mismeasure &lt;code&gt;x&lt;/code&gt; or &lt;code&gt;z&lt;/code&gt;. For each scenario, we’ll compare models with and without an interaction term (&lt;code&gt;x*z&lt;/code&gt;). To fit, tidy, and compare the models, let’s write a few functions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;tidy_lm()&lt;/code&gt; tidies the regression models and formats the numbers a little&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;models_kable()&lt;/code&gt; joins two tables and renders them with &lt;code&gt;kable()&lt;/code&gt; using the &lt;code&gt;kableExtra&lt;/code&gt; package to add a couple of headers&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;compare_models()&lt;/code&gt; combines these two functions and accepts the variables we want to change as arguments so we don’t need to rewrite formulas every time&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;plot_models()&lt;/code&gt; plots the relationship between &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; by levels of &lt;code&gt;z&lt;/code&gt; with hex bins (for the distribution) and regression lines (to assess interaction), combining them with the &lt;code&gt;patchwork&lt;/code&gt; and &lt;code&gt;cowplot&lt;/code&gt; packages (plus a little tidy eval magic!)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tidy_lm &amp;lt;- function(model) {
+  model %&amp;gt;% 
+    tidy() %&amp;gt;% 
+    mutate(p.value = ifelse(p.value &amp;lt; .001, &amp;quot;&amp;lt;.001&amp;quot;, round(p.value, 3))) %&amp;gt;% 
+    mutate_if(is.numeric, round, 2)
+}
+
+models_kable &amp;lt;- function(no_int, int, ...) {
+  no_int &amp;lt;- select(no_int, term, estimate, p.value)
+  int &amp;lt;- select(int, term, estimate, p.value)
+  full_join(no_int, int, by = &amp;quot;term&amp;quot;) %&amp;gt;% 
+    mutate(term = c(&amp;quot;(Intercept)&amp;quot;, &amp;quot;x&amp;quot;, &amp;quot;z&amp;quot;, &amp;quot;x * z&amp;quot;)) %&amp;gt;% 
+    kable(col.names = c(&amp;quot;Term&amp;quot;, rep(c(&amp;quot;Estimate&amp;quot;, &amp;quot;P-Value&amp;quot;), 2)), ...) %&amp;gt;%
+    add_header_above(c(&amp;quot; &amp;quot;, &amp;quot;No Interaction&amp;quot; = 2, &amp;quot;Interaction&amp;quot; = 2))
+}
+
+compare_models &amp;lt;- function(exposure = &amp;quot;x&amp;quot;, confounder = &amp;quot;z&amp;quot;, ...) {
+  fmla &amp;lt;- as.formula(paste(&amp;quot;y ~ &amp;quot;, exposure, &amp;quot; + &amp;quot;, confounder)) # create a formula
+  no_int &amp;lt;- lm(fmla, data = df) %&amp;gt;% 
+    tidy_lm()
+  
+  fmla_int &amp;lt;-   fmla &amp;lt;- as.formula(paste(&amp;quot;y ~ &amp;quot;, exposure, &amp;quot; * &amp;quot;, confounder))
+  int &amp;lt;- lm(fmla_int, data = df) %&amp;gt;% 
+    tidy_lm()
+  
+  models_kable(no_int, int, ...)
+}
+
+plot_models &amp;lt;- function(x = x,
+                        z = z,
+                        x_label = &amp;quot;x (Measured well)&amp;quot;, 
+                        z_label = &amp;quot;Confounder (Measured well)&amp;quot;,
+                        crude = FALSE) {
+  x &amp;lt;- rlang::enquo(x)
+  z &amp;lt;- rlang::enquo(z)
+  
+  p1 &amp;lt;- df %&amp;gt;% 
+    ggplot(aes(x = !!x, y = y, col = factor(!!z))) +
+      geom_hex(aes(fill = factor(z)), col = &amp;quot;white&amp;quot;, alpha = .7) +
+      scale_color_manual(name = z_label, values = c(&amp;quot;#56B4E9&amp;quot;, &amp;quot;#EFA722&amp;quot;, &amp;quot;#E36A25&amp;quot;)) + 
+      scale_fill_manual(name = z_label, values = c(&amp;quot;#56B4E9&amp;quot;, &amp;quot;#EFA722&amp;quot;, &amp;quot;#E36A25&amp;quot;)) + 
+      theme_minimal(base_size = 14) +
+      theme(legend.position = &amp;quot;bottom&amp;quot;,
+            axis.title.x = element_blank()) +
+      labs(y = &amp;quot;y (Measured well)&amp;quot;) + 
+      ylim(c(-10, 16))
+  
+  legend &amp;lt;- cowplot::get_legend(p1)
+  
+  p1a &amp;lt;- p1 + theme(legend.position = &amp;quot;none&amp;quot;)
+  
+  p2 &amp;lt;- df %&amp;gt;% 
+    ggplot(aes(x = !!x, y = y, col = factor(!!z))) +
+      geom_hex(fill = &amp;quot;grey92&amp;quot;, col = &amp;quot;white&amp;quot;, alpha = .8) +
+      geom_smooth(method = &amp;quot;lm&amp;quot;, se = FALSE, size = 1) + 
+      scale_color_manual(name = z_label, values = c(&amp;quot;#56B4E9&amp;quot;, &amp;quot;#EFA722&amp;quot;, &amp;quot;#E36A25&amp;quot;)) + 
+      theme_minimal(base_size = 14) +
+      theme(legend.position = &amp;quot;none&amp;quot;,
+              axis.title = element_blank()) +
+      ylim(c(-10, 16))
+  
+  if (crude) {
+    p2 &amp;lt;- p2 + 
+            geom_smooth(aes(group = 1, col = &amp;quot;Crude Estimate&amp;quot;), 
+                                    method = &amp;quot;lm&amp;quot;, se = FALSE, size = 1) +
+            theme(legend.position = &amp;quot;bottom&amp;quot;)
+    legend &amp;lt;- cowplot::get_legend(p2)
+    p2 &amp;lt;- p2 + theme(legend.position = &amp;quot;none&amp;quot;)
+    }
+  
+  patchworked &amp;lt;- p1a + p2
+  pl1 &amp;lt;- cowplot::plot_grid(patchworked, align = &amp;quot;h&amp;quot;)
+  pl2 &amp;lt;- cowplot::add_sub(pl1, x_label, 
+                          vpadding = grid::unit(0,&amp;quot;lines&amp;quot;), 
+                          y = 4.5, x = .5, vjust = 4.5)
+  pl3 &amp;lt;- cowplot::plot_grid(NULL, legend, NULL, nrow = 1)
+  cowplot::plot_grid(pl2, pl3, ncol = 1, rel_heights = c(1.5, .2))
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If all three variables are measured well, there’s no problem. The effect estimates are about right, and there’s no false interaction. For the plot, notice how 1) the crude estimate (which ignores &lt;code&gt;z&lt;/code&gt;) is an mix of the other two lines and 2) the slopes of the lines for &lt;code&gt;z=0&lt;/code&gt; and &lt;code&gt;z=1&lt;/code&gt; are parallel.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;compare_models()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;1&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+No Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Term
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+(Intercept)
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.99
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.99
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.46
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.47
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x * z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0.912
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_models(crude = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.
+
+## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.
+
+## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/correct_model-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;measurement-error-for-the-outcome-x&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Measurement error for the outcome (&lt;code&gt;x&lt;/code&gt;)&lt;/h2&gt;
+&lt;p&gt;Let’s say that, in practice, we are measuring &lt;code&gt;x&lt;/code&gt; incorrectly (measurement error). The only device around to measure &lt;code&gt;x&lt;/code&gt; is an old 1980 version of the measureator, which by complete coincidence is the same year Sander Greenland &lt;a href=&#34;https://academic.oup.com/aje/article-abstract/112/4/564/59323?redirectedFrom=fulltext&#34;&gt;first talked about this issue&lt;/a&gt;. The 1980 version of this device has a problem: it measures &lt;code&gt;x&lt;/code&gt; better in people who have values of &lt;code&gt;y&lt;/code&gt; above 0 than those below 0. The 2018 version of the device still measures &lt;code&gt;x&lt;/code&gt; with error, but the manufacturer fixed the problem with &lt;code&gt;y&lt;/code&gt;, and now it has nothing to do with that.&lt;/p&gt;
+&lt;div id=&#34;mismeasured-x-dependent-on-y&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Mismeasured &lt;code&gt;x&lt;/code&gt;, dependent on &lt;code&gt;y&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;When we use &lt;code&gt;x_1980&lt;/code&gt; as a proxy for &lt;code&gt;x&lt;/code&gt;, there now appears to be an interaction with &lt;code&gt;z&lt;/code&gt;. It’s present in both the model estimates and the plot. The slopes are no longer parallel. The effect of &lt;code&gt;x&lt;/code&gt; on &lt;code&gt;y&lt;/code&gt; seems like it’s heterogeneous for levels of &lt;code&gt;z&lt;/code&gt;: for people with &lt;code&gt;z=1&lt;/code&gt;, the effect of &lt;code&gt;x&lt;/code&gt; on &lt;code&gt;y&lt;/code&gt; is stronger.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;measureator2018 &amp;lt;- function(x) x + rnorm(10000)
+measureator1980 &amp;lt;- function(x) ifelse(y &amp;gt; 2, x + rnorm(10000, sd = 1.5), ifelse(y &amp;gt; 0, x + rnorm(10000, sd = 2), x + rnorm(10000, sd = 3)))
+
+df &amp;lt;- df %&amp;gt;% 
+  mutate(
+    x_2018 = measureator2018(x),
+    x_1980 = measureator1980(x)
+  )
+
+compare_models(&amp;quot;x_1980&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;1&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+No Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Term
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+(Intercept)
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.98
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.98
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.80
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.28
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x * z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.29
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_models(x = x_1980, x_label = &amp;quot;Mismeasured x (1980 device)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.
+
+## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/x_1980-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;What’s going on here? The plot helps demonstrate the distortion in x (it’s much less stable when &lt;code&gt;y&lt;/code&gt; is below 0 and most people with &lt;code&gt;z=1&lt;/code&gt; are above 0). We can put this together in a DAG. In the case of the 1980 device, we have differential measurement error, so called because the degree of mismeasurement is affected by &lt;code&gt;y&lt;/code&gt;. We want to estimate the effect of &lt;code&gt;x&lt;/code&gt;, but what we really have is an approximation, &lt;code&gt;x_m&lt;/code&gt;, dependent on both &lt;code&gt;error&lt;/code&gt; (the amount of mismeasurement) and &lt;code&gt;x&lt;/code&gt;. &lt;code&gt;error&lt;/code&gt; is dependent on &lt;code&gt;y&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dme &amp;lt;- dagify(y ~ x + z, 
+       x ~ z, 
+       x_m ~ x + error,
+       error ~ y) 
+
+ggdag(dme) +
+  theme_dag()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/dag2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Because two arrows are leading into it, &lt;code&gt;x_m&lt;/code&gt; is a &lt;a href=&#34;https://ggdag.netlify.com/articles/intro-to-dags.html#colliders-and-collider-stratification-bias&#34;&gt;collider&lt;/a&gt;. Including a collider in the regression model will induce an association between its parents, creating bias. Collider bias can also travel upstream (see the previous link), here affecting &lt;code&gt;z&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt;, as well. Look at the web of associations it creates!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggdag_adjust(dme, c(&amp;quot;x_m&amp;quot;, &amp;quot;z&amp;quot;)) +
+  theme_dag() +
+    scale_color_manual(values = c(&amp;quot;#2C7FBF&amp;quot;, &amp;quot;#E69F00&amp;quot;)) + 
+    ggraph::scale_edge_color_manual(values = c(&amp;quot;#E7E7E7&amp;quot;, &amp;quot;#E69F00&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/dag3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mismeasured-x-independent-of-y&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Mismeasured &lt;code&gt;x&lt;/code&gt;, independent of &lt;code&gt;y&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Things are a little different if we use the 2018 device, which measures &lt;code&gt;x&lt;/code&gt; incorrectly but has nothing to do with &lt;code&gt;y&lt;/code&gt;. In this case, there’s no apparent interaction.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;compare_models(&amp;quot;x_2018&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;1&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+No Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Term
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+(Intercept)
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.97
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.97
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.99
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.99
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.48
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.40
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x * z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.04
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0.27
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_models(x = x_2018, x_label = &amp;quot;Mismeasured x (1980 device)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.
+
+## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/x_2018-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This is a case of non-differential measurement error; the error is not dependent on the outcome, &lt;code&gt;y&lt;/code&gt;. &lt;code&gt;x_m&lt;/code&gt; is still a collider but it ends up being less important. Instead, the model underestimate the effect of &lt;code&gt;x&lt;/code&gt; on &lt;code&gt;y&lt;/code&gt; (otherwise known as bias towards the null, which is what happens under most cases of non-differential error) and attributes too much of the effect on &lt;code&gt;y&lt;/code&gt; to &lt;code&gt;z&lt;/code&gt; (&lt;code&gt;x&lt;/code&gt; is a mediator of &lt;code&gt;z&lt;/code&gt;’s impact on &lt;code&gt;y&lt;/code&gt;).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ndme &amp;lt;- dagify(y ~ x + z, 
+       x ~ z, 
+       x_m ~ x + error) 
+
+ggdag(ndme) +
+  theme_dag()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/dag4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;measurement-error-for-covariates-z&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Measurement error for covariates (&lt;code&gt;z&lt;/code&gt;)&lt;/h2&gt;
+&lt;p&gt;What about if we measure &lt;code&gt;x&lt;/code&gt; well but mismeasure the confounder, &lt;code&gt;z&lt;/code&gt;? Let’s say we have a similar situation: one device that occasionally misclassifies &lt;code&gt;z&lt;/code&gt; but isn’t effected by &lt;code&gt;y&lt;/code&gt; and another, broken device that measures &lt;code&gt;z&lt;/code&gt; in people who have higher values of &lt;code&gt;y&lt;/code&gt; better.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;swap &amp;lt;- function(x) ifelse(x == 1, 0, 1)
+
+z_ometer &amp;lt;- function(z) {
+  mismeasured &amp;lt;- sample(c(TRUE, FALSE), size = 10000, replace = TRUE, prob = c(.3, .7))
+  ifelse(mismeasured, swap(z), z)
+}
+
+z_ometer_broken &amp;lt;- function(z) {
+  mismeasured &amp;lt;- ifelse(
+    df$y &amp;gt; 0,
+    sample(c(TRUE, FALSE), size = 10000, replace = TRUE, prob = c(.5, .5)),
+    sample(c(TRUE, FALSE), size = 10000, replace = TRUE, prob = c(.1, .9))
+  )
+  ifelse(mismeasured, swap(z), z)
+}
+
+df &amp;lt;- df %&amp;gt;% 
+  mutate(
+    z_results = z_ometer(z),
+    z_results_broken = z_ometer_broken(z)
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The DAGs for &lt;code&gt;z_m&lt;/code&gt; look pretty similar to &lt;code&gt;x_m&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ndme_z &amp;lt;- dagify(y ~ x + z, 
+       x ~ z, 
+       z_m ~ z + error) 
+
+dme_z &amp;lt;- dagify(y ~ x + z, 
+       x ~ z, 
+       z_m ~ z + error,
+       error ~ y) 
+
+dag1 &amp;lt;- ggdag(ndme_z) +
+  theme_dag() +
+  ggtitle(&amp;quot;Wrongly measure z, independent of y&amp;quot;)
+
+dag2 &amp;lt;- ggdag(dme_z) +
+  theme_dag() +
+  ggtitle(&amp;quot;Wrongly measure z, dependent on y&amp;quot;)
+
+dag1 + dag2&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/dag5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;For both devices, there appears to be a little interaction (probably only detectable because of our large sample size). While that’s often the case, the larger issue is that our proxies for &lt;code&gt;z&lt;/code&gt; are no longer blocking the back-door path between &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt;. In other words, there’s residual confounding. In this example, what ends up happening is a little bit of false interaction for both differential and non-differential misclassification of &lt;code&gt;z&lt;/code&gt; and a lot of confounding bias. The estimate for &lt;code&gt;x&lt;/code&gt; is a little bit off (about 10% too high), and &lt;code&gt;z&lt;/code&gt; is much too low (it’s biased towards the null).&lt;/p&gt;
+&lt;div id=&#34;mismeasured-z-dependent-on-y&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Mismeasured &lt;code&gt;z&lt;/code&gt;, dependent on &lt;code&gt;y&lt;/code&gt;&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;compare_models(confounder = &amp;quot;z_results_broken&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;1&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+No Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Term
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+(Intercept)
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.19
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.22
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.23
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.26
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x * z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+-0.08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_models(z = z_results_broken, z_label = &amp;quot;Confounder (Z-ometer, broken)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.
+
+## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/z_results-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mismeasured-z-independent-of-y&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Mismeasured &lt;code&gt;z&lt;/code&gt;, independent of &lt;code&gt;y&lt;/code&gt;&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;compare_models(confounder = &amp;quot;z_results&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;1&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+No Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; &#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Interaction
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Term
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+P-Value
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+(Intercept)
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.03
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.04
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.16
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+x * z
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+–
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.19
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&amp;lt;.001
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_models(z = z_results, z_label = &amp;quot;Confounder (Z-ometer, broken)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.
+
+## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-08-04-when-interaction-is-not-interaction-confounding-and-measurement-error/index_files/figure-html/z_results_broken-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;So, mismeasurement of both &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;z&lt;/code&gt; can cause problems. Under most circumstances, of course, we are mismeasuring more than one variable (including &lt;code&gt;y&lt;/code&gt;!). Moreover, the errors in the way those variables are measured may themselves be dependent. We need to, then, be very mindful of the structures of these bias and, if necessary, try to address them with bias analysis approaches.&lt;/p&gt;
+&lt;p&gt;If you want to learn about more about these methods, you may be interested in this great-looking resource from Maarten van Smeden:&lt;/p&gt;
+&lt;p&gt;{{&amp;lt; tweet 1025990407757422592 &amp;gt;}}&lt;/p&gt;
+&lt;p&gt;Thanks to him for providing it!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

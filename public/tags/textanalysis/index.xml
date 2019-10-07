@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>textanalysis | Malcolm Barrett</title>
+    <link>/tags/textanalysis/</link>
+      <atom:link href="/tags/textanalysis/index.xml" rel="self" type="application/rss+xml" />
+    <description>textanalysis</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019 Malcolm Barrett</copyright><lastBuildDate>Sun, 23 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>textanalysis</title>
+      <link>/tags/textanalysis/</link>
+    </image>
+    
+    <item>
+      <title>#SER2019 In Review</title>
+      <link>/2019/06/23/ser2019-in-review/</link>
+      <pubDate>Sun, 23 Jun 2019 00:00:00 +0000</pubDate>
+      <guid>/2019/06/23/ser2019-in-review/</guid>
+      <description>
+
+
+&lt;p&gt;The annual meeting of the &lt;a href=&#34;https://epiresearch.org&#34;&gt;Society for Epidemiologic Research&lt;/a&gt; (SER) took place June 18-21. The past two years, I’ve collected Twitter data (&lt;a href=&#34;https://github.com/malcolmbarrett/ser_tweets&#34;&gt;2018&lt;/a&gt;, &lt;a href=&#34;https://github.com/malcolmbarrett/ser_conf_2019&#34;&gt;2019&lt;/a&gt;). The data were collected with the excellent &lt;a href=&#34;https://rtweet.info/&#34;&gt;rtweet&lt;/a&gt; package, and the data collection code was based on related code by &lt;a href=&#34;https://mikewk.com/&#34;&gt;Mike Kearney&lt;/a&gt;, the author of rtweet.&lt;/p&gt;
+&lt;div id=&#34;setup&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Setup&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# for everything else :)
+library(tidyverse)
+# for tidy eval
+library(rlang)
+# for labeling tweets in plots
+library(ggrepel)
+# for network graphs
+library(ggraph)
+library(tidygraph)
+# for text analysis
+library(tidytext)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Since the data were collected over several days, I’m going to read the saved data straight from GitHub. You’ll note that there is also some code to turn the tweets into network data (who is tweeting whom); I’ll also read that in.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ser_tweets &amp;lt;- read_rds(url(&amp;quot;https://github.com/malcolmbarrett/ser_conf_2019/blob/master/data/search.rds?raw=true&amp;quot;))
+ser_tweets_2018 &amp;lt;- read_rds(url(&amp;quot;https://github.com/malcolmbarrett/ser_tweets/blob/master/data/search.rds?raw=true&amp;quot;))
+twitter_graph &amp;lt;- readr::read_rds(url(&amp;quot;https://github.com/malcolmbarrett/ser_conf_2019/raw/master/data/twitter_graph.rds&amp;quot;))
+
+# simplify tweet tibble
+ser_tweets &amp;lt;- ser_tweets %&amp;gt;% 
+  select(screen_name, text, created_at, favorite_count, retweet_count, is_retweet, hashtags, media_type)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First, a few functions to help us out: &lt;code&gt;plot_barchat()&lt;/code&gt; to plot horizontal bar charts, &lt;code&gt;plot_tweets()&lt;/code&gt; to make a scatterplot labeled with the tweet text, and &lt;code&gt;plot_screen_names()&lt;/code&gt; to quickly count number of times a screen name appeared and plot the top ten with &lt;code&gt;plot_barchat()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot horizontal bar charts
+plot_barchat &amp;lt;- function(.df, y) {
+  y &amp;lt;- enquo(y)
+  .df %&amp;gt;% 
+    #  put the bars in order of their appearance
+    mutate(!!y := fct_rev(fct_inorder(!!y))) %&amp;gt;% 
+    #  y first because we&amp;#39;re flipping
+    ggplot(aes(y = n, x = !!y)) + 
+    geom_col(color = NA, fill = &amp;quot;#0172B1&amp;quot;) +
+    theme_minimal(14) +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.minor.x = element_blank()
+    ) + 
+    coord_flip()
+}
+
+# plot points labelled with tweet text
+plot_tweets &amp;lt;- function(.df, y) {
+  y &amp;lt;- enquo(y)
+  .df %&amp;gt;% 
+    mutate(text = str_wrap(text, 50)) %&amp;gt;% 
+    ggplot(aes(x = fct_inorder(screen_name), y = !!y)) + 
+    geom_point(color = &amp;quot;#0172B1&amp;quot;, size = 2) +
+    geom_label_repel(
+      aes(label = text), 
+      size = 2.5, 
+      force = 4, 
+      nudge_y = 3, 
+      point.padding = .5
+    ) +
+    theme_minimal(14)
+}
+
+# group by screen name, count, and plot 1st 10
+plot_screen_name &amp;lt;- function(.df) {
+  .df %&amp;gt;% 
+    group_by(screen_name) %&amp;gt;% 
+    summarize(n = n()) %&amp;gt;% 
+    mutate(screen_name = paste0(&amp;quot;@&amp;quot;, screen_name)) %&amp;gt;% 
+    arrange(desc(n)) %&amp;gt;% 
+    top_n(10) %&amp;gt;% 
+    plot_barchat(screen_name) +
+    xlab(element_blank())
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tweets-vs.2018&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Tweets vs. 2018&lt;/h1&gt;
+&lt;p&gt;I noticed this almost immediately: there were &lt;em&gt;many&lt;/em&gt; more tweets this year. Between the 2018 and 2019, there was tremendous growth in the epidemiology Twitter community under the hashtag &lt;a href=&#34;https://twitter.com/search?q=%23epitwitter&amp;amp;src=tyah&#34;&gt;#epitwitter&lt;/a&gt;, and it showed. There were about twice as many original tweets and retweets during the official days of the conference.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;n_2019 &amp;lt;- ser_tweets %&amp;gt;% 
+  filter(between(created_at, as.POSIXct(&amp;quot;2019-06-18&amp;quot;), as.POSIXct(&amp;quot;2019-06-21&amp;quot;))) %&amp;gt;% 
+  group_by(is_retweet) %&amp;gt;% 
+  summarize(n = n()) %&amp;gt;% 
+  mutate(year = &amp;quot;2019&amp;quot;)
+
+n_2018 &amp;lt;- ser_tweets_2018 %&amp;gt;% 
+  filter(between(created_at, as.POSIXct(&amp;quot;2018-06-19&amp;quot;), as.POSIXct(&amp;quot;2018-06-22&amp;quot;))) %&amp;gt;% 
+  group_by(is_retweet) %&amp;gt;% 
+  summarize(n = n()) %&amp;gt;% 
+  mutate(year = &amp;quot;2018&amp;quot;)
+
+label_retweet &amp;lt;- function(x) ifelse(x, &amp;quot;retweet&amp;quot;, &amp;quot;original tweet&amp;quot;)
+
+bind_rows(n_2019, n_2018) %&amp;gt;% 
+  plot_barchat(year) +
+  facet_wrap(~is_retweet, labeller = as_labeller(label_retweet))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;twitter-connections-and-network-centrality&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Twitter connections and network centrality&lt;/h2&gt;
+&lt;p&gt;1,026 users tweeted or retweeted a tweet with the #SER2019 hashtag. Many were single tweets, but there were hundreds of people interacting. From the 2019 repo:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;knitr::include_graphics(&amp;quot;https://raw.githubusercontent.com/malcolmbarrett/ser_conf_2019/master/tweet_network.png&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/malcolmbarrett/ser_conf_2019/master/tweet_network.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;p&gt;A big reason for the growth in #EpiTwitter is the community building that &lt;a href=&#34;https://twitter.com/EpiEllie&#34;&gt;Ellie Murray&lt;/a&gt;, aka &lt;span class=&#34;citation&#34;&gt;@EpiEllie&lt;/span&gt;, has done. Unsurprisingly, she is the most central person in the Twitter graph, followed by the &lt;a href=&#34;https://twitter.com/societyforepi&#34;&gt;SER twitter account&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;twitter_graph %&amp;gt;% 
+  activate(nodes) %&amp;gt;% 
+  arrange(desc(value)) %&amp;gt;% 
+  as_tibble() %&amp;gt;% 
+  top_n(10) %&amp;gt;% 
+  mutate(name = paste0(&amp;quot;@&amp;quot;, name), n = value) %&amp;gt;% 
+  plot_barchat(name) +
+  labs(y = &amp;quot;centrality&amp;quot;, x = element_blank())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;subjects-by-day&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Subjects by day&lt;/h2&gt;
+&lt;p&gt;A few months back, I read &lt;a href=&#34;https://www.tidytextmining.com&#34;&gt;Tidy Text Mining with R&lt;/a&gt;, and since then, I’ve just been waiting to analyze word use by day of the conference. I won’t go over this code in detail, but it uses &lt;a href=&#34;https://www.wikiwand.com/en/Tf%E2%80%93idf&#34;&gt;tf-dif&lt;/a&gt; to analyze words that were unique to each day. You can find &lt;a href=&#34;https://www.tidytextmining.com/tfidf.html&#34;&gt;a discussion and more examples&lt;/a&gt; of this approach in the book.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tfidf_tweets &amp;lt;- ser_tweets %&amp;gt;% 
+  filter(
+    !is_retweet,
+    between(created_at, as.POSIXct(&amp;quot;2019-06-18&amp;quot;), as.POSIXct(&amp;quot;2019-06-21&amp;quot;))
+  ) %&amp;gt;% 
+  #  tidytext doesn&amp;#39;t like these list columns
+  select_if(~ !is_list(.x)) %&amp;gt;% 
+  #  create day of tweet
+  mutate(day = lubridate::wday(created_at, label = TRUE)) %&amp;gt;% 
+  #  unnest by word and count each word by day
+  unnest_tokens(word, text) %&amp;gt;%
+  group_by(day) %&amp;gt;% 
+  count(word, sort = TRUE) %&amp;gt;%
+  ungroup() %&amp;gt;% 
+  #  add tf-idf and sort
+  bind_tf_idf(word, day, n) %&amp;gt;% 
+  arrange(desc(tf_idf)) %&amp;gt;% 
+  mutate(word = fct_rev(fct_inorder(word))) %&amp;gt;% 
+  #  pick top 10 by day
+  group_by(day) %&amp;gt;% 
+  top_n(10) %&amp;gt;%
+  ungroup()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So, what was unique to each day? Tuesday was full of workshops, including workshops on R, g-computation, and E-values. Wednesday started with a fantastic keynote by &lt;a href=&#34;https://www.npr.org/people/90889243/alix-spiegel&#34;&gt;Alix Spiegel of Invisibilia&lt;/a&gt;, which was like a live version of the podcast. People also talked about &lt;a href=&#34;https://twitter.com/Dr_S_Jefferson&#34;&gt;Dr. Shawnita Sealy-Jefferson&lt;/a&gt;’s powerful talk, “Listen to and trust black women.” Thursday began with a debate by &lt;a href=&#34;https://twitter.com/sandrogalea&#34;&gt;Sandro Galea&lt;/a&gt; and &lt;a href=&#34;https://twitter.com/_MiguelHernan&#34;&gt;Miguel Hernán&lt;/a&gt; about the role of causal inference in social epidemiology. The same day, people were talking about race and racism in relation to health epidemiology. On the final day of the conference, people were talking about the reunion parties the night before, #blackgirlmagic, and &lt;a href=&#34;https://twitter.com/HealthEquityDoc&#34;&gt;Dr. Sharrelle Barber&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tfidf_tweets %&amp;gt;% 
+  ggplot(aes(word, tf_idf)) + 
+  geom_col(color = NA, fill = &amp;quot;#0172B1&amp;quot;) +
+  theme_minimal(14) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.minor.x = element_blank()
+  ) + 
+  coord_flip() + 
+  facet_wrap(~ day, scales = &amp;quot;free&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;other-active-hashtags&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Other active hashtags&lt;/h2&gt;
+&lt;p&gt;What other hashtags were used with #SER2019? Unsurprisingly, #EpiTwitter leads the list, followed by #SPER2019, related to the &lt;a href=&#34;https://sper.org/annual-meeting-2/&#34;&gt;SPER&lt;/a&gt; meeting that happens immediately before SER. People were also talking about the better poster design, open science, causal inference, &lt;a href=&#34;https://twitter.com/lisabodnar&#34;&gt;Lisa Bodnar’s&lt;/a&gt; annual SER party, and more.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unnested_hashtags &amp;lt;- ser_tweets %&amp;gt;% 
+  filter(!is_retweet) %&amp;gt;% 
+  unnest(hashtags) %&amp;gt;% 
+  mutate_at(vars(hashtags), tolower) %&amp;gt;% 
+  filter(
+    stringr::str_detect(
+      hashtags, 
+      stringr::fixed(&amp;quot;SER2019&amp;quot;, ignore_case = TRUE),
+      negate = TRUE
+    )
+  )
+
+unnested_hashtags %&amp;gt;% 
+  group_by(hashtags) %&amp;gt;% 
+  summarize(n = n()) %&amp;gt;% 
+  arrange(desc(n)) %&amp;gt;% 
+  top_n(10) %&amp;gt;% 
+  plot_barchat(hashtags)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;blackepimatters&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;BlackEpiMatters&lt;/h2&gt;
+&lt;p&gt;One particularly powerful event was the inception of the &lt;a href=&#34;https://twitter.com/search?q=%23BlackEpiMatters&amp;amp;src=typd&#34;&gt;#BlackEpiMatters&lt;/a&gt; hashtag, which lead to the creation of the @&lt;a href=&#34;https://twitter.com/black_epi&#34;&gt;black_epi&lt;/a&gt; account. There were many incredible talks by black epidemiologists at this meeting, and the fact that the rooms were absolutely packed for these talks magnified the fact that most were in smaller rooms. Many people called out SER for this, and they have promised to address it for SER 2020. Additionally, many black epidemiologists who are active on Twitter will be doing &lt;a href=&#34;https://twitter.com/societyforepi/status/1142068033407651841&#34;&gt;Twitter takeovers of the SER account over the next year&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So who were the people using #blackepimatters during the meeting? &lt;a href=&#34;https://twitter.com/HealthEquityDoc&#34;&gt;Sharrelle Barber&lt;/a&gt; lead the way.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unnested_hashtags %&amp;gt;% 
+  filter(
+    hashtags %in% c(&amp;quot;blackepimatters&amp;quot;, &amp;quot;blackepidemiologymatters&amp;quot;)
+  ) %&amp;gt;% 
+  plot_screen_name()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Finally, how about a few rankings?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;most-retweets&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Most retweets&lt;/h2&gt;
+&lt;p&gt;My poster got the most retweets 😱😱😱. Also popular were Jess Rohmann’s &lt;a href=&#34;https://docs.google.com/document/d/1a-_VYQrZDLIAWCUs_JKvnwNT2onn-rIiLh69W53fh1o/&#34;&gt;list of DAG papers&lt;/a&gt; and the “Beyond ‘Is Race a Cause?’” session, which was standing-room with a line out the door (I know this because I couldn’t get in the door!).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ser_tweets %&amp;gt;% 
+  filter(!is_retweet) %&amp;gt;% 
+  arrange(desc(retweet_count)) %&amp;gt;%
+  top_n(5, retweet_count) %&amp;gt;% 
+  plot_tweets(retweet_count) +
+  labs(x = &amp;quot;twitter user&amp;quot;, y = &amp;quot;n retweets&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;most-favorites&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Most favorites&lt;/h2&gt;
+&lt;p&gt;My poster also got the most favorites 😱😱😱. One high-impact tweet was &lt;a href=&#34;https://twitter.com/BillMiller_Epi&#34;&gt;Bill Miller&lt;/a&gt;’s offer to mentor attendees. I barely had a chance to say hi to him he was so busy! People also liked Ellie’s temporary tattoos, #SER2019 bingo, and the #betterposter design.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ser_tweets %&amp;gt;% 
+  filter(!is_retweet) %&amp;gt;% 
+  arrange(desc(favorite_count)) %&amp;gt;%
+  top_n(5, favorite_count) %&amp;gt;% 
+  plot_tweets(favorite_count) +
+  labs(x = &amp;quot;twitter user&amp;quot;, y = &amp;quot;n favorites&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;most-tweets&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Most tweets&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;@AbbyCScience&lt;/span&gt; (taking a well-deserved Twitter break) was responsible for the most original tweets by a long shot.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# number original tweets
+ser_tweets %&amp;gt;% 
+  filter(!is_retweet) %&amp;gt;% 
+  plot_screen_name()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;most-retweets-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Most retweets&lt;/h2&gt;
+&lt;p&gt;Unsurprisingly, the most retweets came from my &lt;a href=&#34;https://twitter.com/epi_twit&#34;&gt;EpiBot&lt;/a&gt;, which retweets #EpiTwitter. But Ellie is a surprisingly close second!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# number retweets
+ser_tweets %&amp;gt;% 
+  filter(is_retweet) %&amp;gt;% 
+  plot_screen_name()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;most-photos-posted&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Most photos posted&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://twitter.com/PWGTennant&#34;&gt;Peter Tennant&lt;/a&gt; posted the most photos (plus, there’s a &lt;a href=&#34;https://twitter.com/kellyn_arnold/status/1141820251467857928&#34;&gt;video of his poster presentation&lt;/a&gt;).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ser_tweets %&amp;gt;% 
+  filter(!is_retweet) %&amp;gt;% 
+  unnest(media_type) %&amp;gt;% 
+  filter(media_type == &amp;quot;photo&amp;quot;) %&amp;gt;% 
+  plot_screen_name()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;2240&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;And that’s it for #SER2019!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Stochastic Shakespeare: Sonnets Produced by Markov Chains in R</title>
+      <link>/2018/01/26/stochastic-shakespeare-sonnets-produced-by-markov-chains-in-r/</link>
+      <pubDate>Fri, 26 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>/2018/01/26/stochastic-shakespeare-sonnets-produced-by-markov-chains-in-r/</guid>
+      <description>
+
+
+&lt;div id=&#34;update-with-markovifyr&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Update with &lt;code&gt;markovifyR&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;Thanks to Maëlle Salmon, who referred me to &lt;a href=&#34;https://stackoverflow.blog/2018/01/15/thanks-million-jon-skeet/&#34;&gt;this post&lt;/a&gt; by Julia Silge and Nick Larsen, I explored doing this using the &lt;code&gt;markovifyR&lt;/code&gt; package, and the results are unbelievable. &lt;a href=&#34;#update&#34;&gt;See the bottom of the post for an updated batch of sonnets!&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;original-post&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Original post&lt;/h1&gt;
+&lt;p&gt;I recently saw &lt;a href=&#34;http://katiejolly.io/blog/2018-01-05/random-rupi-markov-chain-poems&#34;&gt;Katie Jolly’s post&lt;/a&gt;, in which she produced Rupi Kuar-style poems using Markov Chains in R. I absolutely loved it, so I decided to try it with Shakespeare’s 154 sonnets using her post as a skeleton.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;downloading-and-cleaning-the-sonnets&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Downloading and cleaning the sonnets&lt;/h1&gt;
+&lt;p&gt;In addition to &lt;code&gt;markovchain&lt;/code&gt; and &lt;code&gt;tidyverse&lt;/code&gt;, I’m going to use the &lt;code&gt;gutenberger&lt;/code&gt; package to download the sonnets.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(gutenbergr)
+library(tidyverse) 
+library(markovchain) &lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;shakespeare &amp;lt;- gutenberg_works(title == &amp;quot;Shakespeare&amp;#39;s Sonnets&amp;quot;) %&amp;gt;% 
+  pull(gutenberg_id) %&amp;gt;% 
+  gutenberg_download(verbose = FALSE)
+
+shakespeare&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 2,625 x 2
+##    gutenberg_id text                                          
+##           &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;                                         
+##  1         1041 THE SONNETS                                   
+##  2         1041 &amp;quot;&amp;quot;                                            
+##  3         1041 by William Shakespeare                        
+##  4         1041 &amp;quot;&amp;quot;                                            
+##  5         1041 &amp;quot;&amp;quot;                                            
+##  6         1041 &amp;quot;&amp;quot;                                            
+##  7         1041 &amp;quot;&amp;quot;                                            
+##  8         1041 &amp;quot;  I&amp;quot;                                         
+##  9         1041 &amp;quot;&amp;quot;                                            
+## 10         1041 &amp;quot;  From fairest creatures we desire increase,&amp;quot;
+## # … with 2,615 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Because the sonnets are in &lt;code&gt;gutenberger&lt;/code&gt;, they’re already in a nice format to work with. I just need to do a little cleaning up: like Katie, I removed the punctuation, but I also have to clear out the sonnet titles, which were Roman numerals, and some title info.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  a little function to make life easier
+`%not_in%` &amp;lt;- function(lhs, rhs) {
+  !(lhs %in% rhs)
+}
+
+#  remove new lines symbol, sonnet Roman numerals, and punctation
+#  and split into vector
+bills_words &amp;lt;- shakespeare %&amp;gt;% 
+  mutate(text = text %&amp;gt;% 
+    str_trim() %&amp;gt;% 
+    str_replace_all(&amp;quot;--&amp;quot;, &amp;quot; &amp;quot;) %&amp;gt;% 
+    str_replace_all(&amp;quot;[^[:alnum:][:space:]&amp;#39;]&amp;quot;, &amp;quot;&amp;quot;) %&amp;gt;% 
+    str_replace_all(&amp;quot;^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$&amp;quot;, 
+                    &amp;quot;&amp;quot;) %&amp;gt;% 
+    str_to_lower()) %&amp;gt;% 
+  filter(text %not_in% c(&amp;quot;the sonnets&amp;quot;, &amp;quot;by william shakespeare&amp;quot;, &amp;quot;&amp;quot;, &amp;quot; &amp;quot;)) %&amp;gt;% 
+  pull(text) %&amp;gt;% 
+  str_split(&amp;quot; &amp;quot;) %&amp;gt;% 
+  unlist() &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I’m also going to extract the punctuation and assess how many of each there are for when I actually assemble the sonnets later.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;punctuation &amp;lt;- shakespeare %&amp;gt;% 
+  pull(text) %&amp;gt;% 
+  str_extract_all(&amp;quot;[^[:alnum:][:space:]&amp;#39;]&amp;quot;) %&amp;gt;% 
+  unlist()
+
+punctuation_probs &amp;lt;- punctuation[punctuation %not_in% c(&amp;quot;-&amp;quot;, &amp;quot;(&amp;quot;, &amp;quot;)&amp;quot;)] %&amp;gt;% 
+  table() %&amp;gt;% 
+  prop.table()&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;fit-the-markov-chain&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Fit the Markov Chain&lt;/h1&gt;
+&lt;p&gt;Now fit the Markov Chain with the vector of words.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  fit a Markov Chain
+sonnet_chain &amp;lt;- markovchainFit(bills_words)
+cat(markovchainSequence(n = 10, markovchain = sonnet_chain$estimate), collapse =  &amp;quot; &amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;i can afford no longer nurseth the joy my poverty&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://media.giphy.com/media/bXKWWJXUJkBsQ/giphy.gif&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;And finally, here are a few functions to piece together lines to make them look like a sonnet using the &lt;code&gt;walk()&lt;/code&gt; function from &lt;code&gt;purrr&lt;/code&gt; to print out the lines (since it’s a side effect). No, they’re not actually iambic pentameter :(&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;write_a_line &amp;lt;- function(n_lines = 1) {
+  walk(1:n_lines, function(.x) {
+  # put together lines of more or less average length
+    lines &amp;lt;- markovchainSequence(n = sample(c(6:9), 1), 
+                               markovchain = sonnet_chain$estimate) %&amp;gt;% 
+      paste(collapse = &amp;quot; &amp;quot;)
+  
+  #  add end-of-line punctuation based on their occurence 
+  end_punctuation &amp;lt;- ifelse(.x == n_lines, &amp;quot;.&amp;quot;, 
+                            sample(names(punctuation_probs), 
+                                   size = 1, 
+                                   prob = punctuation_probs))
+  cat(paste0(lines, end_punctuation, &amp;quot;  \n&amp;quot;))
+  })
+}
+
+psuedosonnet &amp;lt;- function() {
+  walk(1:3, function(.x) {
+    write_a_line(4)
+    cat(&amp;quot;  \n&amp;quot;)
+  })
+  
+  write_a_line(2)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;generating-the-sonnets&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Generating the sonnets&lt;/h1&gt;
+&lt;p&gt;Let’s try it out.&lt;/p&gt;
+&lt;div id=&#34;psuedosonnet-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Psuedosonnet 1:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(154)
+psuedosonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;wing and folly doctorlike controlling skill who knows the,&lt;br /&gt;
+again assur’d and given grace but when all date:&lt;br /&gt;
+shook three till my mind these blenches,&lt;br /&gt;
+in sweetest things deem’d not so dear delight.&lt;/p&gt;
+&lt;p&gt;the mouths of love swearing in these,&lt;br /&gt;
+and soon to woe compar’d with;&lt;br /&gt;
+at your bounty cherish she is ’greeing and yet,&lt;br /&gt;
+by lies buried age and simple savour pitiful thrivers.&lt;/p&gt;
+&lt;p&gt;am now with intelligence as the stage presenteth nought,&lt;br /&gt;
+which it for me suffering my?&lt;br /&gt;
+days making lascivious grace is not thy days are:&lt;br /&gt;
+expired for myself and tombs of my.&lt;/p&gt;
+&lt;p&gt;right my heart another gay why dost,&lt;br /&gt;
+of my use your self thou.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;psuedosonnet-2&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Psuedosonnet 2:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;psuedosonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;past reason hunted and checked with thee;&lt;br /&gt;
+or changes right or at least so strong,&lt;br /&gt;
+the ashes of glass his prescriptions,&lt;br /&gt;
+him to decay lest eyes be false borrowed face.&lt;/p&gt;
+&lt;p&gt;and all kinds of love her blood that,&lt;br /&gt;
+o none but in these offices so.&lt;br /&gt;
+and his spring within the view!&lt;br /&gt;
+to weigh how thy book of.&lt;/p&gt;
+&lt;p&gt;by a tomb of public means which,&lt;br /&gt;
+or who moving points on to?&lt;br /&gt;
+can yet do see my state and age unbred?&lt;br /&gt;
+muse brings forth the orient when.&lt;/p&gt;
+&lt;p&gt;thy hair the world away to show thee:&lt;br /&gt;
+one by day when in love things.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;psuedosonnet-3&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Psuedosonnet 3:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;psuedosonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or else receiv’st not fade die but.&lt;br /&gt;
+grief to mend to stay whilst;&lt;br /&gt;
+reeks i hold thee devouring time that,&lt;br /&gt;
+with you pattern of such day my love happy.&lt;/p&gt;
+&lt;p&gt;hate me last so bright who leaves thy beauty.&lt;br /&gt;
+each friend and your true that one that,&lt;br /&gt;
+whilst like a vengeful canker blooms?&lt;br /&gt;
+and therefore my bad thus to.&lt;/p&gt;
+&lt;p&gt;should i not counted fair whose,&lt;br /&gt;
+state but day arising from hands to;&lt;br /&gt;
+of flower with his presence grace impiety,&lt;br /&gt;
+only herald to the beast that plea.&lt;/p&gt;
+&lt;p&gt;eyelids open wide in posterity thou send’st from,&lt;br /&gt;
+nor shall have err’d and kept unused.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;psuedosonnet-4&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Psuedosonnet 4:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;psuedosonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;that pine to my home of thine own,&lt;br /&gt;
+love being crown’d with that man’s;&lt;br /&gt;
+what need’st thou usurer why of this thy love’s,&lt;br /&gt;
+with sovereign cure i question make him that i.&lt;/p&gt;
+&lt;p&gt;to the ear confounds him have drawn,&lt;br /&gt;
+fight and beauty should my muse and strangely.&lt;br /&gt;
+liv’d alone stands but one so,&lt;br /&gt;
+whilst i alone o in the lines that brightness.&lt;/p&gt;
+&lt;p&gt;creature the lease dost wake elsewhere but me;&lt;br /&gt;
+evil tempteth my love that which still,&lt;br /&gt;
+i am attainted that in the thing to.&lt;br /&gt;
+it thy sweet deaths be but those.&lt;/p&gt;
+&lt;p&gt;that our appetite which he is hanging still:&lt;br /&gt;
+inhabit on death to make one.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;psuedosonnet-5&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Psuedosonnet 5:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;psuedosonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and confounds in me not my?&lt;br /&gt;
+alchemy to all my comfort now i send,&lt;br /&gt;
+the pleasure thine own desert and no hatred in,&lt;br /&gt;
+with disdain lest guilty goddess go since.&lt;/p&gt;
+&lt;p&gt;seem right myself i’ll fight after you,&lt;br /&gt;
+wane so love and simple truth.&lt;br /&gt;
+ah do dispense you like of time despite,&lt;br /&gt;
+to store harsh featureless and by.&lt;/p&gt;
+&lt;p&gt;my reason is daily new lo,&lt;br /&gt;
+love thee i’ll run and in themselves forsake me;&lt;br /&gt;
+thou through windows to play as ’twixt a,&lt;br /&gt;
+me both and to love of.&lt;/p&gt;
+&lt;p&gt;still my bonds in disgrace with newer:&lt;br /&gt;
+morrow to slavery my side against the weary.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://media.giphy.com/media/3o6Ztf18L1Tsmxd528/giphy.gif&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;update&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Update&lt;/h1&gt;
+&lt;p&gt;Alright, this time I’m going to try it with the &lt;code&gt;markovifyR&lt;/code&gt; package. I’m basically going to do the same cleaning as above, but this time I’ll be putting entire sentences, punctuation and all, into the Markov model. The &lt;code&gt;markovify_text()&lt;/code&gt; function also accepts start words, so I thought it might look good to start with a sample of 100 starting words from the sonnets and construct the lines from there.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(markovifyR)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  same as above, but maintain as sentences and keep punctuation
+bills_sentences &amp;lt;- shakespeare %&amp;gt;% 
+  mutate(text = text %&amp;gt;% 
+    str_trim() %&amp;gt;% 
+    str_replace_all(&amp;quot;--&amp;quot;, &amp;quot; &amp;quot;) %&amp;gt;% 
+    str_replace_all(&amp;quot;^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$&amp;quot;, 
+                    &amp;quot;&amp;quot;) %&amp;gt;% 
+    str_to_lower()) %&amp;gt;% 
+  filter(text %not_in% c(&amp;quot;the sonnets&amp;quot;, &amp;quot;by william shakespeare&amp;quot;, &amp;quot;&amp;quot;, &amp;quot; &amp;quot;))
+
+#  fit the Markov Chain
+markovify_model &amp;lt;-
+  generate_markovify_model(
+    input_text = bills_sentences$text,
+    markov_state_size = 2L,
+    max_overlap_total = 25,
+    max_overlap_ratio = .85
+  )
+
+#  generate a sonnet
+markovify_sonnet &amp;lt;- function() {
+  lines &amp;lt;- markovify_text(
+      markov_model = markovify_model,
+      maximum_sentence_length = 75,
+      output_column_name = &amp;#39;sonnet_line&amp;#39;,
+      count = 50,
+      tries = 1000, 
+      start_words = sample(generate_start_words(markovify_model)$wordStart, 100),
+      only_distinct = TRUE,
+      return_message = FALSE) %&amp;gt;% 
+    filter(str_count(sonnet_line, &amp;quot;\\w+&amp;quot;) &amp;gt; 5 &amp;amp; str_count(sonnet_line, &amp;quot;\\w+&amp;quot;) &amp;lt; 10) %&amp;gt;% 
+    slice(sample(1:n(), 14)) %&amp;gt;% 
+    mutate(id = 1:n()) %&amp;gt;% 
+    select(id, sonnet_line) 
+  
+   #  add a period to the last line if the last charachter isn&amp;#39;t punctuation 
+   #  that ends a sentence  
+   last_line &amp;lt;- lines[lines$id == 14, &amp;quot;sonnet_line&amp;quot;]
+   lines[lines$id == 14, &amp;quot;sonnet_line&amp;quot;] &amp;lt;- str_replace(last_line, 
+                                                       &amp;quot;.$(?&amp;lt;!//.//!//?|[:alnum:])&amp;quot;, &amp;quot;.&amp;quot;)
+   
+   #  print in a sonnet-like format
+   walk(1:14, function(.x) {
+     cat(lines$sonnet_line[.x], &amp;quot; \n&amp;quot;)
+     
+     #  add a space every four lines
+     if (.x %% 4 == 0) cat(&amp;quot;\n&amp;quot;) 
+   })
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;markovify-sonnet-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Markovify Sonnet 1:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;markovify_sonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;now counting best to be invited&lt;br /&gt;
+then, in the breath of words respect,&lt;br /&gt;
+are windows to my dear time’s waste:&lt;br /&gt;
+speak of that which thou departest;&lt;/p&gt;
+&lt;p&gt;speak of my faults thy sweet graces graced be;&lt;br /&gt;
+reserve them for my sin you did impute,&lt;br /&gt;
+then, beauteous niggard, why dost thou to mine eyes,&lt;br /&gt;
+die to themselves. sweet roses do not kill&lt;/p&gt;
+&lt;p&gt;this silence for my love, yea take them all;&lt;br /&gt;
+are windows to my thoughts as food to life,&lt;br /&gt;
+beauty’s effect with beauty of thy days.&lt;br /&gt;
+there is but as the rich, whose blessed key,&lt;/p&gt;
+&lt;p&gt;this were to be cross’d:&lt;br /&gt;
+not from the book of honour razed quite.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;markovify-sonnet-2&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Markovify Sonnet 2:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;markovify_sonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;thine eyes i love, and look strange;&lt;br /&gt;
+haply i think my love alone.&lt;br /&gt;
+which should transport me farthest from your tongue;&lt;br /&gt;
+entitled in thy power to lend base subjects light?&lt;/p&gt;
+&lt;p&gt;wishing me like to the very same;&lt;br /&gt;
+not that the world’s fresh ornament,&lt;br /&gt;
+looking with pretty ruth upon my brow;&lt;br /&gt;
+of faults conceal’d, wherein i am forsworn,&lt;/p&gt;
+&lt;p&gt;too base of thee this i do change:&lt;br /&gt;
+now all is done, save what is told.&lt;br /&gt;
+to this composed wonder of your fame!&lt;br /&gt;
+disdains the tillage of thy days.&lt;/p&gt;
+&lt;p&gt;till i return, of posting is no remedy,&lt;br /&gt;
+not wondering at the present nor the prophetic soul&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;markovify-sonnet-3&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Markovify Sonnet 3:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;markovify_sonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;want nothing that the world an end,&lt;br /&gt;
+kill me with that which it doth catch;&lt;br /&gt;
+within the knowledge of mine own love’s might.&lt;br /&gt;
+o! change thy thought, that i prove,&lt;/p&gt;
+&lt;p&gt;within the level of your love.&lt;br /&gt;
+presume not on thy humour doth depend:&lt;br /&gt;
+ere you were once unkind befriends me now,&lt;br /&gt;
+when sometime lofty towers i see thee,&lt;/p&gt;
+&lt;p&gt;wishing me like to the world enjoys it;&lt;br /&gt;
+who taught thee how thy precious minutes waste;&lt;br /&gt;
+mad in pursuit of the time,&lt;br /&gt;
+have added feathers to the time,&lt;/p&gt;
+&lt;p&gt;the summer’s flower is to render thee.&lt;br /&gt;
+what merit do i not to be invited&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;markovify-sonnet-4&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Markovify Sonnet 4:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;markovify_sonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;o, no! it is a man right fair,&lt;br /&gt;
+by seeing farther than my barren rhyme?&lt;br /&gt;
+even that your love taught it this alchemy,&lt;br /&gt;
+theirs for their habitation chose out thee,&lt;/p&gt;
+&lt;p&gt;just to the edge of doom.&lt;br /&gt;
+full many a holy and obsequious tear&lt;br /&gt;
+two loves i have frequent been with unknown minds,&lt;br /&gt;
+how have mine eyes be blessed made&lt;/p&gt;
+&lt;p&gt;speak of that which still doth grow?&lt;br /&gt;
+kind is my love’s breath? the purple pride&lt;br /&gt;
+him in thy steel bosom’s ward,&lt;br /&gt;
+even so, being full of blame,&lt;/p&gt;
+&lt;p&gt;speak of the dead, which now appear&lt;br /&gt;
+will be true despite thy scythe and crooked knife.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;markovify-sonnet-5&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Markovify Sonnet 5:&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;markovify_sonnet()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;never believe though in thy creation did decree&lt;br /&gt;
+make but my five senses can&lt;br /&gt;
+but all alone beweep my outcast state,&lt;br /&gt;
+alack! what poverty my muse want subject to invent,&lt;/p&gt;
+&lt;p&gt;but wherefore do not do the thing they see;&lt;br /&gt;
+lo! in the number let me be borne alone.&lt;br /&gt;
+steal from his low tract, and look strange;&lt;br /&gt;
+so, either by thy beauty being mute,&lt;/p&gt;
+&lt;p&gt;betwixt mine eye loves it and doth first begin.&lt;br /&gt;
+whence hast thou this becoming of their excellence.&lt;br /&gt;
+dost thou to mine own worth do define,&lt;br /&gt;
+wretched in this line some interest,&lt;/p&gt;
+&lt;p&gt;yet, do thy worst to steal thyself away,&lt;br /&gt;
+although thou steal thy sweet self prove.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://media.giphy.com/media/JPW7lVDXKJgXu/giphy.gif&#34; width=&#34;75%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Well, call me Shockedspeare.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Exit, pursued by a bear&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

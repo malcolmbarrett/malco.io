@@ -1,0 +1,257 @@
+---
+title: '#SER2019 In Review'
+author: Malcolm Barrett
+date: '2019-06-23'
+slug: ser2019-in-review
+categories:
+  - r
+tags:
+  - ser
+  - textanalysis
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2019-06-23'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+
+<p>The annual meeting of the <a href="https://epiresearch.org">Society for Epidemiologic Research</a> (SER) took place June 18-21. The past two years, I’ve collected Twitter data (<a href="https://github.com/malcolmbarrett/ser_tweets">2018</a>, <a href="https://github.com/malcolmbarrett/ser_conf_2019">2019</a>). The data were collected with the excellent <a href="https://rtweet.info/">rtweet</a> package, and the data collection code was based on related code by <a href="https://mikewk.com/">Mike Kearney</a>, the author of rtweet.</p>
+<div id="setup" class="section level2">
+<h2>Setup</h2>
+<pre class="r"><code># for everything else :)
+library(tidyverse)
+# for tidy eval
+library(rlang)
+# for labeling tweets in plots
+library(ggrepel)
+# for network graphs
+library(ggraph)
+library(tidygraph)
+# for text analysis
+library(tidytext)</code></pre>
+<p>Since the data were collected over several days, I’m going to read the saved data straight from GitHub. You’ll note that there is also some code to turn the tweets into network data (who is tweeting whom); I’ll also read that in.</p>
+<pre class="r"><code>ser_tweets &lt;- read_rds(url(&quot;https://github.com/malcolmbarrett/ser_conf_2019/blob/master/data/search.rds?raw=true&quot;))
+ser_tweets_2018 &lt;- read_rds(url(&quot;https://github.com/malcolmbarrett/ser_tweets/blob/master/data/search.rds?raw=true&quot;))
+twitter_graph &lt;- readr::read_rds(url(&quot;https://github.com/malcolmbarrett/ser_conf_2019/raw/master/data/twitter_graph.rds&quot;))
+
+# simplify tweet tibble
+ser_tweets &lt;- ser_tweets %&gt;% 
+  select(screen_name, text, created_at, favorite_count, retweet_count, is_retweet, hashtags, media_type)</code></pre>
+<p>First, a few functions to help us out: <code>plot_barchat()</code> to plot horizontal bar charts, <code>plot_tweets()</code> to make a scatterplot labeled with the tweet text, and <code>plot_screen_names()</code> to quickly count number of times a screen name appeared and plot the top ten with <code>plot_barchat()</code>.</p>
+<pre class="r"><code># plot horizontal bar charts
+plot_barchat &lt;- function(.df, y) {
+  y &lt;- enquo(y)
+  .df %&gt;% 
+    #  put the bars in order of their appearance
+    mutate(!!y := fct_rev(fct_inorder(!!y))) %&gt;% 
+    #  y first because we&#39;re flipping
+    ggplot(aes(y = n, x = !!y)) + 
+    geom_col(color = NA, fill = &quot;#0172B1&quot;) +
+    theme_minimal(14) +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      panel.grid.minor.x = element_blank()
+    ) + 
+    coord_flip()
+}
+
+# plot points labelled with tweet text
+plot_tweets &lt;- function(.df, y) {
+  y &lt;- enquo(y)
+  .df %&gt;% 
+    mutate(text = str_wrap(text, 50)) %&gt;% 
+    ggplot(aes(x = fct_inorder(screen_name), y = !!y)) + 
+    geom_point(color = &quot;#0172B1&quot;, size = 2) +
+    geom_label_repel(
+      aes(label = text), 
+      size = 2.5, 
+      force = 4, 
+      nudge_y = 3, 
+      point.padding = .5
+    ) +
+    theme_minimal(14)
+}
+
+# group by screen name, count, and plot 1st 10
+plot_screen_name &lt;- function(.df) {
+  .df %&gt;% 
+    group_by(screen_name) %&gt;% 
+    summarize(n = n()) %&gt;% 
+    mutate(screen_name = paste0(&quot;@&quot;, screen_name)) %&gt;% 
+    arrange(desc(n)) %&gt;% 
+    top_n(10) %&gt;% 
+    plot_barchat(screen_name) +
+    xlab(element_blank())
+}</code></pre>
+</div>
+<div id="tweets-vs.2018" class="section level1">
+<h1>Tweets vs. 2018</h1>
+<p>I noticed this almost immediately: there were <em>many</em> more tweets this year. Between the 2018 and 2019, there was tremendous growth in the epidemiology Twitter community under the hashtag <a href="https://twitter.com/search?q=%23epitwitter&amp;src=tyah">#epitwitter</a>, and it showed. There were about twice as many original tweets and retweets during the official days of the conference.</p>
+<pre class="r"><code>n_2019 &lt;- ser_tweets %&gt;% 
+  filter(between(created_at, as.POSIXct(&quot;2019-06-18&quot;), as.POSIXct(&quot;2019-06-21&quot;))) %&gt;% 
+  group_by(is_retweet) %&gt;% 
+  summarize(n = n()) %&gt;% 
+  mutate(year = &quot;2019&quot;)
+
+n_2018 &lt;- ser_tweets_2018 %&gt;% 
+  filter(between(created_at, as.POSIXct(&quot;2018-06-19&quot;), as.POSIXct(&quot;2018-06-22&quot;))) %&gt;% 
+  group_by(is_retweet) %&gt;% 
+  summarize(n = n()) %&gt;% 
+  mutate(year = &quot;2018&quot;)
+
+label_retweet &lt;- function(x) ifelse(x, &quot;retweet&quot;, &quot;original tweet&quot;)
+
+bind_rows(n_2019, n_2018) %&gt;% 
+  plot_barchat(year) +
+  facet_wrap(~is_retweet, labeller = as_labeller(label_retweet))</code></pre>
+<p><img src="/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-4-1.png" width="2240" /></p>
+<div id="twitter-connections-and-network-centrality" class="section level2">
+<h2>Twitter connections and network centrality</h2>
+<p>1,026 users tweeted or retweeted a tweet with the #SER2019 hashtag. Many were single tweets, but there were hundreds of people interacting. From the 2019 repo:</p>
+<pre class="r"><code>knitr::include_graphics(&quot;https://raw.githubusercontent.com/malcolmbarrett/ser_conf_2019/master/tweet_network.png&quot;)</code></pre>
+<p><img src="https://raw.githubusercontent.com/malcolmbarrett/ser_conf_2019/master/tweet_network.png" /><!-- --></p>
+<p>A big reason for the growth in #EpiTwitter is the community building that <a href="https://twitter.com/EpiEllie">Ellie Murray</a>, aka <span class="citation">@EpiEllie</span>, has done. Unsurprisingly, she is the most central person in the Twitter graph, followed by the <a href="https://twitter.com/societyforepi">SER twitter account</a>.</p>
+<pre class="r"><code>twitter_graph %&gt;% 
+  activate(nodes) %&gt;% 
+  arrange(desc(value)) %&gt;% 
+  as_tibble() %&gt;% 
+  top_n(10) %&gt;% 
+  mutate(name = paste0(&quot;@&quot;, name), n = value) %&gt;% 
+  plot_barchat(name) +
+  labs(y = &quot;centrality&quot;, x = element_blank())</code></pre>
+<p><img src="/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-6-1.png" width="2240" /></p>
+</div>
+<div id="subjects-by-day" class="section level2">
+<h2>Subjects by day</h2>
+<p>A few months back, I read <a href="https://www.tidytextmining.com">Tidy Text Mining with R</a>, and since then, I’ve just been waiting to analyze word use by day of the conference. I won’t go over this code in detail, but it uses <a href="https://www.wikiwand.com/en/Tf%E2%80%93idf">tf-dif</a> to analyze words that were unique to each day. You can find <a href="https://www.tidytextmining.com/tfidf.html">a discussion and more examples</a> of this approach in the book.</p>
+<pre class="r"><code>tfidf_tweets &lt;- ser_tweets %&gt;% 
+  filter(
+    !is_retweet,
+    between(created_at, as.POSIXct(&quot;2019-06-18&quot;), as.POSIXct(&quot;2019-06-21&quot;))
+  ) %&gt;% 
+  #  tidytext doesn&#39;t like these list columns
+  select_if(~ !is_list(.x)) %&gt;% 
+  #  create day of tweet
+  mutate(day = lubridate::wday(created_at, label = TRUE)) %&gt;% 
+  #  unnest by word and count each word by day
+  unnest_tokens(word, text) %&gt;%
+  group_by(day) %&gt;% 
+  count(word, sort = TRUE) %&gt;%
+  ungroup() %&gt;% 
+  #  add tf-idf and sort
+  bind_tf_idf(word, day, n) %&gt;% 
+  arrange(desc(tf_idf)) %&gt;% 
+  mutate(word = fct_rev(fct_inorder(word))) %&gt;% 
+  #  pick top 10 by day
+  group_by(day) %&gt;% 
+  top_n(10) %&gt;%
+  ungroup()</code></pre>
+<p>So, what was unique to each day? Tuesday was full of workshops, including workshops on R, g-computation, and E-values. Wednesday started with a fantastic keynote by <a href="https://www.npr.org/people/90889243/alix-spiegel">Alix Spiegel of Invisibilia</a>, which was like a live version of the podcast. People also talked about <a href="https://twitter.com/Dr_S_Jefferson">Dr. Shawnita Sealy-Jefferson</a>’s powerful talk, “Listen to and trust black women.” Thursday began with a debate by <a href="https://twitter.com/sandrogalea">Sandro Galea</a> and <a href="https://twitter.com/_MiguelHernan">Miguel Hernán</a> about the role of causal inference in social epidemiology. The same day, people were talking about race and racism in relation to health epidemiology. On the final day of the conference, people were talking about the reunion parties the night before, #blackgirlmagic, and <a href="https://twitter.com/HealthEquityDoc">Dr. Sharrelle Barber</a>.</p>
+<pre class="r"><code>tfidf_tweets %&gt;% 
+  ggplot(aes(word, tf_idf)) + 
+  geom_col(color = NA, fill = &quot;#0172B1&quot;) +
+  theme_minimal(14) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.minor.x = element_blank()
+  ) + 
+  coord_flip() + 
+  facet_wrap(~ day, scales = &quot;free&quot;)</code></pre>
+<p><img src="/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-8-1.png" width="2240" /></p>
+</div>
+<div id="other-active-hashtags" class="section level2">
+<h2>Other active hashtags</h2>
+<p>What other hashtags were used with #SER2019? Unsurprisingly, #EpiTwitter leads the list, followed by #SPER2019, related to the <a href="https://sper.org/annual-meeting-2/">SPER</a> meeting that happens immediately before SER. People were also talking about the better poster design, open science, causal inference, <a href="https://twitter.com/lisabodnar">Lisa Bodnar’s</a> annual SER party, and more.</p>
+<pre class="r"><code>unnested_hashtags &lt;- ser_tweets %&gt;% 
+  filter(!is_retweet) %&gt;% 
+  unnest(hashtags) %&gt;% 
+  mutate_at(vars(hashtags), tolower) %&gt;% 
+  filter(
+    stringr::str_detect(
+      hashtags, 
+      stringr::fixed(&quot;SER2019&quot;, ignore_case = TRUE),
+      negate = TRUE
+    )
+  )
+
+unnested_hashtags %&gt;% 
+  group_by(hashtags) %&gt;% 
+  summarize(n = n()) %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  top_n(10) %&gt;% 
+  plot_barchat(hashtags)</code></pre>
+<p><img src="/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-9-1.png" width="2240" /></p>
+</div>
+<div id="blackepimatters" class="section level2">
+<h2>BlackEpiMatters</h2>
+<p>One particularly powerful event was the inception of the <a href="https://twitter.com/search?q=%23BlackEpiMatters&amp;src=typd">#BlackEpiMatters</a> hashtag, which lead to the creation of the @<a href="https://twitter.com/black_epi">black_epi</a> account. There were many incredible talks by black epidemiologists at this meeting, and the fact that the rooms were absolutely packed for these talks magnified the fact that most were in smaller rooms. Many people called out SER for this, and they have promised to address it for SER 2020. Additionally, many black epidemiologists who are active on Twitter will be doing <a href="https://twitter.com/societyforepi/status/1142068033407651841">Twitter takeovers of the SER account over the next year</a>.</p>
+<p>So who were the people using #blackepimatters during the meeting? <a href="https://twitter.com/HealthEquityDoc">Sharrelle Barber</a> lead the way.</p>
+<pre class="r"><code>unnested_hashtags %&gt;% 
+  filter(
+    hashtags %in% c(&quot;blackepimatters&quot;, &quot;blackepidemiologymatters&quot;)
+  ) %&gt;% 
+  plot_screen_name()</code></pre>
+<p><img src="/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-10-1.png" width="2240" /></p>
+<p>Finally, how about a few rankings?</p>
+</div>
+<div id="most-retweets" class="section level2">
+<h2>Most retweets</h2>
+<p>My poster got the most retweets 😱😱😱. Also popular were Jess Rohmann’s <a href="https://docs.google.com/document/d/1a-_VYQrZDLIAWCUs_JKvnwNT2onn-rIiLh69W53fh1o/">list of DAG papers</a> and the “Beyond ‘Is Race a Cause?’” session, which was standing-room with a line out the door (I know this because I couldn’t get in the door!).</p>
+<pre class="r"><code>ser_tweets %&gt;% 
+  filter(!is_retweet) %&gt;% 
+  arrange(desc(retweet_count)) %&gt;%
+  top_n(5, retweet_count) %&gt;% 
+  plot_tweets(retweet_count) +
+  labs(x = &quot;twitter user&quot;, y = &quot;n retweets&quot;)</code></pre>
+<p><img src="/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-11-1.png" width="2240" /></p>
+</div>
+<div id="most-favorites" class="section level2">
+<h2>Most favorites</h2>
+<p>My poster also got the most favorites 😱😱😱. One high-impact tweet was <a href="https://twitter.com/BillMiller_Epi">Bill Miller</a>’s offer to mentor attendees. I barely had a chance to say hi to him he was so busy! People also liked Ellie’s temporary tattoos, #SER2019 bingo, and the #betterposter design.</p>
+<pre class="r"><code>ser_tweets %&gt;% 
+  filter(!is_retweet) %&gt;% 
+  arrange(desc(favorite_count)) %&gt;%
+  top_n(5, favorite_count) %&gt;% 
+  plot_tweets(favorite_count) +
+  labs(x = &quot;twitter user&quot;, y = &quot;n favorites&quot;)</code></pre>
+<p><img src="/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-12-1.png" width="2240" /></p>
+</div>
+<div id="most-tweets" class="section level2">
+<h2>Most tweets</h2>
+<p><span class="citation">@AbbyCScience</span> (taking a well-deserved Twitter break) was responsible for the most original tweets by a long shot.</p>
+<pre class="r"><code># number original tweets
+ser_tweets %&gt;% 
+  filter(!is_retweet) %&gt;% 
+  plot_screen_name()</code></pre>
+<p><img src="/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-13-1.png" width="2240" /></p>
+</div>
+<div id="most-retweets-1" class="section level2">
+<h2>Most retweets</h2>
+<p>Unsurprisingly, the most retweets came from my <a href="https://twitter.com/epi_twit">EpiBot</a>, which retweets #EpiTwitter. But Ellie is a surprisingly close second!</p>
+<pre class="r"><code># number retweets
+ser_tweets %&gt;% 
+  filter(is_retweet) %&gt;% 
+  plot_screen_name()</code></pre>
+<p><img src="/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-14-1.png" width="2240" /></p>
+</div>
+<div id="most-photos-posted" class="section level2">
+<h2>Most photos posted</h2>
+<p><a href="https://twitter.com/PWGTennant">Peter Tennant</a> posted the most photos (plus, there’s a <a href="https://twitter.com/kellyn_arnold/status/1141820251467857928">video of his poster presentation</a>).</p>
+<pre class="r"><code>ser_tweets %&gt;% 
+  filter(!is_retweet) %&gt;% 
+  unnest(media_type) %&gt;% 
+  filter(media_type == &quot;photo&quot;) %&gt;% 
+  plot_screen_name()</code></pre>
+<p><img src="/post/2019-06-23-ser2019-in-review/index_files/figure-html/unnamed-chunk-15-1.png" width="2240" /></p>
+<p>And that’s it for #SER2019!</p>
+</div>
+</div>
