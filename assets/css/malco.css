@@ -35,9 +35,19 @@ section#profile-page.pt-5 div.container div.row div.col-12.col-lg-8{
   max-height: 44px;
 }
 
-.navbar {
-  min-height: 100px !important;
-}
+
+
+@media (max-width: 991px) { 
+    .navbar {
+      min-height: none;
+    }
+ }
+
+ @media (min-width: 993px) { 
+    .navbar {
+      min-height: 100px !important;
+    }
+ }
 
 .navbar
 
