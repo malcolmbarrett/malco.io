@@ -36,23 +36,12 @@ section#profile-page.pt-5 div.container div.row div.col-12.col-lg-8{
 }
 
 
-
-@media (max-width: 991px) { 
-    .navbar {
-      min-height: none;
-    }
- }
-
- @media (min-width: 993px) { 
-    .navbar {
-      min-height: 100px !important;
-    }
- }
-
-.navbar
+.shrink-header {
+  min-height: 44px !important;
+}
 
 #navbar-main {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 
