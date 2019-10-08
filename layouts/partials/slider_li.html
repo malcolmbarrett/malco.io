@@ -34,7 +34,7 @@
   <div class="media-body media-body-slider">
 
     <h3 class="article-title article-title-slider mb-0 mt-0">
-      <a href="{{$link}}" {{ $target | safeHTMLAttr }}>{{ $item.Title }}</a>
+      <a href="{{$link}}" {{ $target | safeHTMLAttr }}>{{ with $item.Title }}{{ . | truncate 40 }}{{ end }}</a>
     </h3>
 
     {{ with $summary }}
@@ -67,7 +67,7 @@
     </div>
 
     {{ if $show_buttons }}
-    <div class="btn-links">
+    <div class="btn-links hide-element">
       {{ partial "page_links" (dict "page" $item "is_list" 1) }}
     </div>
     {{ end }}
