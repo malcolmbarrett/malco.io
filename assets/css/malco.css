@@ -214,6 +214,13 @@ table {
   margin-bottom: 15px;
 }
 
+/*hide certain elements in small screens*/
+@media screen and (max-width: 991px) {
+  .hide-element { 
+    display: none; 
+  }
+}
+
 /*single pages*/
 
 .featured-image {

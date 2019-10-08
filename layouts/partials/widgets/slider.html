@@ -41,7 +41,7 @@
         </h1>
         {{ if $item.use_pages }}
         <div class="row">
-          <div class="col-12 col-lg-4 section-heading section-heading-slider">
+          <div class="col-12 col-lg-4 section-heading section-heading-slider hide-element">
             <h1>{{ with $item.pages_title }}{{ . | markdownify | emojify }}{{ end }}</h1>
             {{ with $item.pages_subtitle }}<p>{{ . | markdownify | emojify }}</p>{{ end }}
           </div>
@@ -81,11 +81,11 @@
 </div>
 
 <!-- Left and right controls -->
-<a class="carousel-control-prev" href="#{{$hash_id}}" data-slide="prev">
+<a class="carousel-control-prev hide-element" href="#{{$hash_id}}" data-slide="prev">
   <span class="carousel-control-prev-icon"></span>
   <span class="sr-only">Previous</span>
 </a>
-<a class="carousel-control-next" href="#{{$hash_id}}" data-slide="next">
+<a class="carousel-control-next hide-element" href="#{{$hash_id}}" data-slide="next">
   <span class="carousel-control-next-icon"></span>
   <span class="sr-only">Next</span>
 </a>
