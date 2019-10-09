@@ -13,9 +13,9 @@ authors: []
 lastmod: '2018-01-26'
 featured: no
 image:
-  caption: ''
+  caption: 'Photo by [Patrick Tomasso](https://unsplash.com/photos/Oaqk7qqNh_c)'
   focal_point: ''
-  preview_only: no
+  preview_only: yes
 projects: [] 
 ---
 

@@ -3,7 +3,17 @@ new_talk <- function(x) {
   rstudioapi::navigateToFile(file.path("content", "talk", x, "index.md"))
 }
 
-feature <- function(x, path, ...) {
+move_image <- function(x, path, img_name, ...) {
   device <- fs::path_ext(x)
-  fs::file_move(x, paste0(path, "featured.", device), ...)
+  fs::file_move(x, paste0(path, img_name, ".", device), ...)
 }
+
+feature <- function(x, path, ...) {
+  move_image(x, path, "featured", ...)
+}
+
+
+thumbnail <- function(x, path, ...) {
+  move_image(x, path, "thumbnail", ...)
+}
+

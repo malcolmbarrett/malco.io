@@ -14,9 +14,9 @@ authors: []
 lastmod: '2018-08-04'
 featured: no
 image:
-  caption: ''
+  caption: 'Photo by [Toa Heftiba](https://unsplash.com/photos/oQvESMKUkzM)'
   focal_point: ''
-  preview_only: no
+  preview_only: yes
 projects: []
 ---
 

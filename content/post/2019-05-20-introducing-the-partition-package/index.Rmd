@@ -13,9 +13,9 @@ authors: []
 lastmod: '2019-05-20'
 featured: no
 image:
-  caption: ''
+  caption: 'Photo by [Braden Collum](https://unsplash.com/photos/LDh4LAV2Duc)'
   focal_point: ''
-  preview_only: no
+  preview_only: yes
 projects: [partition]
 ---
 

@@ -18,7 +18,7 @@ featured: no
 image:
   caption: ''
   focal_point: ''
-  preview_only: no
+  preview_only: yes
 projects: 
   - ggdag
   - methods
@@ -52,12 +52,12 @@ smoking_ca_dag</code></pre>
 ## # A tibble: 6 x 9
 ##   name          x     y direction to        xend  yend circular label      
 ##   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;     &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;      
-## 1 choleste…  13.2  11.8 -&gt;        cardiac…  12.0  11.2 FALSE    Cholesterol
-## 2 smoking    14.5  11.7 -&gt;        cholest…  13.2  11.8 FALSE    Smoking    
-## 3 unhealthy  15.0  12.8 -&gt;        smoking   14.5  11.7 FALSE    &quot;Unhealthy…
-## 4 unhealthy  15.0  12.8 -&gt;        weight    13.8  13.0 FALSE    &quot;Unhealthy…
-## 5 weight     13.8  13.0 -&gt;        cholest…  13.2  11.8 FALSE    Weight     
-## 6 cardiaca…  12.0  11.2 &lt;NA&gt;      &lt;NA&gt;      NA    NA   FALSE    &quot;Cardiac\n…</code></pre>
+## 1 choleste…  26.0  18.3 -&gt;        cardiac…  27.2  17.8 FALSE    Cholesterol
+## 2 smoking    24.7  18.1 -&gt;        cholest…  26.0  18.3 FALSE    Smoking    
+## 3 unhealthy  24.2  19.1 -&gt;        smoking   24.7  18.1 FALSE    &quot;Unhealthy…
+## 4 unhealthy  24.2  19.1 -&gt;        weight    25.3  19.4 FALSE    &quot;Unhealthy…
+## 5 weight     25.3  19.4 -&gt;        cholest…  26.0  18.3 FALSE    Weight     
+## 6 cardiaca…  27.2  17.8 &lt;NA&gt;      &lt;NA&gt;      NA    NA   FALSE    &quot;Cardiac\n…</code></pre>
 <p>The tidy DAG structure looks like a <code>tibble</code>. ggdag 0.2.0 also prints some information about the DAG at the top.</p>
 <pre class="r"><code>ggdag(smoking_ca_dag, text = FALSE, use_labels = &quot;label&quot;)</code></pre>
 <p><img src="/post/2019-09-17-tidy-causal-dags-with-ggdag-0-2-0/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
@@ -100,9 +100,9 @@ tblgraph_dag</code></pre>
 ## # Edge Data: 5 x 9
 ##    from    to     x     y direction  xend  yend circular label             
 ##   &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;             
-## 1     1     5  13.2  11.8 -&gt;         12.0  11.2 FALSE    Cholesterol       
-## 2     2     1  14.5  11.7 -&gt;         13.2  11.8 FALSE    Smoking           
-## 3     3     2  15.0  12.8 -&gt;         14.5  11.7 FALSE    &quot;Unhealthy\n Life…
+## 1     1     5  26.0  18.3 -&gt;         27.2  17.8 FALSE    Cholesterol       
+## 2     2     1  24.7  18.1 -&gt;         26.0  18.3 FALSE    Smoking           
+## 3     3     2  24.2  19.1 -&gt;         24.7  18.1 FALSE    &quot;Unhealthy\n Life…
 ## # … with 2 more rows</code></pre>
 <pre class="r"><code>tblgraph_dag %&gt;% 
   ggraph() +

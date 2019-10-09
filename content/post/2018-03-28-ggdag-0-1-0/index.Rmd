@@ -15,9 +15,9 @@ authors: []
 lastmod: '2018-03-28'
 featured: no
 image:
-  caption: ''
+  caption: 'Photo by [Sam Carter](https://unsplash.com/photos/GHOiyov2TSQ)'
   focal_point: ''
-  preview_only: no
+  preview_only: yes
 projects: 
   - ggdag
 ---
