@@ -57,7 +57,7 @@ ignoreFiles = ["\\.ipynb$", ".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "
 
 [imaging]
   resampleFilter = "lanczos"
-  quality = 90
+  quality = 100
   anchor = "smart"  # Anchor for cropping. Options include Smart and Center.
 
 # Taxonomies.

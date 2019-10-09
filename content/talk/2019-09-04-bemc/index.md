@@ -25,7 +25,7 @@ all_day: false
 publishDate: 2019-10-07T16:20:41-07:00
 
 authors: []
-tags: []
+tags: [ggdag, precisely]
 
 # Is this a featured talk? (true/false)
 featured: false
@@ -70,5 +70,5 @@ slides: ""
 #   Simply enter your project's folder or file name without extension.
 #   E.g. `projects = ["internal-project"]` references `content/project/deep-learning/index.md`.
 #   Otherwise, set `projects = []`.
-projects: []
+projects: [ggdag, precisely]
 ---
