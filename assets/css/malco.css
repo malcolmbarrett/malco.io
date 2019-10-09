@@ -100,13 +100,17 @@ a.hero-cta-alt:hover {
 .btn-slider {
   margin: 0 auto;
   border-color: #fff;
+  background-color: #fff;
 }
 
 .btn {
   border-radius: 0px;
-  background-color: #fff;
 }
 
+.btn.btn-sm {
+  border-radius: 0px;
+  background-color: #fff;
+}
 
 .btn-toolbar .btn:first-child {
   border-radius: 0px;
@@ -121,6 +125,10 @@ pre, code {
   background: #F7F7F7;
 	font-weight: 500;
 	color: #474747;
+}
+
+.hljs {
+  background: #F7F7F7;
 }
 
 table {
@@ -229,4 +237,46 @@ table {
 
 .article-header-caption {
   right: 100px;
+}
+
+.aboutme-header {
+  position:relative;height: 400px;
+  padding: 3em 0;
+  clear: both; 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-position: center;
+}
+
+/* project cards */
+
+.card .card-image.hover-overlay:after {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  content: '';
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card:hover .card-image.hover-overlay:before {
+  opacity: 0;
+}
+
+.card:hover .card-image.hover-overlay:after {
+  opacity: 0;
+}
+
+/* featurettes */
+
+.featurette p {
+  margin-bottom: 2rem;
+}
+
+.featurette h3 {
+  margin-bottom: 15px;
 }

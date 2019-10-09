@@ -30,7 +30,7 @@
   
 [[main]]
   name = "About me"
-  url = "abooutme"
+  url = "aboutme"
   weight = 6
 
 # Link to a PDF of your resume/CV from the menu.

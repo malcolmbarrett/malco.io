@@ -11,6 +11,8 @@ links:
   url: https://twitter.com/georgecushen
 slides: example
 summary: An example of using the in-built project page.
+categories:
+- r
 tags:
 - Deep Learning
 title: Internal Project

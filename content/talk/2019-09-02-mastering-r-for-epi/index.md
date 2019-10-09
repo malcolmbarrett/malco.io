@@ -1,9 +1,9 @@
 ---
 # Documentation: https://sourcethemes.com/academic/docs/managing-content/
 
-title: "Mastering R for Epidemiology"
+title: "Mastering R for Epidemiologic Research"
 slug: "2019-09-02-mastering-r-for-epi"
-event: "Mastering R for Epidemiology"
+event: "Mastering R for Epidemiologic Research"
 event_url: https://bsph.charite.de/fileadmin/user_upload/microsites/m_cc01/bsph/Flyer/BSPH-AdvEpiMethods-Barrett.pdf
 location: Berlin, Germany
 address:
