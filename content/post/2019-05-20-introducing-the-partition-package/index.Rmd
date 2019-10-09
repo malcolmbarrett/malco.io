@@ -6,7 +6,7 @@ slug: introducing-the-partition-package
 categories:
   - r
   - releases
-tags: []
+tags: [partition]
 subtitle: ''
 summary: ''
 authors: []
@@ -16,7 +16,7 @@ image:
   caption: ''
   focal_point: ''
   preview_only: no
-projects: []
+projects: [partition]
 ---
 
 ```{r setup, include=FALSE}
