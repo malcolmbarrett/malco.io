@@ -24,7 +24,7 @@ all_day: false
 # Schedule page publish date (NOT talk date).
 publishDate: 2019-10-06T20:29:10-07:00
 
-authors: []
+authors: [Malcolm Barrett, "[George G. Vega Yon](https://ggvy.cl/)"]
 tags: []
 
 # Is this a featured talk? (true/false)

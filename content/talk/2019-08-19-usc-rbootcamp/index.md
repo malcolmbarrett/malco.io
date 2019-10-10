@@ -24,7 +24,7 @@ all_day: false
 # Schedule page publish date (NOT talk date).
 publishDate: 2019-10-06T20:29:10-07:00
 
-authors: []
+authors: [Malcolm Barrett, "[Brooke M. Bell](https://www.brookembell.com/)", "[Emil Hivtfeldt](https://www.hvitfeldt.me/blog/)", "[George G. Vega Yon](https://ggvy.cl/)", "[Zhi Yang](https://zhiyang.netlify.com/)"]
 tags: []
 
 # Is this a featured talk? (true/false)

@@ -12,7 +12,7 @@ address:
   region:
   postcode:
   country:
-summary:
+summary: 
 abstract: "Recent developments by the R community have revolutionized the data analysis pipeline in R, from manipulating and visualizing data to communicating results. Our workshop will provide hands-on training in tools from the tidyverse ecosystem, using real epidemiologic data. In the first section, we will teach data manipulation with dplyr, a package that makes data cleaning easy, flexible, and enjoyable. In the next section, we will teach data visualization with ggplot2, the most popular plotting package in R, with a focus on creating publication-quality plots. We will then put these tools together to make reproducible documents. Using R Markdown, we will weave code and text together and learn to write papers and reports, exported to PDF, Word, or HTML, entirely in R. This workflow easily propagates upstream changes to data or analyses throughout a document and eliminates copy and paste errors. Together, these tools form a data analysis pipeline for reproducible, publication-ready work."
 
 # Talk start and end times.
@@ -24,7 +24,7 @@ all_day: false
 # Schedule page publish date (NOT talk date).
 publishDate: 2019-10-06T21:14:04-07:00
 
-authors: []
+authors: [Malcolm Barrett, "[Corinne Riddell](https://corinne-riddell.github.io/)"]
 tags: []
 
 # Is this a featured talk? (true/false)
