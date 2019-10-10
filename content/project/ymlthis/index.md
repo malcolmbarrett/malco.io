@@ -15,7 +15,7 @@ external_link: "https://ymlthis.r-lib.org"
 # To use, add an image named `featured.jpg/png` to your page's folder.
 # Focal points: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.
 image:
-  caption: ""
+  caption: "Image by [Mara Averick](https://twitter.com/dataandme)"
   focal_point: "Center"
   preview_only: false
 
