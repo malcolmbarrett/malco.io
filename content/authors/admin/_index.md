@@ -43,4 +43,4 @@ user_groups:
 - Visitors
 ---
 
-I am an R developer and a PhD student in Epidemiology at the University of Southern California. My work in public health has spanned on-ground clinical education and research clinical and cohort studies. Previously, I was an intern at RStudio, and I served two years in AmeriCorps at federally-qualified health centers in Michigan and New York City.
+I am an R developer and a PhD student in Epidemiology at the University of Southern California. My work in public health has spanned on-ground clinical education and research for clinical and cohort studies. Previously, I was an intern at RStudio, and I served two years in AmeriCorps at federally-qualified health centers in Michigan and New York City.
