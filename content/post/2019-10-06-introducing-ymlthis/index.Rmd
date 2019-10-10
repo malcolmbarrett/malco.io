@@ -85,5 +85,5 @@ ymlthis also has a [vignette introducing YAML in general](http://ymlthis.r-lib.o
 
 Learn more about ymlthis on the [package website](http://ymlthis.r-lib.org). There you'll find articles on [with a detailed introduction to ymlthis](http://ymlthis.r-lib.org/articles/introduction-to-ymlthis.html), [introducing YAML](http://ymlthis.r-lib.org/articles/yaml-overview.html), and [the YAML Fieldguide](http://ymlthis.r-lib.org/articles/yaml-fieldguide.html), which documents in one place all the YAML fields contained in ymlthis.
 
-Please feel free to post an issues to the [GitHub repository](https://github.com/r-lib/ymlthis)!
+Please feel free to post any issues to the [GitHub repository](https://github.com/r-lib/ymlthis)!
 
