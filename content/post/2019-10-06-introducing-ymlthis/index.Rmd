@@ -25,7 +25,7 @@ knit_print.yml <- function(x, ...) {
 }
 ```
 
-I'm pleased to announce that [ymlthis 0.1.0](http://ymlthis.r-lib.org), my project for my summer internship at [RStudio](https://rstudio.com/), is now on CRAN! ymlthis is a toolkit to reduce the pain of working with YAML. The two most common issues when working with YAML are getting the syntax right, particularly the white space, and understanding what options you can specify. ymlthis solves these problems by building and documenting YAML from R. ymlthis supports many other R Markdown packages, such as blogdown, bookdown, and pkgdown, and also offers new ways of working with R Markdown and YAML files. 
+I'm pleased to announce that [ymlthis 0.1.0](http://ymlthis.r-lib.org), my project for my summer internship at [RStudio](https://rstudio.com/), is now on CRAN! ymlthis is a toolkit to reduce the pain of working with YAML in the context of R Markdown documents. The two most common issues when working with YAML are getting the syntax right, particularly the white space, and understanding what options you can specify. ymlthis solves these problems by building and documenting YAML from R. ymlthis supports many other R Markdown packages, such as blogdown, bookdown, and pkgdown, and also offers new ways of working with R Markdown and YAML files. 
 
 
 ```{r, eval=FALSE}

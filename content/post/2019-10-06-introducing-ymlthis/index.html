@@ -21,7 +21,7 @@ projects: ['ymlthis']
 
 
 
-<p>I’m pleased to announce that <a href="http://ymlthis.r-lib.org">ymlthis 0.1.0</a>, my project for my summer internship at <a href="https://rstudio.com/">RStudio</a>, is now on CRAN! ymlthis is a toolkit to reduce the pain of working with YAML. The two most common issues when working with YAML are getting the syntax right, particularly the white space, and understanding what options you can specify. ymlthis solves these problems by building and documenting YAML from R. ymlthis supports many other R Markdown packages, such as blogdown, bookdown, and pkgdown, and also offers new ways of working with R Markdown and YAML files.</p>
+<p>I’m pleased to announce that <a href="http://ymlthis.r-lib.org">ymlthis 0.1.0</a>, my project for my summer internship at <a href="https://rstudio.com/">RStudio</a>, is now on CRAN! ymlthis is a toolkit to reduce the pain of working with YAML in the context of R Markdown documents. The two most common issues when working with YAML are getting the syntax right, particularly the white space, and understanding what options you can specify. ymlthis solves these problems by building and documenting YAML from R. ymlthis supports many other R Markdown packages, such as blogdown, bookdown, and pkgdown, and also offers new ways of working with R Markdown and YAML files.</p>
 <pre class="r"><code># install from CRAN
 install.packages(&quot;ymlthis&quot;)</code></pre>
 <div id="write-yaml" class="section level1">
@@ -62,7 +62,7 @@ csl: aje.csl
 <h1>Write R Markdown and YAML files</h1>
 <p>ymlthis prints cleanly to the console, so you can easily copy and paste it into your R Markdown document (or use <code>use_yml()</code> to programatically place it on your clipboard). If you want a more complete workflow, <code>use_rmarkdown()</code> and friends take <code>yml</code> objects and write them to R Markdown and YAML files.</p>
 <pre class="r"><code>use_rmarkdown(path = &quot;myreport.Rmd&quot;)</code></pre>
-<pre><code>## ✔ Writing &#39;/var/folders/03/9x7925g54mncswxx06wpkxl00000gn/T/RtmpzWzjVm/file10fa1eccb9d3/myreport.Rmd&#39;</code></pre>
+<pre><code>## ✔ Writing &#39;/var/folders/03/9x7925g54mncswxx06wpkxl00000gn/T/RtmpjII0sB/file1d557810ebcc/myreport.Rmd&#39;</code></pre>
 <p>Read the <a href="http://ymlthis.r-lib.org/articles/introduction-to-ymlthis.html">vignette introducing ymlthis</a> for more on working with R Markdown and YAML files, as well as for using ymlthis to create R Markdown templates.</p>
 </div>
 <div id="learn-more-about-yaml-and-yaml-options" class="section level1">
