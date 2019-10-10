@@ -1,7 +1,7 @@
 ---
 title: 'Introducing ymlthis: a toolkit for working with YAML'
 author: Malcolm Barrett
-date: '2019-10-06'
+date: '2019-10-10'
 categories:
   - r
   - releases
@@ -9,7 +9,7 @@ categories:
 tags:
   - ymlthis
 slug: introducing-ymlthis
-lastmod: '2019-10-06'
+lastmod: '2019-10-10'
 featured: no
 image:
   caption: 'Image by [Desirée De Leon](https://desiree.rbind.io)'
@@ -35,7 +35,7 @@ install.packages("ymlthis")
 
 # Write YAML
 
-`yml()` is the basic building-block of ymlthis; by default, it adds your name and R code to write the date programatically. 
+`yml()` is the basic building-block of ymlthis; by default, it adds your name and R code to write today's date programmatically.  
 
 ```{r}
 library(ymlthis)
@@ -55,9 +55,11 @@ yml() %>%
   )
 ```
 
+These functions all start with `yml_*()`. YAML functions and helper functions for R Markdown extensions start with `yml_packagename*()` or `packagename_*()`. For instance, blogdown functions follow the pattern `yml_blogdown*()` and `blogdown_*()`.
+
 # Write R Markdown and YAML files
 
-ymlthis prints cleanly to the console, so you can easily copy and paste it into your R Markdown document (or use `use_yml()` to programatically place it on your clipboard). However, this might not fit the needs of your workflow. `use_rmarkdown()` and friends take `yml` objects and write them to R Markdown files.
+ymlthis prints cleanly to the console, so you can easily copy and paste it into your R Markdown document (or use `use_yml()` to programatically place it on your clipboard). If you want a more complete workflow, `use_rmarkdown()` and friends take `yml` objects and write them to R Markdown and YAML files.
 
 ```{r, eval=FALSE}
 use_rmarkdown(path = "myreport.Rmd")
@@ -75,11 +77,13 @@ Read the [vignette introducing ymlthis](http://ymlthis.r-lib.org/articles/introd
 
 # Learn more about YAML and YAML options
 
-Because these YAML fields are expressed as R function arguments, they are explicitly documented in `yml_*()` functions. For instance, if you want to know the LaTeX options you can set while knitting to a PDF file, you can look at the help page for `?yml_latex_opts()`. If you're not quite sure where to look, all of the YAML fields documented in ymlthis are compiled in a single place in the [YAML Fieldguide](http://ymlthis.r-lib.org/articles/yaml-fieldguide.html)
+Because these YAML fields are expressed as R function arguments, they are explicitly documented in `yml_*()` functions. For instance, if you want to know the LaTeX options you can set while knitting to a PDF file, you can look at the help page for `?yml_latex_opts()`. If you're not quite sure where to look, all of the YAML fields documented in ymlthis are compiled in a single place in the [YAML Fieldguide](http://ymlthis.r-lib.org/articles/yaml-fieldguide.html).
 
 ymlthis also has a [vignette introducing YAML in general](http://ymlthis.r-lib.org/articles/yaml-overview.html), if you'd like to learn more about using it directly.
 
 # Where do I learn more about ymlthis?
 
 Learn more about ymlthis on the [package website](http://ymlthis.r-lib.org). There you'll find articles on [with a detailed introduction to ymlthis](http://ymlthis.r-lib.org/articles/introduction-to-ymlthis.html), [introducing YAML](http://ymlthis.r-lib.org/articles/yaml-overview.html), and [the YAML Fieldguide](http://ymlthis.r-lib.org/articles/yaml-fieldguide.html), which documents in one place all the YAML fields contained in ymlthis.
+
+Please feel free to post an issues to the [GitHub repository](https://github.com/r-lib/ymlthis)!
 
