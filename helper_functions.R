@@ -17,3 +17,6 @@ thumbnail <- function(x, path, ...) {
   move_image(x, path, "thumbnail", ...)
 }
 
+update_theme <- function() {
+  system2("git", c("submodule", "update", "--recursive", "--remote"))
+}
