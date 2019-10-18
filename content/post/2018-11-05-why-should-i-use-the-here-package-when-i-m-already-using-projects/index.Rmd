@@ -11,7 +11,7 @@ tags:
 subtitle: ''
 summary: ''
 authors: []
-lastmod: '2019-10-06'
+lastmod: '2019-10-18'
 featured: no
 image:
   caption: 'Photo by [John Baker](https://unsplash.com/photos/3To9V42K0Ag)'
@@ -27,15 +27,19 @@ library(here)
 ```
 
 
-## TL;DR: Why should I use `here`?
+# TL;DR: Why should I use here?
 
-* The `here` package makes it easier to use sub-directories within projects
-* It's robust to other ways people open and run your code
-* Like its base R cousin, `file.path()`, it writes paths safely across operating systems
+The here package bottles up several small best practices for referencing files in your project. You could manufacture most of these yourself using a combination of RStudio projects and clever file paths, but the here package is useful because it streamlines these practices without you needing to think about it. The main benefits:
 
-Like a lot of people, when I learned R, I was taught to put `setwd()` and `rm(list = ls())` at the beginning of scripts. Getting rid of any leftovers in the environment and setting the working directory so I can use relative paths made sense to me. It seemed like good practice! But `setwd()` and `rm(list = ls())` are problematic. `rm()` doesn't actually give you a clean R session; it doesn't, for instance, detach packages. `setwd()`, meanwhile, is completely dependent on the way you organize your files. If you set a working directory that is an absolute path on your computer, it will only run for someone else if they rewrite the absolute path to where it is on *their* computer. 
+* here works from the project up. That makes it easy to reference other sub-folders in your directory.
+* It's robust to other ways people open and run your code. Opening your files outside of your project file will still work as intended.
+* Like its base R cousin, `file.path()`, `here()` writes paths safely across operating systems. 
 
-Last year, Jenny Bryan shared some slides from a talk on this subject. I'll let them speak for themselves:
+# A Song of Fire and Workflows
+
+When I got started with R, I learned to put `setwd()` and `rm(list = ls())` at the beginning of scripts. It made sense to me, too. It seemed like it got rid of any leftovers in the environment and set up the working directory so I could use relative paths. That's got to be a good practice, right? The idea definitely is, but `setwd()` and `rm(list = ls())` are problematic. `rm()` *doesn't* give you a clean R session; it won't, for instance, detach packages. `setwd()`, meanwhile, is completely dependent on the way you organize your files. By and large, the absolute path that you set on your computer won't work on mine because it's doubtful we have the same directory names. I'd need to change the `setwd()` path in your script to match where I have the file on *my* computer.
+
+Last year, Jenny Bryan gave a talk on on setting up your R session for a better workflow. A couple of slides in particular [set off a bit of controversy](much discussion and consternation in #rstats Twitter): 
 
 > *If the first line of your R script is*
 > 
@@ -49,58 +53,22 @@ Last year, Jenny Bryan shared some slides from a talk on this subject. I'll let 
 > 
 > *I will come into your office and SET YOUR COMPUTER ON FIRE* 🔥.
 
-If you haven't read [her write-up on what the issues and solutions are](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/), you should. Here's the basic idea:
+If you haven't read [her write-up](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/) on what the issues with using `setwd()` and `rm()` are and solutions using a project-oriented workflow, you should. Here's the basic idea:
 
-- Use Rstudio projects. They set up a local working directory in a fresh R session, which makes it much easier for someone else to open
-- Use `here()` from the `here` package to write file paths
+- Use RStudio projects. They set up a local working directory in a fresh R session, which makes it much easier for someone else to open and run your code. ([Setting up a project is easy](https://www.youtube.com/watch?v=etkSsF6r2iU)[^1].)
+- Use `here()` from the here package to write file paths
 
-[Setting up a project is easy](https://www.youtube.com/watch?v=etkSsF6r2iU)[^1]. Projects can handle both of the problems `setwd()` and `rm(list = ls())` are trying to solve for you. You can [set it so you have a fresh R session when opening a project](https://community.rstudio.com/t/first-line-of-every-r-script/799/11) (either locally in the project or globally in Rstudio). Additionally, when you're in a project, you don't need to set your working directory. The working directory is just wherever the project is.
+Projects can handle both of the problems `setwd()` and `rm(list = ls())` are trying to solve for you. The need for `setwd()` is automatically eliminated by using projects because the the default directory will be wherever the project is located. For the latter problem, [set the project to open a fresh R session when starting a project](https://community.rstudio.com/t/first-line-of-every-r-script/799/12). You can do so in your local project options or globally in your RStudio options. Always starting a fresh session eliminates the need for `rm(list = ls())` and, in fact, does a better job of clearing your environment. 
 
-So, it may not be obvious: what's the benefit of using the `here` package if projects solve both those problems? 
+**So, it may not be obvious: what's the benefit of using the here package if projects solve both these problems?**
  
 ```{r, echo=FALSE, out.width="75%"}
 knitr::include_graphics("https://media.giphy.com/media/YByMQsx1NrmPKLuYqF/giphy.gif")
 ```
 
-# What's under here?
+# I have a project. Why not just use relative paths?
 
-It may seem like `here` is just pasting paths together for you, but let's look at what it's actually doing. The `here` package is essentially a wrapper for the `rprojroot` package. `rprojroot` is a powerful tool for working with project directories, but `here` offers a simpler set of functions that take care of its main purpose: detecting the root directory and working with paths within it in a platform-independent way. 
-
-If you use `here()`, it will tell you your project root directory, which will look something like this.
-
-```{r here, eval=FALSE}
-library(here)
-here()
-```
-
-```{r here_results, eval=FALSE}
-## here() starts at /Users/malcolmbarrett/folders/to/directory/
-## [1] "/Users/malcolmbarrett/folders/to/directory/"
-```
-
-Essentially, `here()` is looking around for a few things that signify a root directory, like a `.Rproj` project file. `here` also has a function, `set_here()`, that will tag a directory as root using a `.here` file, even if it's not a project. In fact, `.here` files take priority, then `.Rproj` files, followed by several other file formats (see the documentation at `?here`). The last resort is the working directory. If you're not sure why `here` is picking a root directory, you can ask it to explain itself using `dr_here()`
-
-```{r here_dir, eval=FALSE}
-dr_here()
-```
-
-```{r here_dir_results, eval=FALSE}
-## here() starts at /Users/malcolmbarrett/folders/to/directory/, because it contains a file matching `[.]Rproj$` with contents matching `^Version: ` in the first line
-```
-
-`here()` also works a lot like `file.path()` in that it will create a platform-independent path for you (e.g. it will work on Windows and Mac alike). On my Mac, it looks something like this:
-
-```{r here_path, eval=FALSE}
-here("figure", "figure.png")
-```
-
-```{r here_path_results, eval=FALSE}
-## [1] "/Users/malcolmbarrett/folders/to/directory/figure/figure.png"
-```
-
-## I have a project. Why not just use relative paths?
-
-I already touched on one reason to avoid writing paths yourself: the rules aren't necessarily the same between operating systems. You could, of course, use `file.path()` from base R, which safely creates a relative path for you.
+One reason to avoid writing paths yourself is that the rules aren't necessarily the same between operating systems. You could, of course, use `file.path()` from base R, which safely creates a relative path for you.
 
 ```{r file_path, eval=FALSE}
 file.path("figure", "figure.png")
@@ -110,7 +78,7 @@ file.path("figure", "figure.png")
 ## [1] "figure/figure.png"
 ```
 
-But `here` has some added benefits: it makes it easier to manage sub-directories, and it makes your code more robust outside of projects. [As an example, I've set up an R project on my GitHub](https://github.com/malcolmbarrett/here_here) that has a file directory like this:
+But here has some added benefits: it operates from the project up, making it easier to reference other folders, and it makes your code more robust outside of projects. [As an example, I've set up an R project on my GitHub](https://github.com/malcolmbarrett/here_here) that has a file directory like this:
 
 ```{r projdir, eval=FALSE}
 here_here
@@ -126,7 +94,7 @@ here_here
 |--here_here.Rproj
 ```
 
-In `rmd/01_read_data.Rmd`, I try to call the data using a relative path from the root directory, but Rmarkdown sets a local working directory, so it fails: 
+I have an R Markdown file in the `rmd` folder called `01_read_data.Rmd`. In this file, I try to call my data using a relative path from the root directory. But this code fails. R Markdown renders with the working directory set to whatever directory the file is in, but the `data` folder is a level up.
 
 ```{r fail, eval = FALSE}
 library(tidyverse)
@@ -137,9 +105,10 @@ read_csv("data/mtcars.csv")
 ## Error: 'data/mtcars.csv' does not exist in current working directory
 ```
 
-I can solve this with some of the usual wonky backtracking, e.g. `../data/mtcars.csv`, but `here()` will take care if it for me by finding the project directory:
+I could solve this by backtracking my file path, e.g. `../data/mtcars.csv`. While backtracking solves the problem from the perspective of R Markdown, however, it introduces a new one: this code won't work if I run it in the console. `here()` works in both settings by starting from the project directory.
 
 ```{r herehere, eval = FALSE}
+library(here)
 read_csv(here("data", "mtcars.csv"))
 ```
 
@@ -147,9 +116,9 @@ read_csv(here("data", "mtcars.csv"))
 tibble::as_tibble(mtcars)
 ```
 
-It works with no trouble. Likewise, saving output to other sub-directories is no issue:
+Now, my data reads in with no trouble, and it works just as well running in the console as it does in a code chunk. Likewise, saving output to other folders is easy. I have a `figs` folder in my directory, and I want to save a ggplot there[^2].
 
-```{r makee_ggplot}
+```{r make_ggplot}
 ggplot(mtcars, aes(mpg, hp)) + geom_point()
 ```
 
@@ -157,28 +126,73 @@ ggplot(mtcars, aes(mpg, hp)) + geom_point()
 ggsave(here("figs", "mpg_hp.png"))
 ```
 
-Which puts it in the `figs` folder despite being called from the `rmd` folder.
+Even though I'm calling this code from the `rmd` folder (where I saved my report), here has no trouble finding the `figs` folder because it searches from the project up. This code will work even if I move the R Markdown file somewhere else.
 
 ```{r projdir_fig, eval=FALSE}
 |--figs
     |--mpg_hp.png
 ```
 
-This is nice, as well, because if I move a file, I don't need to change the relative directory: it works from the root up. 
+Another benefit is that these files will still run if I open them outside of an RStudio project. For R Markdown files, using a relative path may be okay because it sets a local working directory when running, but `.R` files don't. If you open `scripts/read_data.R` in a different RStudio session, for instance, the relative path fails, but `here()` still works fine. That's because it knows where the right directory is thanks to the `.Rproj` file.
 
-Another benefit is that, if I open any of these files outside of an Rstudio project, they will still run. For Rmarkdown files, using a relative path may be fine because it sets a local working directory when running, but `.R` files don't. If you open `scripts/read_data.R` in a different Rstudio session, for instance, the relative path fails, but `here()` still works fine. That's because it knows where the right directory is based on the `.Rproj` file.
+![](outside_project.gif)
 
-![](https://malco.io/img/outside_project.gif)
+Likewise, if you or someone else set a working directory within your project, here will still work correctly because project directories take precedence. (If you need to set the project root explicitly, use `set_here()`.)
 
-Likewise, if you or someone else sets a working directory within your project, `here` will still work correctly because project directories take precedence. If you need to manually change it for some reason, it's better in this case to use `set_here()`.
+# What's under here?
 
-## More than a path paster
+Those are the main benefits of using here: small best practices that streamline your file organization. So what's here actually doing to make that happen? The here package is a wrapper for the rprojroot package. rprojroot is a powerful tool for working with project directories, but here offers a more straightforward set of functions that take care of its primary purpose: detecting the root directory and working with paths within it in a platform-independent way. 
 
-`here` is one of the many tools in our toolkit for addressing reproducibility. Because it's designed to work with Rstudio projects, it's a natural tool to use within them. `here` is also robust to other ways people run your code. If that doesn't convince you, you can at least sleep soundly knowing that your computer will live another day.
+Running `here()` will tell you your project root directory, which will look something like this.
+
+```{r here, eval=FALSE}
+here()
+```
+
+```{r here_results, eval=FALSE}
+## here() starts at /Users/malcolmbarrett/folders/to/directory/
+## [1] "/Users/malcolmbarrett/folders/to/directory/"
+```
+
+Essentially, `here()` is looking around for a few things that signify a root directory, like a `.Rproj` project file. here also has a function, `set_here()`, that will tag a directory as root using a `.here` file, even if it's not a project. In fact, [`.here` files take priority](https://here.r-lib.org/reference/here.html), followed by `.Rproj` files, then several other file formats. The last resort is the working directory. If you're not sure why here is picking a root directory, you can ask it to explain itself using `dr_here()`
+
+```{r here_dir, eval=FALSE}
+dr_here()
+```
+
+```{r here_dir_results, eval=FALSE}
+## here() starts at /Users/malcolmbarrett/folders/to/directory/, because it contains a file matching `[.]Rproj$` with contents matching `^Version: ` in the first line
+```
+
+`here()` also works a lot like `file.path()` in that it will create a platform-independent path for you (e.g., it will work on Windows and Mac alike). On my Mac, it looks something like this:
+
+```{r here_path, eval=FALSE}
+here("figure", "figure.png")
+```
+
+```{r here_path_results, eval=FALSE}
+## [1] "/Users/malcolmbarrett/folders/to/directory/figure/figure.png"
+```
+
+The main difference is that, while `file.path()` also gives a cross-platform path, it only pieces together what you give it. That's very useful, of course, so it may be practical to combine the tools, depending on the needs of your project. 
+
+```{r file_path2, eval=FALSE}
+file.path("figure", "figure.png")
+```
+
+```{r file_path_results2, eval=FALSE}
+## [1] "figure/figure.png"
+```
+
+# More than a path paster
+
+here is one of the many tools in our toolkit for addressing reproducibility. It's designed to work with RStudio projects from the root directory up, making it convenient to organize both your files and your file paths. here is also robust to other ways people run your code. If that doesn't convince you, you can at least sleep soundly knowing that your computer will live another day.
 
 ```{r, echo=FALSE, out.width="75%"}
 knitr::include_graphics("https://media.giphy.com/media/XQt3RY9g48OwU/giphy.gif")
 ```
 
 
-[^1]: And if you're on a Mac, you can also combine it with Alfred. [Check out Hadley's workflow with projects and Alfred here](https://www.youtube.com/watch?v=boKFxBniUH0).
+[^1]: And if you're on a Mac, you can also combine it with Alfred. [Check out Hadley's workflow with projects and Alfred here](https://www.youtube.com/watch?v=boKFxBniUH0), which has become essential for me.
+
+[^2]: Alternatively, you can set it so plots are knitted directly to your folder by putting this code in your R Markdown file: `knitr::opts_chunk$set(fig.path = here::here("figs"))`. This came up in a conversation with Simon Kiss on the original version of this post.
