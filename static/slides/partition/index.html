@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Introducing partition</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Malcolm Barrett" />
+    <meta name="date" content="2019-05-22" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introducing partition
+### Malcolm Barrett
+### 2019-05-22
+
+---
+
+
+
+
+## `partition()`
+
+
+```r
+partition(
+  
+  
+)
+```
+
+---
+
+## `partition()`
+
+
+```r
+partition(
+* .data,
+* threshold,
+  
+)
+```
+
+---
+
+##  `partition()`
+
+
+```r
+partition(
+  .data,
+  threshold, 
+* partitioner = part_icc(),
+)
+```
+
+---
+
+
+```r
+set.seed(123)
+library(partition)
+sim_data &lt;- simulate_block_data(
+  rep(3:5, 3), 
+  lower_corr = .4, 
+  upper_corr = .6, 
+  n = 1000
+)
+```
+
+---
+
+
+```r
+prt &lt;- partition(sim_data, threshold = .6)
+prt
+```
+
+---
+
+
+```r
+prt &lt;- partition(sim_data, threshold = .6)
+prt
+```
+
+```
+## Partitioner:
+##    Director: Minimum Distance (Pearson) 
+##    Metric: Intraclass Correlation 
+##    Reducer: Scaled Mean
+## 
+## Reduced Variables:
+## 2 reduced variables created from 4 observed variables
+## 
+## Mappings:
+## reduced_var_1 = {block6_x2, block6_x4}
+## reduced_var_2 = {block1_x1, block1_x2}
+## 
+## Minimum information:
+## 0.606
+```
+
+---
+
+class: middle
+
+|  partitioner |  direct |  measure | reduce |
+|:--|:--|:--|:--|
+|  `part_icc()`|  Minimum Distance |  ICC | scaled row means |
+|  `part_kmeans()`|  K-Means Clusters | Minimum ICC | scaled row means |
+|  `part_minr2()`|  Minimum Distance |  Minimum R-Squared | scaled row means |
+|  `part_pc1()`|  Minimum Distance |  Variance Explained (PCA) | first principal component |
+|  `part_icc()`|  Minimum Distance |  Standardized Mutual Information | scaled row means |
+
+---
+
+## reduced data
+
+
+```r
+# also: prt$reduced_data
+partition_scores(prt)
+```
+
+---
+
+
+```
+## # A tibble: 1,000 x 34
+##    block1_x3 block2_x1 block2_x2 block2_x3 block2_x4
+##        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+##  1     0.786   -1.60     -1.42     -1.29     -1.31  
+##  2     0.787    0.218    -1.21     -0.142    -0.262 
+##  3    -0.160    0.263     1.13      0.612    -0.0914
+##  4     1.93     1.48      0.0141   -0.153    -0.304 
+##  5    -0.914   -0.243     0.534    -0.661     0.191 
+##  6     2.67     0.240     0.322    -0.223    -0.383 
+##  7     0.690    1.46     -0.457     0.864     0.410 
+##  8     2.51    -1.19      0.0107   -0.773    -2.01  
+##  9     0.970   -0.0343   -0.124     0.0621   -2.58  
+## 10     0.173    0.268     1.09      1.37      1.44  
+## # … with 990 more rows, and 29 more variables:
+## #   block3_x1 &lt;dbl&gt;, block3_x2 &lt;dbl&gt;, block3_x3 &lt;dbl&gt;,
+## #   block3_x4 &lt;dbl&gt;, block3_x5 &lt;dbl&gt;, block4_x1 &lt;dbl&gt;,
+## #   block4_x2 &lt;dbl&gt;, block4_x3 &lt;dbl&gt;, block5_x1 &lt;dbl&gt;,
+## #   block5_x2 &lt;dbl&gt;, block5_x3 &lt;dbl&gt;, block5_x4 &lt;dbl&gt;,
+## #   block6_x1 &lt;dbl&gt;, block6_x3 &lt;dbl&gt;, block6_x5 &lt;dbl&gt;,
+## #   block7_x1 &lt;dbl&gt;, block7_x2 &lt;dbl&gt;, block7_x3 &lt;dbl&gt;,
+## #   block8_x1 &lt;dbl&gt;, block8_x2 &lt;dbl&gt;, block8_x3 &lt;dbl&gt;,
+## #   block8_x4 &lt;dbl&gt;, block9_x1 &lt;dbl&gt;, block9_x2 &lt;dbl&gt;,
+## #   block9_x3 &lt;dbl&gt;, block9_x4 &lt;dbl&gt;, block9_x5 &lt;dbl&gt;,
+## #   reduced_var_1 &lt;dbl&gt;, reduced_var_2 &lt;dbl&gt;
+```
+
+---
+
+## mapping
+
+
+```r
+mapping_key(prt)
+```
+
+```
+## # A tibble: 34 x 4
+##    variable  mapping   information indices  
+##    &lt;chr&gt;     &lt;list&gt;          &lt;dbl&gt; &lt;list&gt;   
+##  1 block1_x3 &lt;chr [1]&gt;           1 &lt;int [1]&gt;
+##  2 block2_x1 &lt;chr [1]&gt;           1 &lt;int [1]&gt;
+##  3 block2_x2 &lt;chr [1]&gt;           1 &lt;int [1]&gt;
+##  4 block2_x3 &lt;chr [1]&gt;           1 &lt;int [1]&gt;
+##  5 block2_x4 &lt;chr [1]&gt;           1 &lt;int [1]&gt;
+##  6 block3_x1 &lt;chr [1]&gt;           1 &lt;int [1]&gt;
+##  7 block3_x2 &lt;chr [1]&gt;           1 &lt;int [1]&gt;
+##  8 block3_x3 &lt;chr [1]&gt;           1 &lt;int [1]&gt;
+##  9 block3_x4 &lt;chr [1]&gt;           1 &lt;int [1]&gt;
+## 10 block3_x5 &lt;chr [1]&gt;           1 &lt;int [1]&gt;
+## # … with 24 more rows
+```
+
+---
+
+## mapping
+
+
+```r
+unnest_mappings(prt)
+```
+
+```
+## # A tibble: 36 x 4
+##    variable  information mapping   indices
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;       &lt;int&gt;
+##  1 block1_x3           1 block1_x3       3
+##  2 block2_x1           1 block2_x1       4
+##  3 block2_x2           1 block2_x2       5
+##  4 block2_x3           1 block2_x3       6
+##  5 block2_x4           1 block2_x4       7
+##  6 block3_x1           1 block3_x1       8
+##  7 block3_x2           1 block3_x2       9
+##  8 block3_x3           1 block3_x3      10
+##  9 block3_x4           1 block3_x4      11
+## 10 block3_x5           1 block3_x5      12
+## # … with 26 more rows
+```
+
+---
+
+## mapping
+
+
+```r
+filter_reduced(prt)
+```
+
+```
+## # A tibble: 2 x 4
+##   variable      mapping   information indices  
+##   &lt;chr&gt;         &lt;list&gt;          &lt;dbl&gt; &lt;list&gt;   
+## 1 reduced_var_1 &lt;chr [2]&gt;       0.608 &lt;int [2]&gt;
+## 2 reduced_var_2 &lt;chr [2]&gt;       0.606 &lt;int [2]&gt;
+```
+
+---
+
+## Direct-measure-reduce: `part_icc()`
+
+
+```r
+*as_partitioner(
+  direct = direct_distance_pearson,
+  measure = measure_icc,
+  reduce = reduce_scaled_mean
+)
+```
+
+---
+
+## Direct-measure-reduce: `part_icc()`
+
+
+```r
+as_partitioner(
+* direct = direct_distance_pearson,
+  measure = measure_icc,
+  reduce = reduce_scaled_mean
+)
+```
+
+---
+
+## Direct-measure-reduce: `part_icc()`
+
+
+```r
+as_partitioner( 
+  direct = direct_distance_pearson,
+* measure = measure_icc,
+  reduce = reduce_scaled_mean
+)
+```
+
+---
+
+## Direct-measure-reduce: `part_icc()`
+
+
+```r
+as_partitioner(
+  direct = direct_distance_pearson,
+  measure = measure_icc,
+* reduce = reduce_scaled_mean
+)
+```
+
+---
+
+## use a custom partitioner
+
+
+```r
+*part_icc_rowmeans &lt;- replace_partitioner(
+  part_icc, 
+  reduce = as_reducer(rowMeans)
+)
+```
+
+---
+
+## use a custom partitioner
+
+
+```r
+part_icc_rowmeans &lt;- replace_partitioner(
+* part_icc,
+  reduce = as_reducer(rowMeans)
+)
+```
+
+---
+
+## use a custom partitioner
+
+
+```r
+part_icc_rowmeans &lt;- replace_partitioner(
+  part_icc, 
+* reduce = as_reducer(rowMeans)
+)
+```
+
+---
+
+
+
+
+```r
+partition(sim_data, threshold = .6, partitioner = part_icc_rowmeans) 
+```
+
+```
+## Partitioner:
+##    Director: Minimum Distance (Pearson) 
+##    Metric: Intraclass Correlation 
+*##    Reducer: &lt;custom reducer&gt;
+## 
+## Reduced Variables:
+## 2 reduced variables created from 4 observed variables
+## 
+## Mappings:
+## reduced_var_1 = {block6_x2, block6_x4}
+## reduced_var_2 = {block1_x1, block1_x2}
+## 
+## Minimum information:
+## 0.606
+```
+
+---
+
+
+```r
+plot_stacked_area_clusters(sim_data) +
+  ggplot2::theme_minimal(14)
+```
+
+![](index_small_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+
+---
+
+class: inverse, center
+
+# Vignettes at [uscbiostats.github.io/partition/](https://uscbiostats.github.io/partition/)
+
+&lt;br&gt;&lt;br&gt;
+
+## [Introduction to partition](https://uscbiostats.github.io/partition/articles/introduction-to-partition.html)
+##  [Extending partition](https://uscbiostats.github.io/partition/articles/extending-partition.html)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

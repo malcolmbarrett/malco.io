@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Introduction to the Tidyverse</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Malcolm Barrett" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction to the Tidyverse
+## pt 3: functional programming with purrr
+### Malcolm Barrett
+### <p>
+<h4>
+Slides: <a href='http://bit.ly/hs_purrr_slides'>bit.ly/hs_purrr_slides</a>
+</h4>
+</p>
+<p>
+<h4>
+Code: <a href='http://bit.ly/hs_purrr_repo'>bit.ly/hs_purrr_repo</a>
+</h4>
+</p>
+
+---
+
+
+
+
+
+class: inverse-ns, center
+
+background-image: url(tidyhex.png)
+---
+
+class: inverse-ns, center
+
+# Working with data in R
+## the &lt;span style = 'color:#E69F00'&gt;tidyverse&lt;/span&gt; is a collection of &lt;span style = 'color:#56B4E9'&gt;friendly and consistent&lt;/span&gt; tools for data analysis and visualization. 
+
+---
+class: inverse-ns, center
+
+# Working with data in R
+## &lt;span style = 'color:#6C7B7F'&gt;the tidyverse is a collection of friendly and consistent tools for data analysis and visualization. &lt;/span&gt;
+## They live as &lt;span style = 'color:#E69F00'&gt;R packages&lt;/span&gt; each of which does one thing well. 
+
+---
+
+background-image: url(https://raw.githubusercontent.com/tidyverse/tidyverse/master/man/figures/logo.png)
+background-position: 95% 10%
+## `library(tidyverse)` will load  
+## the core tidyverse packages: 
+
+#### [ggplot2](http://ggplot2.tidyverse.org), for data visualisation.
+#### [dplyr](http://dplyr.tidyverse.org), for data manipulation.
+#### [tidyr](http://tidyr.tidyverse.org), for data tidying.
+#### [readr](http://readr.tidyverse.org), for data import.
+#### [purrr](http://purrr.tidyverse.org), for functional programming.
+#### [tibble](http://tibble.tidyverse.org), for tibbles, a modern re-imagining of data frames.
+#### [stringr](https://github.com/tidyverse/stringr), for strings.
+#### [forcats](https://github.com/hadley/forcats), for factors.
+
+---
+background-image: url(http://hexb.in/hexagons/purrr.png)
+background-position: 90% 26%
+
+# purrr: A functional programming toolkit for R 
+
+&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+
+## Complete and consistent set of tools for working with functions and vectors
+
+---
+class: inverse
+
+# Problems we want to solve:
+1. Making code clear
+2. Making code safe
+3. Working with lists and data frames
+
+---
+
+# Review: lists, vectors, and data.frames (or tibbles)
+
+
+```r
+c(a = "hello", b = 1)
+```
+
+```
+##       a       b 
+## "hello"     "1"
+```
+
+---
+
+# lists can contain any object
+
+
+```r
+list(a = "hello", b = 1, c = mean)
+```
+
+```
+## $a
+## [1] "hello"
+## 
+## $b
+## [1] 1
+## 
+## $c
+## function (x, ...) 
+## UseMethod("mean")
+## &lt;bytecode: 0x7f996d1fc3b0&gt;
+## &lt;environment: namespace:base&gt;
+```
+
+---
+
+#  data frames are lists
+
+
+```r
+x &lt;- list(a = "hello", b = 1)
+as.data.frame(x)
+```
+
+```
+##       a b
+## 1 hello 1
+```
+
+---
+
+#  data frames are lists
+
+
+```r
+library(gapminder)
+gapminder
+```
+
+```
+## # A tibble: 1,704 x 6
+##    country     continent  year lifeExp      pop gdpPercap
+##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+##  1 Afghanistan Asia       1952    28.8  8425333      779.
+##  2 Afghanistan Asia       1957    30.3  9240934      821.
+##  3 Afghanistan Asia       1962    32.0 10267083      853.
+##  4 Afghanistan Asia       1967    34.0 11537966      836.
+##  5 Afghanistan Asia       1972    36.1 13079460      740.
+##  6 Afghanistan Asia       1977    38.4 14880372      786.
+##  7 Afghanistan Asia       1982    39.9 12881816      978.
+##  8 Afghanistan Asia       1987    40.8 13867957      852.
+##  9 Afghanistan Asia       1992    41.7 16317921      649.
+## 10 Afghanistan Asia       1997    41.8 22227415      635.
+## # … with 1,694 more rows
+```
+
+---
+
+#  data frames are lists
+
+
+```r
+as.list(head(gapminder))
+```
+
+---
+
+#  data frames are lists
+
+
+```r
+as.list(head(gapminder))
+```
+
+```
+## $country
+## [1] Afghanistan Afghanistan Afghanistan Afghanistan Afghanistan Afghanistan
+## 142 Levels: Afghanistan Albania Algeria Angola Argentina ... Zimbabwe
+## 
+## $continent
+## [1] Asia Asia Asia Asia Asia Asia
+## Levels: Africa Americas Asia Europe Oceania
+## 
+## $year
+## [1] 1952 1957 1962 1967 1972 1977
+## 
+## $lifeExp
+## [1] 28.801 30.332 31.997 34.020 36.088 38.438
+## 
+## $pop
+## [1]  8425333  9240934 10267083 11537966 13079460 14880372
+## 
+## $gdpPercap
+## [1] 779.4453 820.8530 853.1007 836.1971 739.9811 786.1134
+```
+
+---
+
+#  vectorized functions don't work on lists
+
+
+
+
+```r
+sum(rnorm(10))
+```
+
+---
+
+#  vectorized functions don't work on lists
+
+
+
+
+```r
+sum(rnorm(10))
+```
+
+```
+## [1] -3.831574
+```
+
+---
+
+#  vectorized functions don't work on lists
+
+
+
+
+```r
+sum(rnorm(10))
+```
+
+```
+## [1] -3.831574
+```
+
+
+```r
+sum(list(x = rnorm(10), y = rnorm(10), z = rnorm(10)))
+```
+
+---
+
+#  vectorized functions don't work on lists
+
+
+
+
+```r
+sum(rnorm(10))
+```
+
+```
+## [1] -3.831574
+```
+
+
+```r
+sum(list(x = rnorm(10), y = rnorm(10), z = rnorm(10)))
+```
+
+```
+## Error in sum(list(x = rnorm(10), y = rnorm(10), z = rnorm(10))): invalid 'type' (list) of argument
+```
+
+---
+
+background-image: url(http://hexb.in/hexagons/purrr.png)
+background-position: 95% 2%
+
+# map(.x, .f)
+
+--
+
+## .x: a vector, list, or data frame
+
+--
+
+## .f: a function
+
+--
+
+## Returns a list
+
+---
+
+# Using map()
+
+
+```r
+library(purrr)
+x_list &lt;- list(x = rnorm(10), y = rnorm(10), z = rnorm(10))
+
+map(x_list, mean)
+```
+
+---
+
+# Using map()
+
+
+```r
+library(purrr)
+*x_list &lt;- list(x = rnorm(10), y = rnorm(10), z = rnorm(10))
+
+map(x_list, mean)
+```
+
+
+---
+
+# Using map()
+
+
+```r
+library(purrr)
+x_list &lt;- list(x = rnorm(10), y = rnorm(10), z = rnorm(10))
+
+*map(x_list, mean)
+```
+
+
+---
+
+# Using map()
+
+
+```r
+library(purrr)
+x_list &lt;- list(x = rnorm(10), y = rnorm(10), z = rnorm(10))
+
+map(x_list, mean)
+```
+
+```
+## $x
+## [1] -0.6097971
+## 
+## $y
+## [1] -0.2788647
+## 
+## $z
+## [1] 0.6165922
+```
+
+---
+
+&lt;img src="img/purrr_list.png" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/purrr_f_list.png" width="912" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/purr_x_input.png" width="901" style="display: block; margin: auto;" /&gt;
+
+---
+
+## using `map()` with data frames
+
+
+```r
+gapminder %&gt;% 
+  dplyr::select_if(is.numeric) %&gt;% 
+  map(sd)
+```
+
+---
+
+## using `map()` with data frames
+
+
+```r
+*gapminder %&gt;%
+* dplyr::select_if(is.numeric) %&gt;%
+  map(sd)
+```
+
+---
+
+## using `map()` with data frames
+
+
+```r
+gapminder %&gt;% 
+  dplyr::select_if(is.numeric) %&gt;% 
+* map(sd)
+```
+
+---
+
+## using `map()` with data frames
+
+
+```r
+gapminder %&gt;% 
+  dplyr::select_if(is.numeric) %&gt;% 
+  map(sd)
+```
+
+```
+## $year
+## [1] 17.26533
+## 
+## $lifeExp
+## [1] 12.91711
+## 
+## $pop
+## [1] 106157897
+## 
+## $gdpPercap
+## [1] 9857.455
+```
+
+---
+
+#  Review: writing functions
+
+
+```r
+x &lt;- x^2
+x &lt;- scale(x)
+x &lt;- max(x)
+```
+
+---
+
+#  Review: writing functions
+
+
+```r
+x &lt;- x^2
+x &lt;- scale(x)
+x &lt;- max(x)
+
+y &lt;- x^2
+y &lt;- scale(y)
+y &lt;- max(y)
+
+z &lt;- z^2
+z &lt;- scale(x)
+z &lt;- max(z)
+```
+
+---
+
+
+#  Review: writing functions
+
+
+```r
+x &lt;- x^2
+x &lt;- scale(x)
+x &lt;- max(x)
+
+*y &lt;- x^2
+y &lt;- scale(y)
+y &lt;- max(y)
+
+z &lt;- z^2
+*z &lt;- scale(x)
+z &lt;- max(z)
+```
+
+---
+
+#  Review: writing functions
+
+
+```r
+*x &lt;- x^3
+x &lt;- scale(x)
+x &lt;- max(x)
+
+*y &lt;- x^2
+y &lt;- scale(y)
+y &lt;- max(y)
+
+*z &lt;- z^2
+z &lt;- scale(x)
+z &lt;- max(z)
+```
+
+---
+
+#  Review: writing functions
+
+
+```r
+.f &lt;- function(x) {
+  x &lt;- x^3
+  x &lt;- scale(x)
+  
+  max(x)
+}
+
+.f(x)
+.f(y)
+.f(z)
+```
+
+---
+
+class: inverse, center, middle, takeaway
+
+# **If you copy and paste your code three times, it's time to write a function**
+
+---
+class: inverse
+# Three ways to pass functions to `map()`
+1. pass directly to `map()`
+2. use an anonymous function
+3. use ~
+
+---
+
+&lt;img src="img/purr_f_input1.png" width="904" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/purr_f_input2.png" width="968" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/purr_f_input3.png" width="839" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+map(gapminder, ~length(unique(.x)))
+```
+
+---
+
+
+```r
+map(gapminder, ~length(unique(.x)))
+```
+
+```
+## $country
+## [1] 142
+## 
+## $continent
+## [1] 5
+## 
+## $year
+## [1] 12
+## 
+## $lifeExp
+## [1] 1626
+## 
+## $pop
+## [1] 1704
+## 
+## $gdpPercap
+## [1] 1704
+```
+
+---
+
+# Returning types
+
+|  map |  returns |
+|:--|:--|
+|`map()` | list |
+|`map_chr()` | character vector |
+|`map_dbl()` | double vector (numeric) |
+|`map_int()` | integer vector |
+|`map_lgl()` | logical vector |
+|`map_dfc()` | data frame (by column) |
+|`map_dfr()` | data frame (by row) |
+
+---
+
+# Returning types
+
+
+```r
+map_int(gapminder, ~length(unique(.x)))
+```
+
+---
+
+# Returning types
+
+
+```r
+map_int(gapminder, ~length(unique(.x)))
+```
+
+```
+##   country continent      year   lifeExp       pop gdpPercap 
+##       142         5        12      1626      1704      1704
+```
+
+---
+
+# map2(.x, .y, .f)
+
+--
+
+## .x, .y: a vector, list, or data frame
+
+--
+
+## .f: a function
+
+--
+
+## Returns a list
+
+
+---
+
+&lt;img src="img/purr_x2_input.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/purr_x2_input_warn.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="img/purr_f2_input.png" width="80%" height="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# map2()
+
+
+```r
+gapminder_countries &lt;- split(gapminder, gapminder$country)
+models &lt;- map(gapminder_countries, ~ lm(lifeExp ~ year, data = .x))
+preds &lt;- map2(models, gapminder_countries, predict)
+head(preds, 3)
+```
+---
+
+# map2()
+
+
+```r
+*gapminder_countries &lt;- split(gapminder, gapminder$country)
+models &lt;- map(gapminder_countries, ~ lm(lifeExp ~ year, data = .x))
+preds &lt;- map2(models, gapminder_countries, predict)
+head(preds, 3)
+```
+
+---
+
+# map2()
+
+
+```r
+gapminder_countries &lt;- split(gapminder, gapminder$country)
+*models &lt;- map(gapminder_countries, ~ lm(lifeExp ~ year, data = .x))
+preds &lt;- map2(models, gapminder_countries, predict)
+head(preds, 3)
+```
+
+---
+
+# map2()
+
+
+```r
+gapminder_countries &lt;- split(gapminder, gapminder$country)
+models &lt;- map(gapminder_countries, ~ lm(lifeExp ~ year, data = .x))
+*preds &lt;- map2(models, gapminder_countries, predict)
+head(preds, 3)
+```
+
+---
+
+# map2()
+
+
+```r
+gapminder_countries &lt;- split(gapminder, gapminder$country)
+models &lt;- map(gapminder_countries, ~ lm(lifeExp ~ year, data = .x))
+preds &lt;- map2(models, gapminder_countries, predict)
+head(preds, 3)
+```
+
+
+
+```
+## $Afghanistan
+##        1        2        3        4        5        6 
+## 29.90729 31.28394 32.66058 34.03722 35.41387 36.79051 
+## 
+## $Albania
+##        1        2        3        4        5        6 
+## 59.22913 60.90254 62.57596 64.24938 65.92279 67.59621 
+## 
+## $Algeria
+##        1        2        3        4        5        6 
+## 43.37497 46.22137 49.06777 51.91417 54.76057 57.60697
+```
+
+---
+
+class: middle, center
+
+| input 1 | input 2 | returns |
+|:--|:--|
+|`map()` | `map2()` | list |
+|`map_chr()` | `map2_chr()` |  character vector |
+|`map_dbl()` | `map2_dbl()` |  double vector (numeric) |
+|`map_int()` | `map2_int()` |  integer vector |
+|`map_lgl()` | `map2_lgl()` |  logical vector |
+|`map_dfc()` | `map2_dfc()` |  data frame (by column) |
+|`map_dfr()` | `map2_dfr()` |  data frame (by row) |
+
+---
+
+# Other mapping functions
+
+## **pmap()** and friends: take n lists or data frame with argument names
+
+--
+
+## **walk()** and friends: for side effects like plotting; returns input invisibly
+
+--
+
+## **imap()** and friends: includes counter `i`
+
+--
+
+## **map_if()**, **map_at()**: Apply only to certain elements
+
+---
+
+class: middle, center
+
+| input 1 | input 2 |  input n | returns |
+|:--|:--|
+|`map()` | `map2()` | `pmap()` | list |
+|`map_chr()` | `map2_chr()` | `pmap_chr()` | character vector |
+|`map_dbl()` | `map2_dbl()` | `pmap_dbl()` |   double vector (numeric) |
+|`map_int()` | `map2_int()` | `pmap_int()` |   integer vector |
+|`map_lgl()` | `map2_lgl()` | `pmap_lgl()` |   logical vector |
+|`map_dfc()` | `map2_dfc()` | `pmap_dfc()` |   data frame (by column) |
+|`map_dfr()` | `map2_dfr()` | `pmap_dfr()` |   data frame (by row) |
+|`walk()` | `walk2()` | `pwalk()` | input (side effects!) |
+
+---
+
+# Base R
+
+| base R | purrr |
+|:--|:--|
+|`lapply()` | `map()` |
+|`vapply()` | `map_*()` |
+|`sapply()` | ? |
+|`x[] &lt;- lapply()` | `map_dfc()` |
+|`mapply()` | `map2()`, `pmap()` |
+
+---
+
+class: inverse
+
+# Benefits of purrr
+1. Consistent 
+2. Type-safe
+3. ~f(.x)
+
+---
+
+## Loops vs functional programming
+
+
+```r
+x &lt;- rnorm(10)
+y &lt;- map(x, mean)
+```
+
+
+```r
+x &lt;- rnorm(10)
+y &lt;- vector("list", length(x))
+for (i in seq_along(x)) {
+  y[[i]] &lt;- mean(x[[i]])
+}
+```
+
+---
+
+## Loops vs functional programming
+
+
+```r
+x &lt;- rnorm(10)
+y &lt;- map(x, mean)
+```
+
+
+```r
+x &lt;- rnorm(10)
+y &lt;- vector("list", length(x))
+for (i in seq_along(x)) {
+* y[[i]] &lt;- mean(x[[i]])
+}
+```
+
+---
+
+## Loops vs functional programming
+
+
+```r
+x &lt;- rnorm(10)
+y &lt;- map(x, mean)
+```
+
+
+```r
+x &lt;- rnorm(10)
+*y &lt;- vector("list", length(x))
+for (i in seq_along(x)) {
+  y[[i]] &lt;- mean(x[[i]]) 
+}
+```
+
+---
+
+# Working with lists and nested data
+
+&lt;img src="img/cheatsheet_lists.png" width="568" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Working with lists and nested data
+
+&lt;img src="img/cheatsheet_nested.png" width="845" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: inverse, center
+
+# Learn more!
+## Try the purrr exercises [interactively](http://bit.ly/purrr_exercises) or [in the repo](http://bit.ly/hs_purrr_repo) for this talk!
+## [Jenny Bryan's purrr tutorial](https://jennybc.github.io/purrr-tutorial/): A detailed introduction to purrr. Free online.
+## [R for Data Science](http://r4ds.had.co.nz/): A comprehensive but friendly introduction to the tidyverse. Free online.
+
+---
+
+class: inverse, center, middle
+
+### *Thanks for coming!*
+#### *map(kittens, wag_tail)*
+
+&lt;img src="img/cat-min.gif" width="25%" height="25%" style="display: block; margin: auto;" /&gt;
+
+### <i class="fab  fa-github "></i> [malcolmbarrett](https://github.com/malcolmbarrett/)
+### <i class="fab  fa-twitter "></i> [@malco_barrett](https://twitter.com/malco_barrett)
+
+Slides created via the R package [xaringan](https://github.com/yihui/xaringan).
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Accessing Twitter Data</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Malcolm Barrett" />
+    <meta name="date" content="2018-10-05" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="theme.css" type="text/css" />
+    <link rel="stylesheet" href="fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# <span style="color:#E69F00">Accessing Twitter Data</span>
+## <span style="color:#56B4E9">with rtweet</span> <br>
+### Malcolm Barrett <br>
+### 10/05/2018
+
+---
+
+
+
+
+class: inverse-ns, center
+
+# Getting started
+## &lt;span style = 'color:#E69F00'&gt;Log in&lt;/span&gt; to the SER Twitter account
+
+## Install rtweet (if needed) and load
+
+
+```r
+install.packages("rtweet")
+library(rtweet)
+```
+
+---
+
+# Authenticate via browser
+## https://developer.twitter.com/en/apps
+
+
+```r
+token &lt;- create_token(
+  app = "tweet_tokens_ser",
+  consumer_key = "[CONSUMER KEY]",
+  consumer_secret = "[SECRET CONSUMER KEY]",
+  acess_token = "[SECRET ACCESS KEY]",
+  access_secret =  "[SECRET ACCESS KEY]"
+)
+```
+
+---
+
+# Get mentions
+
+
+```r
+ser_mentions &lt;- get_mentions()
+ser_mentions
+```
+
+```
+## # A tibble: 198 x 20
+##    created_at          status_id text  truncated source status_in_reply…
+##    &lt;dttm&gt;              &lt;chr&gt;     &lt;chr&gt; &lt;lgl&gt;     &lt;chr&gt;  &lt;chr&gt;           
+##  1 2018-10-05 02:09:45 10480324… #Epi… TRUE      "&lt;a h… &lt;NA&gt;            
+##  2 2018-10-04 19:00:01 10479243… New … TRUE      "&lt;a h… &lt;NA&gt;            
+##  3 2018-10-03 13:18:35 10474760… Who’… FALSE     "&lt;a h… &lt;NA&gt;            
+##  4 2018-10-02 09:52:00 10470616… @Maa… TRUE      "&lt;a h… 104599229489215…
+##  5 2018-10-01 17:47:34 10468189… @Lau… FALSE     "&lt;a h… 104638157466367…
+##  6 2018-09-30 12:49:42 10463815… Real… TRUE      "&lt;a h… &lt;NA&gt;            
+##  7 2018-09-29 17:41:37 10460926… @ver… FALSE     "&lt;a h… 104609191108429…
+##  8 2018-09-29 17:29:40 10460896… @Pro… FALSE     "&lt;a h… 104577152315443…
+##  9 2018-09-29 16:21:56 10460725… @Tfe… FALSE     "&lt;a h… 104578113750567…
+## 10 2018-09-29 16:11:37 10460699… @Jai… FALSE     "&lt;a h… 104603578878025…
+## # ... with 188 more rows, and 14 more variables:
+## #   status_in_reply_to_user_id &lt;chr&gt;, in_reply_to_screen_name &lt;chr&gt;,
+## #   geo &lt;lgl&gt;, coordinates &lt;lgl&gt;, place &lt;lgl&gt;, contributors &lt;lgl&gt;,
+## #   is_quote_status &lt;lgl&gt;, status_quoted_status_id &lt;chr&gt;,
+## #   retweet_count &lt;int&gt;, favorite_count &lt;int&gt;, favorited &lt;lgl&gt;,
+## #   retweeted &lt;lgl&gt;, possibly_sensitive &lt;lgl&gt;, lang &lt;chr&gt;
+```
+
+---
+
+# Get mentions
+
+
+```r
+library(tidyverse)
+ser_mentions %&gt;% 
+  ts_plot()
+```
+
+&lt;img src="rtweet_tutorial_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Most frequent mentioners
+
+
+```r
+library(tidyverse)
+mentioners &lt;- lookup_tweets(ser_mentions$status_id)
+mentioners
+```
+
+```
+## # A tibble: 198 x 88
+##    user_id status_id created_at          screen_name text  source
+##  * &lt;chr&gt;   &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; 
+##  1 420928… 10451554… 2018-09-27 03:37:20 Soneidar    That… Twitt…
+##  2 666601… 10410768… 2018-09-15 21:30:35 lisabodnar  @PWG… Twitt…
+##  3 666601… 10400205… 2018-09-12 23:33:27 lisabodnar  @Epi… Twitt…
+##  4 666601… 10266265… 2018-08-07 00:30:17 lisabodnar  @Ger… Twitt…
+##  5 666601… 10402445… 2018-09-13 14:23:10 lisabodnar  @Lau… Twitt…
+##  6 666601… 10377964… 2018-09-06 20:15:41 lisabodnar  ".@P… Twitt…
+##  7 666601… 10373668… 2018-09-05 15:48:27 lisabodnar  @soc… Twitt…
+##  8 666601… 10357008… 2018-09-01 01:28:14 lisabodnar  @rob… Twitt…
+##  9 666601… 10357262… 2018-09-01 03:09:24 lisabodnar  @Epi… Twitt…
+## 10 666601… 10357231… 2018-09-01 02:57:00 lisabodnar  @Epi… Twitt…
+## # ... with 188 more rows, and 82 more variables: display_text_width &lt;dbl&gt;,
+## #   reply_to_status_id &lt;chr&gt;, reply_to_user_id &lt;chr&gt;,
+## #   reply_to_screen_name &lt;chr&gt;, is_quote &lt;lgl&gt;, is_retweet &lt;lgl&gt;,
+## #   favorite_count &lt;int&gt;, retweet_count &lt;int&gt;, hashtags &lt;list&gt;,
+## #   symbols &lt;list&gt;, …
+```
+
+---
+
+# Most frequent mentioners
+
+
+```r
+mentioners %&gt;% 
+  count(screen_name) %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  head(18) %&gt;% 
+  mutate(screen_name = paste0("@", screen_name)) %&gt;% 
+  ggplot(aes(fct_rev(fct_inorder(screen_name)), n)) +
+    geom_col(col = "white", fill = "#0072B2") +
+    coord_flip() +
+    theme_minimal(base_size = 14) + 
+    theme(panel.grid.major.y = element_blank(),
+          panel.grid.minor.y = element_blank(),
+          axis.title.y = element_blank()) +
+    ylab("mentions")
+```
+
+---
+
+&lt;img src="rtweet_tutorial_files/figure-html/most_mentions_out-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Get SER tweets
+
+
+```r
+ser_tweets &lt;- get_timeline("societyforepi", n = 1e5)
+ser_tweets
+```
+
+```
+## # A tibble: 3,231 x 88
+##    user_id status_id created_at          screen_name text  source
+##  * &lt;chr&gt;   &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; 
+##  1 587813… 10479837… 2018-10-04 22:56:03 societyfor… New … Twitt…
+##  2 587813… 10473323… 2018-10-03 03:47:37 societyfor… It's… Twitt…
+##  3 587813… 10468004… 2018-10-01 16:34:11 societyfor… "Rea… Twitt…
+##  4 587813… 10466449… 2018-10-01 06:16:15 societyfor… We n… Twitt…
+##  5 587813… 10460688… 2018-09-29 16:07:08 societyfor… Out … Twitt…
+##  6 587813… 10458036… 2018-09-28 22:33:09 societyfor… Best… Twitt…
+##  7 587813… 10457980… 2018-09-28 22:11:03 societyfor… Yes,… Twitt…
+##  8 587813… 10457303… 2018-09-28 17:42:10 societyfor… Did … Twitt…
+##  9 587813… 10457297… 2018-09-28 17:39:40 societyfor… "SER… Twitt…
+## 10 587813… 10457193… 2018-09-28 16:58:26 societyfor… Caus… Twitt…
+## # ... with 3,221 more rows, and 82 more variables:
+## #   display_text_width &lt;dbl&gt;, reply_to_status_id &lt;chr&gt;,
+## #   reply_to_user_id &lt;chr&gt;, reply_to_screen_name &lt;chr&gt;, is_quote &lt;lgl&gt;,
+## #   is_retweet &lt;lgl&gt;, favorite_count &lt;int&gt;, retweet_count &lt;int&gt;,
+## #   hashtags &lt;list&gt;, symbols &lt;list&gt;, …
+```
+
+---
+
+# Get SER tweets
+
+
+```r
+ser_tweets %&gt;% 
+  ts_plot()
+```
+
+&lt;img src="rtweet_tutorial_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Most liked tweets
+
+
+```r
+library(ggrepel)
+ser_tweets %&gt;% 
+  arrange(desc(favorite_count)) %&gt;% 
+  head(100) %&gt;% 
+  mutate(id = 1:n(), label = ifelse(id %in% c(1:3, 6, 10), str_wrap(text), "")) %&gt;% 
+  arrange(favorite_count) %&gt;%
+  ggplot(aes(fct_inorder(status_id), favorite_count)) +
+    geom_jitter(col = "white", fill = "#0072B2", shape = 21, size = 2.5) +
+    geom_label_repel(aes(label = label), size = 2.5, force = 4, nudge_y = 3, point.padding = .5) +
+    theme_minimal(base_size = 14) +
+    theme(axis.text.x = element_blank(),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank()) +
+    scale_y_continuous(breaks = seq(0, 150, 25)) +
+    labs(x = "tweet", y = "favorites")
+```
+
+---
+
+&lt;img src="rtweet_tutorial_files/figure-html/most_liked_tweets_out-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Most retweeted tweets
+
+
+```r
+library(ggrepel)
+ser_tweets %&gt;% 
+  arrange(desc(retweet_count)) %&gt;% 
+  filter(!is_retweet) %&gt;% 
+  head(100) %&gt;% 
+  mutate(id = 1:n(), label = ifelse(id %in% c(1:3, 6, 10), str_wrap(text), "")) %&gt;% 
+  arrange(retweet_count) %&gt;%
+  ggplot(aes(fct_inorder(status_id), retweet_count)) +
+    geom_jitter(col = "white", fill = "#0072B2", shape = 21, size = 2.5) +
+    geom_label_repel(aes(label = label), size = 2.5, force = 4, nudge_y = 3, point.padding = .5) +
+    theme_minimal(base_size = 14) +
+    theme(axis.text.x = element_blank(),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank()) +
+    scale_x_discrete(expand = expand_scale(add = 1)) +
+    scale_y_continuous(breaks = seq(0, 150, 25)) +
+    labs(x = "tweet", y = "retweets") 
+```
+
+---
+
+&lt;img src="rtweet_tutorial_files/figure-html/most_rt_tweets_out-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Take a screenshot 
+
+
+```r
+tweet_shot(ser_tweets$status_id[2], zoom = 3, scale = FALSE)
+```
+
+&lt;img src="rtweet_tutorial_files/figure-html/unnamed-chunk-8-1.png" width="470" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Post, follow, retweet, etc.
+
+
+```r
+post_tweet("this is to post a tweet")
+
+# retweet using status id
+post_tweet(retweet_id = "1025872214472544256")
+
+# like using status id
+post_favorite("1025872214472544256")
+
+# follow a user
+post_follow("malco_barrett")
+
+# send a direct message
+post_message("you can even send a private message", "malco_barrett")
+```
+
+---
+class: inverse, center
+
+# rtweet vignettes
+## [Obtaining and using access tokens](https://rtweet.info/articles/auth.html)
+## [Intro to rtweet: Collecting Twitter Data](https://rtweet.info/articles/intro.html)
+## [Live streaming tweets](https://rtweet.info/articles/stream.html)
+
+## Soon to come: rtweet cheatsheet
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
