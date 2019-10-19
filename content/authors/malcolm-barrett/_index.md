@@ -1,8 +1,8 @@
 ---
 authors:
 - admin
-bio: Malcolm Barrett is a PhD student in Epidemiology at the University of Southern California. He has worked on both mature and nascent cohort studies, as well as in several clinical settings. He served for two years in AmeriCorps at Federally-Qualified Health Centers and is committed to science as service.
-  matter.
+bio: | 
+  I am an R developer and a PhD student in Epidemiology at the University of Southern California. My work in public health has spanned on-ground clinical education and research for clinical and cohort studies. Previously, I was an intern at RStudio, and I served two years in AmeriCorps at federally-qualified health centers in Michigan and New York City.
 education: 
   courses:
   - course: PhD in Epidemiology
