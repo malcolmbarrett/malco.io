@@ -1,0 +1,100 @@
+---
+title: Setting up my MacBook Pro for Data Science with R
+author: Malcolm Barrett
+date: '2019-10-22'
+slug: setting-up-my-macbook-pro-for-data-science-with-r
+categories:
+  - r
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2019-10-22T12:37:34-04:00'
+featured: no
+image:
+  caption: 'Photo by [Annie Spratt](https://unsplash.com/photos/dwYFsqTBKIo)'
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+My path into coding was quite curvy. I'm an epidemiologist by training with no formal education in computer science; I stumbled my way into the world of R by some comboniation of data analysis coursework, necessity, and intrigue. Setting up things like version control, typesetting tools, compilers, and whatever else I (apparently) needed often went like this:
+
+> Oh, I need {{ x }} to do {{ y }}. I'll Google it. Ah, I see I should use {{ dubious installation method }}. Oh, that didn't work. What if I try {{ untrustworthy code found an dark corner of a forum }}? (This continues for several hours until, frustrated, I go to sleep. Upon waking, {{ x }} now works. It is never fully clear why.) 
+
+I end up getting most things working most of the time, but it was always harrowing. I wasn't sure I could easily recreate my data science environment, so I cloned my *exact* setup from computer to computer, reboot to reboot. My computer started to feel like it was one gentle breeze away from falling apart.
+
+![Simpson's GIF: Bart and Milhouse play Jenga. The ground shakes and a bookshelf falls on Milhouse](https://media.giphy.com/media/gXF3P4m5CMPTy/giphy.gif)
+
+I was recently compelled to start fresh on my MacBook Pro (a 2017 model, if you're curious). I sensed that it was going to be much better to set it up to do data science and development. Why? Yes, I have a clearer sense of what my workflow is. But more importantly, setting up tools like git (for version control) and LaTeX (for PDF typesetting) are much less painful thanks to empathetic developers like [Jenny Bryan](https://jennybryan.org/) and [Yihui Xie](https://yihui.name/).
+
+# Once rageful seas now calm
+
+So I ventured forth. After a terrifying hiccup where I acidentally wiped my MacBook *without a reboot drive*, things went pretty smoothly. Here's what I did.
+
+## Install R and RStudio. 
+
+*What I need it for:* Everything. [Analyzing Data](https://r4ds.had.co.nz/). [Writing Papers](https://bookdown.org/yihui/rmarkdown/). [Making my website](https://bookdown.org/yihui/blogdown/). [Ordering lunch](https://github.com/SamanthaToet/yelpr).
+
+*What I did:* [Installed the most recent version of R](https://cloud.r-project.org/). [Installed the most recent version of RStudio](https://rstudio.com/products/rstudio/download/#download). I had previously used a [daily build](https://dailies.rstudio.com/) of RStudio (there's going to be a spellcheck feature!!), but I opted for stability using the most recent official release.
+
+*What I didn't know when I first started:* These are two different softwares. RStudio helps you use and write R. That means you've got three things to keep updated: R, RStudio, and the R packages you have installed. Updating RStudio is usually pretty seamless. Updating R is unusual because when when the minor numbers change (e.g. R 3.5 to R 3.6), R creates a new library for your packages. That makes it seem like your packages have dissapearred! You can use the R packages [installR](http://talgalili.github.io/installr/) on Windows and [updateR](http://www.andreacirillo.com/2018/03/10/updater-package-update-r-version-with-a-function-on-mac-osx/) on Mac to help install the next version of R while keeping your packages organized. I recommend updating R packages through the "Packages" tab in the file pane of RStudio.
+
+## Install essential packages
+
+RStudio 1.2 introduced a nice feature that detects when a script uses a package that you don't have installed and [offers to install it for you](https://blog.rstudio.com/2018/11/19/rstudio-1-2-preview-the-little-things/). For that reason, I didn't fret much about fully replacing my package libray. 
+
+Instead, I focused on my essential packages: Tools I use interactively for project and package set up, the Tidyverse, R Markdown and packages related to writing documents, some of my favorite tools for data visualization, shiny and a few extensions I'm using, and a few packages with useful add-ins. 
+
+```{r, eval=FALSE}
+#  Essential set up and problem solving packages
+install.packages(c("devtools", "reprex", "usethis"))
+
+#  The Big One
+install.packages("tidyverse")
+
+#  R Markdown and friends
+install.packages(c("rmarkdown", "bookdown", "blogdown", "pkgdown", "distill", "pagedown", "xaringan", "kableExtra", "here", "drake"))
+
+#  Data visualization tools
+install.packages(c("ggraph", "tidygraph", "cowplot", "colorblindr", "colorspace", "gplots"))
+
+#  Shiny and friends
+install.packages(c("shiny", "miniUI", "shinyBS", "shinyFiles", "shinyjs"))
+
+#  Useful addins
+install.packages(c("lintr", "styler", "cronR"))
+```
+
+## Install git and connect to GitHub
+
+*What I need it for:* Backing up my files, maintaining a single file rather than multiple offshoots (no more files named "analysis_final_v2"), and collaborating on packages and other projects on GitHub
+
+*What I did:* Followed the instructions in [*Happy Git with R*](https://happygitwithr.com/) By Jenny Bryan and the Stat 545 team. This is a complete guide to getting set up git to use with R and RStudio. The big ones are to [install git](https://happygitwithr.com/install-git.html) and [connect RStudio](https://happygitwithr.com/connect-intro.html). I also [cached my GitHub credentials with SSH](https://happygitwithr.com/ssh-keys.html).
+
+*What I didn't know when I first started:* git is the thing I understood least when I installed it. I didn't quite know how it worked or why I needed it. A couple of things stick out. The first is that you don't need to be a git expert to use it well. I use [a few basic commands](https://happygitwithr.com/git-intro.html), very often through the RStudio git GUI, and not much more. The latter half of *Happy git with R* has a lot of examples of workflows you might encounter beyond basic saving and update of files, such as [forking and cloning a repository](https://happygitwithr.com/fork-and-clone.html). Learning how to commit, push, and pull will get you most of the way on your own work, and learning how to fork, clone, and submit pull requests to other people's repositories will get you most of the way on collaborating. 
+
+[usethis](https://usethis.r-lib.org) (tied with ggplot2 and purrr for my favorite R package) also supports good git workflows in R. *Happy git with R* has chapters on a [variety of workflows for setting up RStudio Projects with corresponding git/GitHub repositories](). What I like to do is simple with usethis. 
+
+```{r eval=FALSE}
+library(usethis)
+create_project("path/to/project")
+# or create_package() if it's a package; it will also set up the package as an RStudio Project
+use_git() # create a local git repository
+use_github() # create the repo on GitHub, connect it to the local repo, and push everything
+```
+
+The usethis team recently added [functions to facilitate pull requests](https://usethis.r-lib.org/articles/articles/pr-functions.html). These are game changers if you need to collaborate on GitHub or another service. I use them all the time. Like a lot of these empathetic tools, the `pr_*()` functions make it easy to use best practices. By and large, these are things you can do yourself, but I for one always forgot to do at least one of the steps usethis takes care of for you.
+
+## Setting up RStudio global options
+
+I changed a few global settings in my RStudio. Under Global Options:
+
++ Don't restore .Rdata, and never save it in the first place. These will generally help you assure reproducibility, because you won't accidentally depend on something did in your previous session without saving the code.
++ Don't restore projects or open files. I really only do this because I always open way too many files at once. That makes it harder to find what I need (often better suited with Find in Files, under the Edit menu). Forcing myself to close down projects without restoring also forces me to save anything I have that I need.
++ I also set my default working directory to the folder where I keep active projects. I don't often open RStudio outside of projects, but this helps when 
+
+
+## Setting up my Rprofile
+
+The .Rprofile is a place to 
