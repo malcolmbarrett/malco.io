@@ -50,4 +50,11 @@ subtitle = ""
   name = "R Markdown for Health Scientists"
   description = "A 1/2-day workshop diving more deeply into R Markdown. You'll learn the basics of creating reproducible reports and articles using R, to manage research papers reproducibly, managing citations and journal citation styles, and making outputs that are publication-quality."
 
+[[feature]]
+  icon = "drafting-compass"
+  icon_pack = "fas"
+  name = "Designing ggplots"
+  description = "A 1/2-day workshop that will take your ggplot2 data visualizations to the next level. You'll create beautiful, expressive plots that communicate effectively. You'll learn highlighting, direct labeling, annoation, combining plots, and more."
+
+
 +++
