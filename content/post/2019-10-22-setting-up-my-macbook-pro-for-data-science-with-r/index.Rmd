@@ -1,4 +1,5 @@
 ---
+draft: true
 title: Setting up my MacBook Pro for Data Science with R
 author: Malcolm Barrett
 date: '2019-10-22'
