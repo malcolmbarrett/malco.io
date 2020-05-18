@@ -1,5 +1,5 @@
 ---
-title: Replicating an NYT Table of Swedish COVID deaths with gt
+title: Replicating an NYT Table of Swedish COVID-19 deaths with gt
 author: Malcolm Barrett
 date: '2020-05-16'
 slug: replicating-an-nyt-table-of-swedish-covid-deaths-with-gt
