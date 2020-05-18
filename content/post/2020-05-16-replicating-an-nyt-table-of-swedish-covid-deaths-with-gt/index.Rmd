@@ -1,5 +1,5 @@
 ---
-title: Replicating an NYT Table of Swedish COVID-19 deaths with gt
+title: Replicating a New York Times Table of Swedish COVID-19 deaths with gt
 author: Malcolm Barrett
 date: '2020-05-16'
 slug: replicating-an-nyt-table-of-swedish-covid-deaths-with-gt
@@ -20,7 +20,7 @@ image:
 projects: []
 ---
 
-I recently read an article in the New York Times about [excess deaths in Sweden during the coronavirus outbreak](). As opposed to many of its neighbors, Sweden did not do a general lockdown; instead, it (controversially) strove to systematically develop [herd immunity](https://www.npr.org/2020/04/26/845211085/stockholm-expected-to-reach-herd-immunity-in-may-swedish-ambassador-says). However, current data suggest that excess deaths (the number of deaths above the usual number) in Sweden are higher than many of its neighbors that enacted early, stricter lockdowns. It's unclear at this point whether this means the approach taken in Sweden doesn't help prevent COVID-19 deaths in the long run, but the data are worth considering either way. In the NYT article, the authors present a table of excess deaths for Sweden and other countries in Europe. I thought this table was remarkably good: it's simple, clear, and beautiful.
+I recently read an article in the *New York Times* about [excess deaths in Sweden during the coronavirus outbreak](). As opposed to many of its neighbors, Sweden did not do a general lockdown; instead, it (controversially) strove to systematically develop [herd immunity](https://www.npr.org/2020/04/26/845211085/stockholm-expected-to-reach-herd-immunity-in-may-swedish-ambassador-says). However, current data suggest that excess deaths (the number of deaths above the usual number) in Sweden are higher than many of its neighbors that enacted early, stricter lockdowns. It's unclear at this point whether this means the approach taken in Sweden doesn't help prevent COVID-19 deaths in the long run, but the data are worth considering either way. In the *NYT* article, the authors present a table of excess deaths for Sweden and other countries in Europe. I thought this table was remarkably good: it's simple, clear, and beautiful.
 
 ```{r, out.width="100%", echo = FALSE}
 knitr::include_graphics("nyt-table.png")
@@ -48,7 +48,7 @@ table > tbody > tr:hover > th {
 
 I've been working with the [gt](https://gt.rstudio.com/) package for making tables ([new to CRAN!](https://blog.rstudio.com/2020/04/08/great-looking-tables-gt-0-2/)), and I wondered if I could replicate this table in R. gt is a flexible tool with an excellent interface, and it's particularly strong with HTML tables. There are many, many packages for making tables in R, but I think gt solves the problem of making tables in R in a generalized and elegant way. (If you want to learn how to use gt, try the [gt Test Drive RStudio Cloud project](https://rstudio.cloud/project/779965). It's a comprehensive introduction with runnable code.)
 
-Anyway, let's give this table a shot. First, I'll load gt and htmltools (which we'll need later for some final touches), as well as the data from the NYT article. The `euro_table` data frame has columns with European country names, the percentage of deaths the country has had during the pandemic that is above normal amounts, the number of excess deaths the country has had, and the time the data cover.
+Anyway, let's give this table a shot. First, I'll load gt and htmltools (which we'll need later for some final touches), as well as the data from the *NYT* article. The `euro_table` data frame has columns with European country names, the percentage of deaths the country has had during the pandemic that is above normal amounts, the number of excess deaths the country has had, and the time the data cover.
 
 ```{r, warning=FALSE}
 library(gt)
@@ -81,7 +81,7 @@ euro_table_gt <- gt(euro_table)
 euro_table_gt
 ```
 
-gt has reasonable defaults that create a nice looking, simple table from the data, but this table lacks many of the elements the NYT article has. The columns with the percentage above normal and the number of deaths, for instance, had some basic formatting that isn't included here. gt has a whole set of `fmt_*()` functions for formatting columns. The first argument is where you tell gt what columns you want to format. You can use [tidy select helpers](https://www.rdocumentation.org/packages/tidyselect/versions/1.1.0/topics/language), as in dplyr and friends, to specify columns, but here I'll format them one at a time, so I can just put the column name in a string. `fmt_number()` is a reasonable place to start because it's simple: it will format Excess Deaths as a number (adding commas and justifying it to the right, here without decimal places).
+gt has reasonable defaults that create a nice looking, simple table from the data, but this table lacks many of the elements the *NYT* article has. The columns with the percentage above normal and the number of deaths, for instance, had some basic formatting that isn't included here. gt has a whole set of `fmt_*()` functions for formatting columns. The first argument is where you tell gt what columns you want to format. You can use [tidy select helpers](https://www.rdocumentation.org/packages/tidyselect/versions/1.1.0/topics/language), as in dplyr and friends, to specify columns, but here I'll format them one at a time, so I can just put the column name in a string. `fmt_number()` is a reasonable place to start because it's simple: it will format Excess Deaths as a number (adding commas and justifying it to the right, here without decimal places).
 
 
 ```{r}
@@ -109,7 +109,7 @@ euro_table_gt <- euro_table_gt %>%
 euro_table_gt
 ```
 
-So now, the *content* of the table matches the NYT article, but there are a lot of stylistic differences. In particular, we need to change the font (depending on the cell, we might need to change the size, color, case, or weight), and we need to highlight the row with data from Sweden. 
+So now, the *content* of the table matches the *NYT* article, but there are a lot of stylistic differences. In particular, we need to change the font (depending on the cell, we might need to change the size, color, case, or weight), and we need to highlight the row with data from Sweden. 
 
 `tab_style()` can handle both of these issues. `tab_style()` takes two additional arguments beyond a `gt` object: `style` and `locations.` `style` lets us specify how a part of the table should be styled with `cell_text()`, `cell_fill()`, or `cell_borders()`. Let's highlight Sweden first. We’ll add the highlighting color with `cell_fill(color = "#F7EFB2")`. The `locations` argument is the real magic of `tab_style()`: it lets us specify exactly which columns, rows, or cells to style. We want to format some cells in the table body, so we'll use `cells_body()` (see the [help page for `tab_style()`](https://gt.rstudio.com/reference/tab_style.html) for all the helper functions available). As above, we can use the `rows` argument to tell gt to highlight the row where `Country == "Sweden"`. 
 
@@ -124,7 +124,7 @@ euro_table_gt <- euro_table_gt %>%
 euro_table_gt
 ```
 
-There are also several typographic styles in the table, so let's address them one at a time. First, `Country`, `Pct Above Normal`, and `Excess Deaths` all have a font size of 15 pixels, are lightly bolded, and have a different font than gt's defaults (technically the font is the NYT custom font, but we'll use their backup font, Arial, to get close). We can specify all of these differences with `cell_text()`. Again, these are cells in the table body, so we'll use `cells_body()` to locate them. I'll use the tidyselect function `vars()` to find each of the columns we want to format.
+There are also several typographic styles in the table, so let's address them one at a time. First, `Country`, `Pct Above Normal`, and `Excess Deaths` all have a font size of 15 pixels, are lightly bolded, and have a different font than gt's defaults (technically the font is the *NYT* custom font, but we'll use their backup font, Arial, to get close). We can specify all of these differences with `cell_text()`. Again, these are cells in the table body, so we'll use `cells_body()` to locate them. I'll use the tidyselect function `vars()` to find each of the columns we want to format.
 
 
 ```{r, warning=FALSE}
@@ -206,7 +206,7 @@ euro_table_gt <- euro_table_gt %>%
 euro_table_gt
 ```
 
-That gets us most of the way there! We're able to the this far entirely in gt. However, it turns out that one of the more compelling parts of the NYT table–the more-or-less annotation on the left side–is actually not part of the table. Instead, they use a trick with [divs](https://www.internetingishard.com/html-and-css/css-selectors/) and [flexboxes](https://www.internetingishard.com/html-and-css/flexbox/) to group the arrow annotation with the table. Everything is wrapped in a container `<div>` with row-wise flexboxes, and the annotations are themselves in a `<div>` with column-wise flexboxes. The arrows are from a single [image file](https://static01.nyt.com/newsgraphics/2020/05/12/sweden/9e1eca4da0509269e349b4771ee3b25daf054f51/arrow-01.png), which I've saved as `arrow-01.png`.
+That gets us most of the way there! We're able to the this far entirely in gt. However, it turns out that one of the more compelling parts of the *NYT* table–the more-or-less annotation on the left side–is actually not part of the table. Instead, they use a trick with [divs](https://www.internetingishard.com/html-and-css/css-selectors/) and [flexboxes](https://www.internetingishard.com/html-and-css/flexbox/) to group the arrow annotation with the table. Everything is wrapped in a container `<div>` with row-wise flexboxes, and the annotations are themselves in a `<div>` with column-wise flexboxes. The arrows are from a single [image file](https://static01.nyt.com/newsgraphics/2020/05/12/sweden/9e1eca4da0509269e349b4771ee3b25daf054f51/arrow-01.png), which I've saved as `arrow-01.png`.
 
 Luckily, gt works well with the htmltools package, so we can add the annotations ourselves. First, we'll turn our gt table into raw HTML with `as_raw_html()`. Then, we'll use the htmltools package to create the more-or-less annotation and combine it with the HTML from the gt table later on.
 
@@ -215,7 +215,7 @@ html_table <- as_raw_html(euro_table_gt)
 class(html_table)
 ```
 
-We need to write a little CSS for the annotations to create a column-wise flexbox and match the typography in the NYT table. htmltool's `css()` function will help us write the CSS using R. For the arrows, we'll use the same image, but we'll rotate the lower one with the CSS `transform` property. Then, we'll put together the more-or-less `<div>` which has the images and text stacked on top of each other (with some additions to the padding and widths to put them in the right spot).
+We need to write a little CSS for the annotations to create a column-wise flexbox and match the typography in the *NYT* table. htmltool's `css()` function will help us write the CSS using R. For the arrows, we'll use the same image, but we'll rotate the lower one with the CSS `transform` property. Then, we'll put together the more-or-less `<div>` which has the images and text stacked on top of each other (with some additions to the padding and widths to put them in the right spot).
 
 
 ```{r, warning=FALSE}
