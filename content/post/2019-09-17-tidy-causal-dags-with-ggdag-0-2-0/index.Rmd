@@ -29,7 +29,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
 
-I'm please to announce that [ggdag 0.2.0](https://ggdag.malco.io/) is now on CRAN! ggdag links the dagitty package, which contains powerful algorithms for analyzing causal DAGs, with the unlimited flexibility of ggplot2. ggdag coverts dagitty objects to a tidy DAG data structure, which allows you to both analyze your DAG and plot it easily in ggplot2. Let's look at an example for a causal diagram of the effect of smoking on cardiac arrest.
+I'm pleased to announce that [ggdag 0.2.0](https://ggdag.malco.io/) is now on CRAN! ggdag links the dagitty package, which contains powerful algorithms for analyzing causal DAGs, with the unlimited flexibility of ggplot2. ggdag coverts dagitty objects to a tidy DAG data structure, which allows you to both analyze your DAG and plot it easily in ggplot2. Let's look at an example for a causal diagram of the effect of smoking on cardiac arrest.
 
 ```{r, message=FALSE, warning=FALSE}
 library(ggdag)

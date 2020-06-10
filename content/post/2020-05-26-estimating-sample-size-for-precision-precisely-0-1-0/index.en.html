@@ -1,0 +1,59 @@
+---
+title: 'Estimating sample size for precision: precisely 0.1.0'
+author: Malcolm Barrett
+date: '2020-05-26'
+slug: estimating-sample-size-for-precision-precisely-0-1-0
+categories:
+  - r
+  - releases
+tags:
+  - precisely
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-05-26T09:09:31-07:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: yes
+projects: []
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>I’m pleased to announce that <a href="https://precisely.malco.io/">precisely 0.1.0</a> is now on CRAN! precisely is a study planning tool to calculate sample size based on precision rather than power. Power calculations focus on whether or not an estimate will be statistically significant; calculations of precision are based on the same principles as power calculation but turn the focus to the width of the confidence interval. precisely currently supports sample size calculations for risk differences, rate differences, risk ratios, rate ratios, and odds ratios.</p>
+<p>These tools implement the work of <a href="https://www.ncbi.nlm.nih.gov/pubmed/29912015">Rothman and Greenland</a>. Here’s an example from their paper: We want to estimate the sample size required for a study where we are estimating a risk difference. We want the precision (here, the width of the confidence interval) to be .08. We’ll assume that the exposed participants have a disease risk of 0.4 while the unexposed have a risk of 0.3, for a risk difference of 0.1. Setting the ratio of unexposed participants to the unexposed to 3 (e.g., there are 3x more unexposed participants), we need 2097 participants to estimate a confidence interval of this precision.</p>
+<pre class="r"><code># install.packages(&quot;precisely&quot;)
+library(precisely)
+
+n_risk_difference(
+  precision = .08,
+  exposed = .4,
+  unexposed = .3,
+  group_ratio = 3,
+  ci = .90
+)</code></pre>
+<pre><code>## # A tibble: 1 x 9
+##   n_exposed n_unexposed n_total risk_difference precision exposed unexposed
+##       &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
+## 1      524.       1573.   2097.             0.1      0.08     0.4       0.3
+## # … with 2 more variables: group_ratio &lt;dbl&gt;, ci &lt;dbl&gt;</code></pre>
+<p>precisely also includes functions for making sample size figures, functions for estimating precision from the sample size, and more. See the <a href="https://precisely.malco.io/articles/introduction-to-precisely.html">introductory vignette</a> to learn more about what you can do.</p>
+<pre class="r"><code>map_precisely(
+  precision_odds_ratio,
+  n_cases = seq(from = 500, to = 1000, by = 10),
+  exposed_cases = .6,
+  exposed_controls = .4,
+  group_ratio = 1:4
+) %&gt;%
+  dplyr::group_by(&quot;Control/Case Ratio&quot; = factor(group_ratio)) %&gt;%
+  plot_precision() +
+  theme_precisely()</code></pre>
+<p><img src="/post/2020-05-26-estimating-sample-size-for-precision-precisely-0-1-0/index.en_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>This package includes a Shiny app to help with sample size calculations, which you can start locally with <code>launch_precisely_app()</code>. You can also find an online version at <a href="https://malcolmbarrett.shinyapps.io/precisely/">malcolmbarrett.shinyapps.io/precisely</a>.</p>
+<div id="making-contributions-to-precisely" class="section level2">
+<h2>Making contributions to precisely</h2>
+<p>precisely has been available on GitHub for some time. If you already use precisely, there isn’t much new in the official CRAN release except some polishing and minor bug fixes. Over the past couple of years, I have received several requests for sample size calculations for different effect types and study designs. While I haven’t had time to implement these, this is an excellent opportunity to contribute to the package! Please feel free to make pull requests to the <a href="https://github.com/malcolmbarrett/precisely/">GitHub repository</a> or suggest calculations that precisely could make in an issue (preferably with some code to do the calculation or a clear reference that explains how).</p>
+</div>
