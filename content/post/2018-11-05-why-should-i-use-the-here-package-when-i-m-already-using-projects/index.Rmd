@@ -39,7 +39,7 @@ The here package bottles up several small best practices for referencing files i
 
 When I got started with R, I learned to put `setwd()` and `rm(list = ls())` at the beginning of scripts. It made sense to me, too. It seemed like it got rid of any leftovers in the environment and set up the working directory so I could use relative paths. That's got to be a good practice, right? The idea definitely is, but `setwd()` and `rm(list = ls())` are problematic. `rm()` *doesn't* give you a clean R session; it won't, for instance, detach packages. `setwd()`, meanwhile, is completely dependent on the way you organize your files. By and large, the absolute path that you set on your computer won't work on mine because it's doubtful we have the same directory names. I'd need to change the `setwd()` path in your script to match where I have the file on *my* computer.
 
-Last year, Jenny Bryan gave a talk on on setting up your R session for a better workflow. A couple of slides in particular [set off a bit of controversy](much discussion and consternation in #rstats Twitter): 
+Last year, Jenny Bryan gave a talk on on setting up your R session for a better workflow. A couple of slides in particular [set off a bit of controversy](https://twitter.com/hadleywickham/status/940021008764846080): 
 
 > *If the first line of your R script is*
 > 

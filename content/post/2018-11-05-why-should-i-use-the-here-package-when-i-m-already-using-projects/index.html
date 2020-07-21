@@ -20,6 +20,7 @@ image:
 projects: []
 ---
 
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <div id="tldr-why-should-i-use-here" class="section level1">
@@ -34,10 +35,10 @@ projects: []
 <div id="a-song-of-fire-and-workflows" class="section level1">
 <h1>A Song of Fire and Workflows</h1>
 <p>When I got started with R, I learned to put <code>setwd()</code> and <code>rm(list = ls())</code> at the beginning of scripts. It made sense to me, too. It seemed like it got rid of any leftovers in the environment and set up the working directory so I could use relative paths. That’s got to be a good practice, right? The idea definitely is, but <code>setwd()</code> and <code>rm(list = ls())</code> are problematic. <code>rm()</code> <em>doesn’t</em> give you a clean R session; it won’t, for instance, detach packages. <code>setwd()</code>, meanwhile, is completely dependent on the way you organize your files. By and large, the absolute path that you set on your computer won’t work on mine because it’s doubtful we have the same directory names. I’d need to change the <code>setwd()</code> path in your script to match where I have the file on <em>my</em> computer.</p>
-<p>Last year, Jenny Bryan gave a talk on on setting up your R session for a better workflow. A couple of slides in particular <a href="much%20discussion%20and%20consternation%20in%20#rstats%20Twitter">set off a bit of controversy</a>:</p>
+<p>Last year, Jenny Bryan gave a talk on on setting up your R session for a better workflow. A couple of slides in particular <a href="https://twitter.com/hadleywickham/status/940021008764846080">set off a bit of controversy</a>:</p>
 <blockquote>
 <p><em>If the first line of your R script is</em></p>
-<p><code>setwd(&quot;C:\Users\jenny\path\that\only\I\have&quot;)</code></p>
+<p><code>setwd("C:\Users\jenny\path\that\only\I\have")</code></p>
 <p><em>I will come into your office and SET YOUR COMPUTER ON FIRE</em> 🔥.</p>
 </blockquote>
 <blockquote>
@@ -75,7 +76,7 @@ projects: []
 <pre class="r"><code>library(tidyverse)
 read_csv(&quot;data/mtcars.csv&quot;)</code></pre>
 <pre class="r"><code>## Error: &#39;data/mtcars.csv&#39; does not exist in current working directory</code></pre>
-<p>I could solve this by backtracking my file path, e.g. <code>../data/mtcars.csv</code>. While backtracking solves the problem from the perspective of R Markdown, however, it introduces a new one: this code won’t work if I run it in the console. <code>here()</code> works in both settings by starting from the project directory.</p>
+<p>I could solve this by backtracking my file path, e.g. <code>../data/mtcars.csv</code>. While backtracking solves the problem from the perspective of R Markdown, however, it introduces a new one: this code won’t work if I run it in the console. <code>here()</code> works in both settings by starting from the project directory.</p>
 <pre class="r"><code>library(here)
 read_csv(here(&quot;data&quot;, &quot;mtcars.csv&quot;))</code></pre>
 <pre><code>## # A tibble: 32 x 11
@@ -128,7 +129,7 @@ read_csv(here(&quot;data&quot;, &quot;mtcars.csv&quot;))</code></pre>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>And if you’re on a Mac, you can also combine it with Alfred. <a href="https://www.youtube.com/watch?v=boKFxBniUH0">Check out Hadley’s workflow with projects and Alfred here</a>, which has become essential for me.<a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Alternatively, you can set it so plots are knitted directly to your folder by putting this code in your R Markdown file: <code>knitr::opts_chunk$set(fig.path = here::here(&quot;figs&quot;))</code>. This came up in a conversation with Simon Kiss on the original version of this post.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>And if you’re on a Mac, you can also combine it with Alfred. <a href="https://www.youtube.com/watch?v=boKFxBniUH0">Check out Hadley’s workflow with projects and Alfred here</a>, which has become essential for me.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Alternatively, you can set it so plots are knitted directly to your folder by putting this code in your R Markdown file: <code>knitr::opts_chunk$set(fig.path = here::here("figs"))</code>. This came up in a conversation with Simon Kiss on the original version of this post.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
