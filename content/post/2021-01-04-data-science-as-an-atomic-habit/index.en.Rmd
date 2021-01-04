@@ -29,4 +29,4 @@ Making a vow to sit every day completely changed my experience. Why? The answer 
 
 I recently read *Atomic Habits* by James Clear. 
 
-[^sitting]: The term "sitting" is a euphemism for doing meditation. It's especially common in Zen, where we practice [zazen](https://zmm.org/teachings-and-training/meditation-instructions/), a form of silent, seated meditation. In fact, "zazen" can be translated as "seated meditation" or "sitting Zen".
+[^sitting]: The term "sitting" is a euphemism for doing meditation. It's especially common in Zen, where we practice [zazen](https://zmm.org/teachings-and-training/meditation-instructions/), a form of silent, seated meditation. In fact, "zazen" means "seated meditation" or "sitting Zen".
