@@ -27,6 +27,35 @@ When I moved to California for my Ph.D., I had a hard time with my practice. I d
 
 Making a vow to sit every day completely changed my experience. Why? The answer was clear to me almost immediately: the debate in my head was gone. There was no more "should I sit?", no more "how long?" or "when?". I didn't worry about it, because it was a solved problem: I sit every day, first thing. Nothing to think about. Even though spending *more* time practicing was important to me, I didn't focus on that. I focused on the system that got me on the cushion. Because it's important to me, spending more time doing it bloomed naturally from a consistent practice; if I just got on the cushion every day, that was enough. 
 
-I recently read *Atomic Habits* by James Clear. 
+I recently read [*Atomic Habits* by James Clear](https://jamesclear.com/atomic-habits), which I quite liked ([here's a summary](https://kislayverma.com/books/book-review-atomic-habits/)). A lot of books on productivity are one or two good blog posts wrapped in 200 pages of gimmicky marketing, but I found this book readable and practical, supported by research. When I read the book, I realized: oh, what I did with my practice was an atomic habit. I focused on small, consistent habits that build on their own. I ingrained them in my life so that I did not need to think about it. I *became* a person who gets on the cushion every day. 
+
+# Data science as an Atomic Habit
+
+In Clear's view, the most important habits are small and consistent, whose benefits slowly build and compound over time, much like a retirement account. Relatedly, we *think* our abilities should grow linearly to our effort, but that is not so. This was exactly my experience learning R and other tools for data science. When you're learning R or python, for instance, you may find yourself wondering why, if you're coding or studying every day, you still feel like the language doesn't *get* you. Clear uses a diagram to show this, but since this is a data science post, we might as well draw it in R:
+
+```{r}
+library(ggplot2)
+inner_thoughts <- tibble::tribble(
+  ~x,  ~y,    ~label,
+  .5,   800,  "Cool!",
+  1.25, 800,  "...?",
+  3,    800,  "What the heck is a closure?",
+  4.75, 900,  "Ugghhhh",
+  6,    1200, "Ugghhhhhhh",
+  7.25, 2500, "Oh wait",
+  8,    4000, "...!!",
+  8.75, 8000, "!!!!!",
+  9.2, 20000, "Oh sure, it's easy"
+)
+
+ggplot() + 
+  geom_function(fun = exp, size = 1.2, color = "firebrick") + 
+  geom_text(data = inner_thoughts, aes(x, y, label = label)) +
+  xlim(0, 10) + 
+  ggtitle("Mastering a programming language") + 
+  theme_void(24)
+```
+
+This is the stubbornly quiet path of practice: our abilities lag behind our effort. It's right at "Ugghhhh" stage that our internal motivation to keep on starts to dissolve. Sure, you can make a plot or whatever, but you're still fighting errors all day. What do you have to show for it at this point? Not that much more than when you started. But our growth is rarely linear: often, it's exponential, at least at key moments. We suddenly start to make connections, which help us build other connections, and so on. Growth is never infinite (bad news: you're going to die some day even if you improve every day until then), but it's also rarely as linked to our *immediate* efforts as we expect. 
 
 [^sitting]: The term "sitting" is a euphemism for doing meditation. It's especially common in Zen, where we practice [zazen](https://zmm.org/teachings-and-training/meditation-instructions/), a form of silent, seated meditation. In fact, "zazen" means "seated meditation" or "sitting Zen".
