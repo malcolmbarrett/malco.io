@@ -72,7 +72,7 @@ The fuller quote is:
 
 > Whenever you’re learning a new tool, for a long time you’re going to suck... But the good news is that is typical; that’s something that happens to everyone, and it’s only temporary.
 
-I've always liked this because you *should* prepare yourself for not being a master programmer for a while; it really is an inherent part of the process and largely unavoidable. I also think, however, that it's good to recognize that your learning, your effort--they're not going to waste. *Becoming* a data scientist merely lags behind the effort we put in to *practicing* data science. What's happening underneath is quiet--right until it rises with a fury. Practice and becoming are one process, one action, but we often don't see how they're connected.
+I've always liked this because you *should* prepare yourself for not being a master programmer for a while; it really is an inherent part of the process and largely unavoidable. I also think, however, that it's good to recognize that your learning, your effort--they're not going to waste. *Becoming* a data scientist merely lags behind the effort we put in to *practicing* data science. Practice and becoming are one process, one action, but we often don't see how they're connected. What's happening underneath the surface of our effort is quiet--right until it rises with a fury.
 
 # One foot after the other
 
