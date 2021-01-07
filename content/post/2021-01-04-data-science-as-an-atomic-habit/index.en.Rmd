@@ -76,9 +76,32 @@ I've always liked this because you *should* prepare yourself for not being a mas
 
 # One foot after the other
 
+Pick something small that you can squeeze in on your busiest of days, and know when you're going to do it. This last part is important: if you don't have a set period to engage with your habit, you don't know you missed it until the end of the day, when perhaps it's too late. A useful strategy is to stack the new habit on an existing habit. Do you already make a cup of coffee every morning? Make a clear commitment attached to that habit: "I'm going to _______ every morning right after I make a cup of coffee." The habit you stack it with can be anything as long is it's something you do every day.
+
+So what would an atomic habit for becoming a data scientist look like? Here are a few ideas:
+
+1. Open RStudio and type "Good morning, R" into the console. That's it. Seriously.[^small]
+2. Write code for 5 minutes
+3. Use one new function. Reading the help page counts.
+4. Make a single commit on git. 
+
+These extremely small habits are useful because you can always fit them in, but they work best when you have a sense of what you might do after. When I used to run (prior to a hamstring injury), I followed a running schedule, but when I was having trouble getting off the couch, I would say to myself: "all you have to do is put on your running shoes and step out on the porch, then you can be done." Usually that was enough for me to engage with whatever my original plan was. It's also helpful if you're plan involves cool or urgent things to keep you motivated. Luckily, in the world of data science, there's no shortage of either.
+
+In other words, the habit you're building is showing up. Action drives motivation. When you wait around for motivation to drive action, well, you end up waiting around a lot.
+
+# Tracking
+
+You should track your habit to make sure you *are* showing up. One nice feature of GitHub is that it shows your commit history in a heatmap; if you commit, it's green, and if not, it's gray. If your habit is to make a commit every day, don't leave any gray squares. This is very similar to a popular productivity technique: [The Seinfeld Chain](https://lifehacker.com/jerry-seinfelds-productivity-secret-281626). Jerry Seinfeld made a commitment to write a joke every day. He had a big, daily calendar, and he crossed off a day in red marker every time he wrote. You build up a chain of red Xs. Quoth Jerry: "Don't break the chain."
+
+There are several apps that are good for this. I use [HabitHub](https://www.thehabithub.com/). I used to draw out 365 squares in my gridded Moleskine notebook and cross them off manually. 
+
+Right now, I track 5 habits on HabitHub. I slowly added them, focusing on one at a time. I also made modifications to them over time as my needs for this support changed.
+
 # Trust yourself
 
-Patience is trust, not endurance. It is, in particular, trust in yourself. That's good news, because keeping your nose the grindstone is useful, but it's not sustainable. Eventually you run out of nose. Instead, apply your grit to where it's most beneficial: consistency and reflection. Get to the keyboard every day. Make that commit every day. Show up. While you're doing that, make the choice to see your victories. Cultivate trust in yourself by witnessing yourself for who you are: someone who is really capable of what you've set out to do. Witness the evidence of your abilities--perhaps small and simple at first. Then witness it bloom.
+Ultimately, what you're cultivating here is consistency and patience with the process. We often conflate patience with grit. Patience, however, is trust, not endurance. It is, in particular, trust in yourself. That's good news, because keeping your nose the grindstone is useful, but it's not sustainable. Eventually you run out of nose. Instead, apply your grit to where it's most beneficial: consistency and trust. Get to the keyboard every day. Make that commit every day. Show up. While you're doing that, make the choice to see your victories. Cultivate trust in yourself by witnessing yourself *for who you are*: someone who is really capable of what you've set out to do. Witness the evidence of your abilities--perhaps small and simple at first. Then witness it bloom.
+
+[^small] 
 
 [^sitting]: The term "sitting" is a euphemism for doing meditation. It's especially common in Zen, where we practice [zazen](https://zmm.org/teachings-and-training/meditation-instructions/), a form of silent, seated meditation. In fact, "zazen" means "seated meditation" or "sitting Zen".
 
