@@ -76,16 +76,16 @@ I've always liked this because you *should* prepare yourself for not being a mas
 
 # One foot after the other
 
-Pick something small that you can squeeze in on your busiest of days, and know when you're going to do it. This last part is important: if you don't have a set period to engage with your habit, you don't know you missed it until the end of the day, when perhaps it's too late. A useful strategy is to stack the new habit on an existing habit. Do you already make a cup of coffee every morning? Make a clear commitment attached to that habit: "I'm going to _______ every morning right after I make a cup of coffee." The habit you stack it with can be anything as long is it's something you do every day.
+Pick something small that you can squeeze in on your busiest of days, and know when you're going to do it. This last part is important: if you don't have a set period to engage with your habit, you don't know you missed it until the end of the day, when perhaps it's too late. A useful strategy is to stack the new habit on an existing habit. Do you already make a cup of coffee every morning? Make a clear commitment attached to that habit: "I'm going to _______ every morning right after I make a cup of coffee." The habit you stack it on top of can be anything as long is it's something you do every day.
 
 So what would an atomic habit for becoming a data scientist look like? Here are a few ideas:
 
-1. Open RStudio and type "Good morning, R" into the console. That's it. Seriously.[^small]
+1. Open RStudio and type "Good morning, R" into the console. That's it. Seriously.
 2. Write code for 5 minutes
 3. Use one new function. Reading the help page counts.
 4. Make a single commit on git. 
 
-These extremely small habits are useful because you can always fit them in, but they work best when you have a sense of what you might do after. When I used to run (prior to a hamstring injury), I followed a running schedule, but when I was having trouble getting off the couch, I would say to myself: "all you have to do is put on your running shoes and step out on the porch, then you can be done." Usually that was enough for me to engage with whatever my original plan was. It's also helpful if you're plan involves cool or urgent things to keep you motivated. Luckily, in the world of data science, there's no shortage of either.
+These extremely small habits are useful because you can always fit them in, but they work best when you have a sense of what you might do after. When I used to run (prior to a hamstring injury), I followed a running schedule, but when I was having trouble getting off the couch, I would say to myself: "all you have to do is put on your running shoes and step out on the porch, then you can be done." Usually that was enough for me to engage with whatever my original plan was. It's also helpful if you're plan involves cool or urgent things to keep you motivated. Luckily, in the world of data science, there's no shortage of either. In other words, focus on high-impact activity. Many data scientists will benefit most from starting with data visualization and project workflow tools, while a software engineer might benefit from starting with language fundamentals.[^start]
 
 In other words, the habit you're building is showing up. Action drives motivation. When you wait around for motivation to drive action, well, you end up waiting around a lot.
 
@@ -95,14 +95,12 @@ You should track your habit to make sure you *are* showing up. One nice feature 
 
 There are several apps that are good for this. I use [HabitHub](https://www.thehabithub.com/). I used to draw out 365 squares in my gridded Moleskine notebook and cross them off manually. 
 
-Right now, I track 5 habits on HabitHub. I slowly added them, focusing on one at a time. I also made modifications to them over time as my needs for this support changed.
+Right now, I track 5 habits on HabitHub. I slowly added them, focusing on one at a time, until they felt secure, then I add another. I also made modifications to them over time as my needs for this support changed; some habits became so automatic that I didn't need to track them any more, while others benefited from creating a new, closely-related habit to stack on the one that had become stable. 
 
 # Trust yourself
 
 Ultimately, what you're cultivating here is consistency and patience with the process. We often conflate patience with grit. Patience, however, is trust, not endurance. It is, in particular, trust in yourself. That's good news, because keeping your nose the grindstone is useful, but it's not sustainable. Eventually you run out of nose. Instead, apply your grit to where it's most beneficial: consistency and trust. Get to the keyboard every day. Make that commit every day. Show up. While you're doing that, make the choice to see your victories. Cultivate trust in yourself by witnessing yourself *for who you are*: someone who is really capable of what you've set out to do. Witness the evidence of your abilities--perhaps small and simple at first. Then witness it bloom.
 
-[^small] 
-
 [^sitting]: The term "sitting" is a euphemism for doing meditation. It's especially common in Zen, where we practice [zazen](https://zmm.org/teachings-and-training/meditation-instructions/), a form of silent, seated meditation. In fact, "zazen" means "seated meditation" or "sitting Zen".
-
 [^errors]: More good news/bad news: you're never going to stop writing code with bugs. Might as well make friends with it now!
+[^start]: Where you start in a language depends on what your setting out to acheive, as well as your background. Many teachers of R and python start with things like object types and control flow. But those are *language* fundamentals. You'll probably need to know them eventually, but depending on your needs, you might be better off starting with *data science* fundamentals: reading data, visualizing data, manipulating data, and so on. Of course, this is totally dependent. Perhaps you have a computer science background and starting with control flow sounds great to you! 
