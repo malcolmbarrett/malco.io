@@ -91,7 +91,13 @@ In other words, the habit you're building is showing up. Action drives motivatio
 
 # Tracking
 
-It helps if you track your habit to make sure you *are* showing up. One nice feature of GitHub is that it shows your commit history in a heatmap; if you commit, it's green, and if not, it's gray. If your habit is to make a commit every day, don't leave any gray squares. GitHub's heatmap is very similar to a popular productivity technique: [The Seinfeld Chain](https://lifehacker.com/jerry-seinfelds-productivity-secret-281626). Jerry Seinfeld committed to writing a joke every day. He had a big, daily calendar, and he crossed off a day in red marker every time he wrote. You build up a chain of red Xs. Quoth Jerry: "Don't break the chain."
+It helps if you track your habit to make sure you *are* showing up. One nice feature of GitHub is that it shows your commit history in a heatmap; if you commit, it's green, and if not, it's gray. If your habit is to make a commit every day, don't leave any gray squares. 
+
+```{r, echo=FALSE}
+knitr::include_graphics("img/gitmap.png")
+```
+
+GitHub's heatmap is very similar to a popular productivity technique: [The Seinfeld Chain](https://lifehacker.com/jerry-seinfelds-productivity-secret-281626). Jerry Seinfeld committed to writing a joke every day. He had a big, daily calendar, and he crossed off a day in red marker every time he wrote. You build up a chain of red Xs. Quoth Jerry: "Don't break the chain."
 
 Several apps are good for this. I use [HabitHub](https://www.thehabithub.com/). I used to draw out 365 squares in my gridded Moleskine notebook and cross them off manually. 
 
