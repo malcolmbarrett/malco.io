@@ -3,7 +3,6 @@ title: Data science as an atomic habit
 author: Malcolm Barrett
 date: '2021-01-11'
 slug: data-science-as-an-atomic-habit
-draft: true
 categories:
   - learning
   - habits
