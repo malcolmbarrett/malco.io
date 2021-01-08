@@ -2,7 +2,7 @@
 authors:
 - admin
 bio: | 
-  I am an R developer and a PhD student in Epidemiology at the University of Southern California. My work in public health has spanned on-ground clinical education and research for clinical and cohort studies. Previously, I was an intern at RStudio, and I served two years in AmeriCorps at federally-qualified health centers in Michigan and New York City.
+  I am a data scientist, an R developer, and an epidemiologist. My work in public health has spanned on-ground clinical education and research for clinical and cohort studies. Previously, I was an intern at RStudio, and I served two years in AmeriCorps at federally-qualified health centers in Michigan and New York City.
 education: 
   courses:
   - course: PhD in Epidemiology
@@ -21,9 +21,9 @@ interests:
 - Epidemiologic Methods
 name: Malcolm Barrett
 organizations:
-- name: University of Southern California
+- name: Teladoc Health
   url: ""
-role: PhD Student in Epidemiology
+role: Clinical Research Data Scientist
 social:
 - icon: envelope
   icon_pack: fas
@@ -43,4 +43,4 @@ user_groups:
 - Visitors
 ---
 
-I am an R developer and a PhD student in Epidemiology at the University of Southern California. My work in public health has spanned on-ground clinical education and research for clinical and cohort studies. Previously, I was an intern at RStudio, and I served two years in AmeriCorps at federally-qualified health centers in Michigan and New York City.
+I am a data scientist, an R developer, and an epidemiologist. My work in public health has spanned clinical education, health data science courses, and research for clinical and cohort studies. Previously, I was an intern at RStudio, and I served two years in AmeriCorps at federally-qualified health centers in Michigan and New York City.
