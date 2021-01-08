@@ -30,18 +30,18 @@ projects: []
 <p>I recently read <a href="https://jamesclear.com/atomic-habits"><em>Atomic Habits</em> by James Clear</a>, which I quite liked (<a href="https://kislayverma.com/books/book-review-atomic-habits/">here’s a summary</a>). Many books on productivity amount to one or two useful blog posts wrapped in 200 pages of gimmicky marketing, but I found this book readable and practical, supported by research. When I read the book, I realized: oh, what I did with my practice was an atomic habit. I focused on small, consistent actions that build on their own. I ingrained them in my life so that I did not need to think about it. I <em>became</em> a person who gets on the cushion every day.</p>
 <div id="data-science-as-an-atomic-habit" class="section level1">
 <h1>Data science as an Atomic Habit</h1>
-<p>In Clear’s view, the most important habits are small and consistent, whose benefits slowly build and compound over time, much like a retirement account. We <em>think</em> our abilities should grow linearly to our effort, but that is not so. My experience learning R and other data science tools followed the same path: I had an expectation of what my progress should be that turned out to be quite different from what actually happened. When you’re learning R or python, for instance, you may find yourself wondering why, if you’re coding or studying every day, you still feel like the language doesn’t <em>get</em> you. Clear uses a diagram to show this, but since this is a data science post, we might as well draw it in R:</p>
+<p>In Clear’s view, the most important habits are small and consistent, whose benefits slowly build and compound over time, much like my commitment to sit every day. Where we get tripped up is this second part, and this especially true in learning data science. We <em>think</em> our abilities should grow linearly to our effort, but that is not so. My experience learning R and other data science tools followed this type of non-intuitive path: I had an expectation of what my progress should be that turned out to be quite different from what actually happened. When you’re learning R or python, for instance, you may find yourself wondering why, if you’re coding or studying every day, you still feel like the language doesn’t <em>get</em> you. Clear uses a diagram to show this, but since this is a data science post, we might as well draw it in R:</p>
 <pre class="r"><code>library(ggplot2)
 inner_thoughts &lt;- tibble::tribble(
   ~x,  ~y,    ~label,
-  0,    800,  &quot;Cool!&quot;,
-  0.9, 800,  &quot;...?&quot;,
-  1.8,  1400,  &quot;object... of\ntype... closure?&quot;,
-  3.9,  900,  &quot;Ugghhhh&quot;,
-  5.3,    1200, &quot;Ugghhhhhh&quot;,
-  6.7, 2500, &quot;Oh wait&quot;,
-  7.7,    4000, &quot;...!!&quot;,
-  8.5, 8000, &quot;!!!!!&quot;,
+  0,   800,   &quot;Cool!&quot;,
+  0.9, 800,   &quot;...?&quot;,
+  1.8, 1400,  &quot;object... of\ntype... closure?&quot;,
+  3.9, 900,   &quot;Ugghhhh&quot;,
+  5.3, 1200,  &quot;Ugghhhhhh&quot;,
+  6.7, 2500,  &quot;Oh wait&quot;,
+  7.7, 4000,  &quot;...!!&quot;,
+  8.5, 8000,  &quot;!!!!!&quot;,
   7.9, 20000, &quot;Oh sure, it&#39;s easy&quot;
 )
 
@@ -52,7 +52,7 @@ ggplot() +
   ggtitle(&quot;Mastering a programming language&quot;) + 
   theme_void(24)</code></pre>
 <p><img src="/post/2021-01-04-data-science-as-an-atomic-habit/index.en_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>This is the stubbornly quiet path of practice: our abilities lag behind our effort. It’s right at “Ugghhhh” stage that our internal motivation to keep on starts to dissolve. Sure, you can make a plot or whatever, but you’re still fighting errors all day. What do you have to show for it at this point? Not that much more than when you started. But our growth is rarely linear: often, it’s exponential, at least at critical moments. We suddenly begin to make connections, which help us build other relationships, and so on. Growth is never infinite (bad news: you’re going to die someday even if you improve every day until then), but it’s also rarely as linked to our <em>immediate</em> efforts as we expect.</p>
+<p>This is the stubbornly quiet path of practice: our abilities lag behind our effort. At the “Ugghhhh” stage, our internal motivation starts to dissolve. Sure, you can make a plot or whatever, but you’re still fighting errors all day. What do you have to show for it at this point? Not that much more, you might feel, than when you started. But our growth is rarely linear: often, it’s explosive, almost exponential, at least at critical moments. We suddenly begin to make connections, which help us build other relationships, and so on. Growth is never infinite (bad news: even if you manage to improve every day, you’ll die eventually), but it’s also rarely as linked to our <em>immediate</em> efforts as we expect.</p>
 </div>
 <div id="practice-and-becoming-are-one-action" class="section level1">
 <h1>Practice and becoming are one action</h1>

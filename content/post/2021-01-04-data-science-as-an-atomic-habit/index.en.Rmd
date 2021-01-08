@@ -31,20 +31,20 @@ I recently read [*Atomic Habits* by James Clear](https://jamesclear.com/atomic-h
 
 # Data science as an Atomic Habit
 
-In Clear's view, the most important habits are small and consistent, whose benefits slowly build and compound over time, much like a retirement account. We *think* our abilities should grow linearly to our effort, but that is not so. My experience learning R and other data science tools followed the same path: I had an expectation of what my progress should be that turned out to be quite different from what actually happened. When you're learning R or python, for instance, you may find yourself wondering why, if you're coding or studying every day, you still feel like the language doesn't *get* you. Clear uses a diagram to show this, but since this is a data science post, we might as well draw it in R:
+In Clear's view, the most important habits are small and consistent, whose benefits slowly build and compound over time, much like my commitment to sit every day. Where we get tripped up is this second part, and this especially true in learning data science. We *think* our abilities should grow linearly to our effort, but that is not so. My experience learning R and other data science tools followed this type of non-intuitive path: I had an expectation of what my progress should be that turned out to be quite different from what actually happened. When you're learning R or python, for instance, you may find yourself wondering why, if you're coding or studying every day, you still feel like the language doesn't *get* you. Clear uses a diagram to show this, but since this is a data science post, we might as well draw it in R:
 
 ```{r}
 library(ggplot2)
 inner_thoughts <- tibble::tribble(
   ~x,  ~y,    ~label,
-  0,    800,  "Cool!",
-  0.9, 800,  "...?",
-  1.8,  1400,  "object... of\ntype... closure?",
-  3.9,  900,  "Ugghhhh",
-  5.3,    1200, "Ugghhhhhh",
-  6.7, 2500, "Oh wait",
-  7.7,    4000, "...!!",
-  8.5, 8000, "!!!!!",
+  0,   800,   "Cool!",
+  0.9, 800,   "...?",
+  1.8, 1400,  "object... of\ntype... closure?",
+  3.9, 900,   "Ugghhhh",
+  5.3, 1200,  "Ugghhhhhh",
+  6.7, 2500,  "Oh wait",
+  7.7, 4000,  "...!!",
+  8.5, 8000,  "!!!!!",
   7.9, 20000, "Oh sure, it's easy"
 )
 
@@ -56,7 +56,7 @@ ggplot() +
   theme_void(24)
 ```
 
-This is the stubbornly quiet path of practice: our abilities lag behind our effort. It's right at "Ugghhhh" stage that our internal motivation to keep on starts to dissolve. Sure, you can make a plot or whatever, but you're still fighting errors all day. What do you have to show for it at this point? Not that much more than when you started. But our growth is rarely linear: often, it's exponential, at least at critical moments. We suddenly begin to make connections, which help us build other relationships, and so on. Growth is never infinite (bad news: you're going to die someday even if you improve every day until then), but it's also rarely as linked to our *immediate* efforts as we expect. 
+This is the stubbornly quiet path of practice: our abilities lag behind our effort. At the "Ugghhhh" stage, our internal motivation starts to dissolve. Sure, you can make a plot or whatever, but you're still fighting errors all day. What do you have to show for it at this point? Not that much more, you might feel, than when you started. But our growth is rarely linear: often, it's explosive, almost exponential, at least at critical moments. We suddenly begin to make connections, which help us build other relationships, and so on. Growth is never infinite (bad news: even if you manage to improve every day, you'll die eventually), but it's also rarely as linked to our *immediate* efforts as we expect. 
 
 # Practice and becoming are one action
 
