@@ -9,7 +9,7 @@ tags:
   - here
 event: "useR! 2020"
 event_url: "https://user2020.r-project.org/"
-location: ~
+location: "useR! 2020"
 address:
   street: ~
   city: ~
