@@ -1,0 +1,41 @@
+---
+title: Zen and the Art of R Package Development
+author: Malcolm Barrett
+date: '2020-03-02'
+slug: zen-and-the-art-of-r-package-development
+categories:
+  - r
+tags:
+  - rpackage
+event: New York Open Statistical Programming Meetup
+event_url: ~
+location: New York City, NY
+address:
+  street: ~
+  city: ~
+  region: ~
+  postcode: ~
+  country: ~
+summary: ~
+abstract: ~
+date_end: '2020-03-02T12:33:29-08:00'
+all_day: no
+publishDate: '2020-03-02T12:33:29-08:00'
+authors: []
+featured: no
+image:
+  caption: '[Image by Kaz Tanahashi](https://www.brushmind.net/)'
+  focal_point: ''
+  preview_only: no
+links:
+- icon: images
+  icon_pack: fas
+  name: slides
+  url: "https://zenartofrpkgs.netlify.app"
+url_slides: ~
+url_code: ~
+url_pdf: ~
+url_video: ~
+slides: ''
+projects: []
+---
