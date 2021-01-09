@@ -1,0 +1,41 @@
+---
+title: "You're Already Ready: Zen and the Art of R Package Development"
+author: Malcolm Barrett
+date: '2021-01-12T18:00:00-08:00'
+slug: you-re-already-ready-zen-and-the-art-of-r-package-development
+categories:
+  - r
+tags:
+  - rpackage
+event: ~
+event_url: ~
+location: Bay Area R Users Group
+address:
+  street: ~
+  city: ~
+  region: ~
+  postcode: ~
+  country: ~
+summary: ~
+abstract: "R packages make it easier to write robust, reproducible code, and modern tools in R development like usethis make it easy to work with packages. When you write R packages, you also unlock a whole ecosystem of tools that will make it easier to test, document, and share your code. Despite these benefits, many believe package development is too advanced for them or that they have nothing to offer. A fundamental belief in Zen is that you are already complete, that you already have everything you need. I’ll talk about why your project is already an R package, why you’re already an R package developer, and why you already have the skills to walk the path of development."
+date_end: ~
+all_day: no
+publishDate: '2021-01-09T12:39:29-08:00'
+authors: []
+featured: no
+image:
+  caption: '[Image by Kaz Tanahashi](https://www.brushmind.net/)'
+  focal_point: ''
+  preview_only: no
+links:
+- icon: images
+  icon_pack: fas
+  name: slides
+  url: "https://rsg-zen-art-rpkgs.netlify.app/"
+url_slides: ~
+url_code: ~
+url_pdf: ~
+url_video: ~
+slides: ''
+projects: []
+---

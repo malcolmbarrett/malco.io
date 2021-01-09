@@ -1,0 +1,47 @@
+---
+title: My Organization's First R Package
+author: Malcolm Barrett
+date: '2020-01-27T9:00:00-08:00'
+slug: my-organization-s-first-r-package
+categories:
+  - r
+  - learning
+tags:
+  - rpackage
+event: rstudio::conf(2020L)
+event_url: ~
+location: San Francisco, CA
+address:
+  street: ~
+  city: ~
+  region: ~
+  postcode: ~
+  country: ~
+summary: ~
+abstract: > 
+  If your organization uses R, there are clear benefits to having an organizational R package. Such benefits can be realized whether there is only a single R user or dozens of them. An R package focused on the particular needs of an organization can open up a world of possibilities including easier data access, shared functions for data transformation and analysis, and a common look and feel for reporting. Creating your first organizational R package can be daunting however. You may wonder: “what functions should be included?”, “how would colleagues install the package (and updates)?”, “what could be done to ensure there is sufficient quality control?”. This workshop will demonstrate how to get an organizational R package off the ground. We’ll take a look at planning the package and understanding the requirements of the internal stakeholders. We’ll consider how the package could fit in with existing organizational infrastructure. We’ll design and implement functions for data access, data analysis, and reporting. One of the hardest parts of the process could very well be gaining and maintaining internal support for an organizational package project. To address this, we’ll work through ways to communicate value and to develop an internal community of colleagues to sustain the project and to make it a valuable part of the core infrastructure.
+date_end: '2020-01-28T17:00:00-08:00'
+all_day: no
+publishDate: '2020-01-27T12:23:40-08:00'
+authors: [Malcolm Barrett, "[Rich Iannone](https://randr.rocks/)"]
+featured: no
+image:
+  caption: '[Photo by freestocks on Unsplash](https://unsplash.com/photos/uqzIUz9NczE)'
+  focal_point: ''
+  preview_only: no
+links:
+- icon: images 
+  icon_pack: fas
+  name: slides
+  url: "https://education.rstudio.com/blog/2020/06/conf20-org-first-pkg/"
+- icon: github
+  icon_pack: fab
+  name: github
+  url: "https://github.com/rstudio-conf-2020/my-org-first-pkg"
+url_slides: ~
+url_code: ~
+url_pdf: ~
+url_video: ~
+slides: ''
+projects: []
+---
