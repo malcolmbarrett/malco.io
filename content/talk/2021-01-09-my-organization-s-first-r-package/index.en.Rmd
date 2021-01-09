@@ -23,7 +23,7 @@ abstract: >
 date_end: '2020-01-28T12:23:40-08:00'
 all_day: no
 publishDate: '2020-01-27T12:23:40-08:00'
-authors: []
+authors: [Malcolm Barrett, "[Rich Iannone](https://randr.rocks/)"]
 featured: no
 image:
   caption: '[Photo by freestocks on Unsplash](https://unsplash.com/photos/uqzIUz9NczE)'
