@@ -2,7 +2,7 @@
 title: Data manipulation, visualization, and reproducible documents with R and the
   Tidyverse
 author: Malcolm Barrett
-date: '2020-11-19'
+date: '2020-11-19T9:00:00-08:00'
 slug: data-manipulation-visualization-and-reproducible-documents-with-r-and-the-tidyverse
 categories:
   - r
@@ -20,7 +20,7 @@ address:
   country: ~
 summary: ~
 abstract: "Recent developments by the R community have revolutionized the data analysis pipeline in R, from manipulating and visualizing data to communicating results. Our workshop will provide hands-on training in tools from the tidyverse ecosystem, using real epidemiologic data. In the first section, we will teach data manipulation with dplyr, a package that makes data cleaning easy, flexible, and enjoyable. In the next section, we will teach data visualization with ggplot2, the most popular plotting package in R, with a focus on creating publication-quality plots. We will then put these tools together to make reproducible documents. Using R Markdown, we will weave code and text together and learn to write papers and reports, exported to PDF, Word, or HTML, entirely in R. This workflow easily propagates upstream changes to data or analyses throughout a document and eliminates copy and paste errors. Together, these tools form a data analysis pipeline for reproducible, publication-ready work."
-date_end: '2020-11-19T15:13:46-08:00'
+date_end: ~
 all_day: no
 publishDate: '2021-01-09T15:13:46-08:00'
 authors: [Malcolm Barrett, "[Corinne Riddell](https://corinne-riddell.github.io/)"]

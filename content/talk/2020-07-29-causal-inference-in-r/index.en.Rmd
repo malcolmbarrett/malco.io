@@ -1,7 +1,7 @@
 ---
 title: Causal Inference in R
 author: Malcolm Barrett
-date: '2020-07-29'
+date: '2020-07-29T9:00:00-08:00'
 slug: causal-inference-in-r
 categories:
   - r
@@ -18,7 +18,7 @@ address:
   country: ~
 summary: ~
 abstract: "In both data science and academic research, prediction modeling is often not enough; to answer many questions, we need to approach them causally. In this workshop, we’ll teach the essential elements of answering causal questions in R through causal diagrams, and causal modeling techniques such as propensity scores, inverse probability weighting, and g-computation. We’ll also show that by distinguishing predictive models from causal models, we can better take advantage of both tools; prediction modeling plays a role in establishing many causal models, such as propensity scores and g-computation. You’ll be able to use the tools you already know--the tidyverse, regression models, and more--to answer the questions that are important to your work."
-date_end: '2020-07-29T14:49:55-08:00'
+date_end: ~
 all_day: no
 publishDate: '2021-01-09T14:49:55-08:00'
 authors: [Malcolm Barrett, "[Lucy D'Agostino McGowan](https://www.lucymcgowan.com/)"]
