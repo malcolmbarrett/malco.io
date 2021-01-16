@@ -2,7 +2,7 @@
 title: "You're Already Ready: Zen and the Art of R Package Development"
 author: Malcolm Barrett
 date: '2021-01-12T18:00:00-08:00'
-slug: you-re-already-ready-zen-and-the-art-of-r-package-development
+slug: you-re-already-ready-zen-and-the-art-of-r-package-development-barug
 categories:
   - r
 tags:
@@ -39,7 +39,3 @@ url_video: ~
 slides: ''
 projects: []
 ---
-
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
-
-
