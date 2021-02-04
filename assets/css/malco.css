@@ -118,13 +118,18 @@ a.hero-cta-alt:hover {
 
 /* code */
 pre, code {
-  background: #F7F7F7;
+  background: #4D4D4DFF;
 	font-weight: 500;
-	color: #474747;
+	font-size: 0.8rem;
+	color: #EDEEEFFF;
+  border-radius: 6px;
+  padding: 4px;
 }
 
 .hljs {
-  background: #F7F7F7;
+  background: #4D4D4DFF;
+	color: #EDEEEFFF;
+  border-radius: 8px;
 }
 
 table {
