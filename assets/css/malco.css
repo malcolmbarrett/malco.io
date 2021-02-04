@@ -81,9 +81,10 @@ a.hero-cta-alt:hover {
   color: white;
 }
 
-.wg-hero.dark .btn {
+.wg-hero.dark a:not(.wg-hero.btn) {
   color: #00517f;
 }
+
 
 .hero-title {
 	line-height: 1.2;
