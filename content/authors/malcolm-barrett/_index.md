@@ -2,7 +2,7 @@
 authors:
 - admin
 bio: | 
-  I am a data scientist, an R developer, and an epidemiologist. My work in public health has spanned on-ground clinical education and research for clinical and cohort studies. Previously, I was an intern at RStudio, and I served two years in AmeriCorps at federally-qualified health centers in Michigan and New York City. </br></br><iframe src="https://github.com/sponsors/malcolmbarrett/button" title="Sponsor malcolmbarrett" height="35" width="116" style="border: 0;"></iframe></br>
+  I am a data scientist, an R developer, and an epidemiologist. My work in public health has spanned on-ground clinical education and research for clinical and cohort studies. Previously, I was an intern at RStudio, and I served two years in AmeriCorps at federally-qualified health centers in Michigan and New York City. </br><a href="https://github.com/sponsors/malcolmbarrett" class="btn btn-light btn-lg btn-sponsor" ><i class="fas fa-heart" style="padding-right: 10px;"></i>Sponsor me on GitHub</a>
 education: 
   courses:
   - course: PhD in Epidemiology
@@ -44,5 +44,4 @@ user_groups:
 ---
 
 I am a data scientist, an R developer, and an epidemiologist. My work in public health has spanned on-ground clinical education and research for clinical and cohort studies. Previously, I was an intern at RStudio, and I served two years in AmeriCorps at federally-qualified health centers in Michigan and New York City.
-
-<iframe src="https://github.com/sponsors/malcolmbarrett/button" title="Sponsor malcolmbarrett" height="35" width="116" style="border: 0;"></iframe>
+<a href="https://github.com/sponsors/malcolmbarrett" class="btn btn-light btn-lg btn-sponsor" ><i class="fas fa-heart" style="padding-right: 10px;"></i>Sponsor me on GitHub</a>

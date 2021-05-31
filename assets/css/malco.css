@@ -281,3 +281,17 @@ table {
 .featurette h3 {
   margin-bottom: 15px;
 }
+
+.btn-sponsor {
+  margin-top: 25px;
+  margin-bottom: 20px;
+  background-color: #0072b2;
+  color: #FFF;
+}
+
+.btn-sponsor:hover {
+  background-color: #0072b2;
+  border-color: #f7f7f7;
+  border-radius: 0;
+  color: #FFF;
+}
